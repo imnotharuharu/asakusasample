@@ -1,35 +1,26 @@
-# asakusa-front
+浅草調香ワークショップ - ポートフォリオサイト
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+浅草にある香水作り体験ワークショップの魅力を伝えるためのランディングページです。
+実際の店舗の雰囲気を再現し、ユーザーが直感的に予約フローへ進めるようなデザインと構成を意識しました。
 
-## Built with v0
+🚀 デプロイ先 (GitHub Pages)
+[https://imnotharuharu.github.io/asakusasample/](https://imnotharuharu.github.io/asakusasample/)
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+ 🛠 使用技術
+- Frontend: HTML5, CSS3, Tailwind CSS
+- Framework/Library: Next.js (Static Export) / React
+- Design Tools: Figma
+- Version Control :Git / GitHub
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_uicefMzXK6EUlSCMOu3LQOEDGXEa)
+ ✨ 主なこだわりポイント
+- レスポンシブデザイン: PCだけでなく、スマートフォンからの閲覧時も画像やテキストが美しく配置されるように調整しました。
+- UXの最適化: ワークショップの工程（香料選び〜調合〜完成）を視覚的に伝えるため、画像を多用し、サービスの擬似体験ができる構成にしました。
+- パフォーマンス: 画像パスの最適化を行い、GitHub Pages上でスムーズに画像が表示されるようディレクトリ構成を工夫しました。
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
-
-<a href="https://v0.app/chat/api/kiro/clone/imnotharuharu/asakusa-front" alt="Open in Kiro"><img src="https://pdgvvgmkdvyeydso.public.blob.vercel-storage.com/open%20in%20kiro.svg?sanitize=true" /></a>
+ 📂 ディレクトリ構成
+```text
+.
+├── images/          # ワークショップの工程や内装の画像
+├── index.html       # メインページ
+├── styles/          # Tailwind CSS 等のスタイルシート
+└── (その他 Next.js 関連設定ファイル)
