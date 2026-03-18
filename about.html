@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About / Information | 浅草 露ーTSUYU ASAKUSA</title>
+  <meta name="description" content="浅草 露について。私たちのコンセプト、調香師のご紹介、よくあるご質問をご覧いただけます。" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Shippori Mincho -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            mincho: ['"Shippori Mincho"', 'Georgia', 'serif'],
+          },
+          colors: {
+            cream:      '#F5F1EB',
+            'cream-d':  '#EDE8DF',
+            sumi:       '#2C2418',
+            'sumi-l':   '#5C4E3C',
+            gold:       '#B8963E',
+            'gold-l':   '#D4B96A',
+            sand:       '#E8E0D4',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%':   { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Shippori Mincho', Georgia, serif; }
+
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-600 { animation-delay: 0.6s; }
+
+    .anim-hidden { opacity: 0; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* FAQ Accordion */
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-item.open .faq-answer { max-height: 500px; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+  </style>
+</head>
+
+<body class="bg-cream text-sumi antialiased">
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-cream/95 backdrop-blur-sm border-b border-sumi/10">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+
+        <!-- Logo -->
+        <a href="/index.html" id="nav-logo" class="text-lg tracking-[0.25em] font-normal text-sumi transition-colors duration-500">
+          TSUYU
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden lg:flex items-center gap-10">
+          <a href="/experience.html" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Experience</a>
+          <a href="/pricing.html" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Plans</a>
+          <a href="#" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Online Shop</a>
+          <a href="/about.html" class="text-sm tracking-widest text-gold hover:text-gold transition-colors duration-300 uppercase">About</a>
+          <a href="/contact.html" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Contact</a>
+        </div>
+
+        <!-- CTA + Hamburger -->
+        <div class="flex items-center gap-4">
+          <a href="/pricing.html"
+             class="hidden md:inline-flex items-center px-6 py-2.5 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi-l transition-colors duration-300">
+            ご予約
+          </a>
+          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
+            <span id="menu-line-1" class="block w-6 h-px bg-sumi transition-all duration-300"></span>
+            <span id="menu-line-2" class="block w-6 h-px bg-sumi transition-all duration-300"></span>
+            <span id="menu-line-3" class="block w-4 h-px bg-sumi transition-all duration-300 ml-auto"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
+      <a href="/experience.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
+      <a href="/pricing.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
+      <a href="#" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Online Shop</a>
+      <a href="/about.html" class="text-lg tracking-widest text-gold hover:text-gold transition-colors uppercase">About</a>
+      <a href="/contact.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
+      <a href="/pricing.html" class="mt-4 px-8 py-3 bg-sumi text-cream text-sm tracking-widest uppercase">ご予約はこちら</a>
+    </div>
+  </nav>
+
+  <!-- ===== HEADER SECTION ===== -->
+  <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+    <div class="absolute inset-0 bg-sand/30"></div>
+    <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
+      <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4 anim-hidden animate-fade-in delay-200">About / Information</p>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-wide mb-6 anim-hidden animate-fade-in delay-300">
+        私たちについて
+      </h1>
+      <p class="text-sumi-l leading-relaxed max-w-2xl mx-auto anim-hidden animate-fade-in delay-400">
+        浅草 露は、日本の伝統と現代の感性を融合させた<br class="hidden md:inline" />
+        調香アトリエです。
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CONCEPT SECTION ===== -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Image -->
+        <div class="reveal">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img src="/images/about-hero.jpg" alt="浅草 露のアトリエ" class="w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="reveal">
+          <p class="text-xs tracking-[0.3em] text-gold uppercase mb-4">Our Concept</p>
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-normal tracking-wide mb-6">
+            露のように、<br />儚く美しい香りを
+          </h2>
+          <div class="space-y-4 text-sumi-l leading-relaxed">
+            <p>
+              「露」という名前には、朝日に輝く一滴の雫のように、儚くも美しい瞬間を香りに閉じ込めたいという想いを込めました。
+            </p>
+            <p>
+              私たちは、日本古来の香道の精神を受け継ぎながら、現代のライフスタイルに寄り添う香りの創造を目指しています。浅草という歴史ある街で、伝統と革新が交差する特別な体験をお届けします。
+            </p>
+            <p>
+              一人ひとりの記憶や感性に寄り添い、世界にひとつだけの香りを創り上げる。それが、浅草 露の使命です。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BENEFITS SECTION ===== -->
+  <section class="py-20 lg:py-28 bg-sand/30">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <p class="text-xs tracking-[0.3em] text-gold uppercase mb-4">Why Choose Us</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-normal tracking-wide">
+          浅草 露が選ばれる理由
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Benefit 1 -->
+        <div class="reveal bg-cream p-8 border border-sumi/5">
+          <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-3">厳選された香料</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            世界各地から厳選した20種類以上の天然香料と上質なエッセンシャルオイルを使用。日本の四季を感じる和の香りも豊富にご用意しています。
+          </p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="reveal bg-cream p-8 border border-sumi/5">
+          <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-3">経験豊富な調香師</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            国内外で経験を積んだプロの調香師が、一人ひとりの感性に寄り添いながら、香り創りをサポートいたします。
+          </p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="reveal bg-cream p-8 border border-sumi/5">
+          <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-3">浅草の特別な空間</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            歴史ある浅草の街並みに佇む、和モダンなアトリエ。日常を離れ、香りに集中できる特別な時間をお過ごしいただけます。
+          </p>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="reveal bg-cream p-8 border border-sumi/5">
+          <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-3">心を込めたおもてなし</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            少人数制で、お一人おひとりに丁寧に向き合います。初めての方でも安心して楽しめるよう、きめ細やかなサポートをお約束します。
+          </p>
+        </div>
+
+        <!-- Benefit 5 -->
+        <div class="reveal bg-cream p-8 border border-sumi/5">
+          <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-3">柔軟な予約対応</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            お客様のご都合に合わせて、平日・週末問わず柔軟に対応。プライベートプランでは完全貸切での体験も可能です。
+          </p>
+        </div>
+
+        <!-- Benefit 6 -->
+        <div class="reveal bg-cream p-8 border border-sumi/5">
+          <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-3">充実のアフターサポート</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            お作りいただいた香りのレシピをお渡しし、リピートオーダーにも対応。大切な香りをいつまでもお楽しみいただけます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS SECTION ===== -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <p class="text-xs tracking-[0.3em] text-gold uppercase mb-4">How It Works</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-normal tracking-wide">
+          ワークショップの流れ
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-8">
+        <!-- Step 1 -->
+        <div class="reveal text-center">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-full border-2 border-gold flex items-center justify-center">
+            <span class="text-2xl font-light text-gold">01</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3">カウンセリング</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            お好みの香りやイメージをお伺いし、調香の方向性を決めます。
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="reveal text-center">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-full border-2 border-gold flex items-center justify-center">
+            <span class="text-2xl font-light text-gold">02</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3">香料の選択</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            20種類以上の香料から、トップ・ミドル・ベースノートを選びます。
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="reveal text-center">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-full border-2 border-gold flex items-center justify-center">
+            <span class="text-2xl font-light text-gold">03</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3">調合・ブレンド</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            調香師のアドバイスのもと、バランスを見ながら香りを調合します。
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="reveal text-center">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-full border-2 border-gold flex items-center justify-center">
+            <span class="text-2xl font-light text-gold">04</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3">完成・お持ち帰り</h3>
+          <p class="text-sumi-l text-sm leading-relaxed">
+            オリジナルボトルに入れて、その日のうちにお持ち帰りいただけます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TEAM SECTION ===== -->
+  <section class="py-20 lg:py-28 bg-sumi text-cream">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Text -->
+        <div class="reveal order-2 lg:order-1">
+          <p class="text-xs tracking-[0.3em] text-gold-l uppercase mb-4">Our Team</p>
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-normal tracking-wide mb-6 text-cream">
+            調香師のご紹介
+          </h2>
+          <div class="space-y-4 text-cream/70 leading-relaxed">
+            <p>
+              浅草 露の調香師チームは、国内外の香料メーカーや香水ブランドで経験を積んだプロフェッショナルで構成されています。
+            </p>
+            <p>
+              日本の伝統的な香道から現代のフレグランス理論まで、幅広い知識と技術を持ち、お客様一人ひとりの想いを香りという形に変えるお手伝いをいたします。
+            </p>
+            <p>
+              初めての方でも安心してご参加いただけるよう、わかりやすく丁寧なガイドを心がけています。香りを通じて、新しい自分との出会いをお楽しみください。
+            </p>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="reveal order-1 lg:order-2">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img src="/images/team.jpg" alt="浅草 露の調香師チーム" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ SECTION ===== -->
+  <section class="py-20 lg:py-28" id="faq">
+    <div class="mx-auto max-w-3xl px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <p class="text-xs tracking-[0.3em] text-gold uppercase mb-4">FAQ</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-normal tracking-wide">
+          よくあるご質問
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <div class="faq-item reveal border border-sumi/10 bg-cream">
+          <button class="faq-btn w-full flex items-center justify-between p-6 text-left">
+            <span class="font-medium pr-4">調香の経験がなくても参加できますか？</span>
+            <span class="faq-icon w-5 h-5 flex-shrink-0 transition-transform duration-300">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="px-6 pb-6 text-sumi-l leading-relaxed">
+              はい、もちろんです。ほとんどのお客様が初めての方です。調香師が丁寧にサポートいたしますので、安心してご参加ください。香りに対する好奇心があれば、どなたでも楽しんでいただけます。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item reveal border border-sumi/10 bg-cream">
+          <button class="faq-btn w-full flex items-center justify-between p-6 text-left">
+            <span class="font-medium pr-4">所要時間はどのくらいですか？</span>
+            <span class="faq-icon w-5 h-5 flex-shrink-0 transition-transform duration-300">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="px-6 pb-6 text-sumi-l leading-relaxed">
+              スタンダードプランで約90分、プレミアムプランで約120分を目安にしています。お時間に余裕を持ってお越しいただくことをおすすめします。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item reveal border border-sumi/10 bg-cream">
+          <button class="faq-btn w-full flex items-center justify-between p-6 text-left">
+            <span class="font-medium pr-4">作った香水はすぐに持ち帰れますか？</span>
+            <span class="faq-icon w-5 h-5 flex-shrink-0 transition-transform duration-300">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="px-6 pb-6 text-sumi-l leading-relaxed">
+              はい、当日お持ち帰りいただけます。オリジナルボトルに入れて、お渡しいたします。香りは時間とともに熟成されていきますので、数日後にはより深みのある香りをお楽しみいただけます。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item reveal border border-sumi/10 bg-cream">
+          <button class="faq-btn w-full flex items-center justify-between p-6 text-left">
+            <span class="font-medium pr-4">予約のキャンセルはできますか？</span>
+            <span class="faq-icon w-5 h-5 flex-shrink-0 transition-transform duration-300">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="px-6 pb-6 text-sumi-l leading-relaxed">
+              キャンセルは3日前まで無料で承っております。2日前〜前日は50%、当日は100%のキャンセル料が発生いたします。日程変更は可能な限り対応いたしますので、お早めにご連絡ください。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item reveal border border-sumi/10 bg-cream">
+          <button class="faq-btn w-full flex items-center justify-between p-6 text-left">
+            <span class="font-medium pr-4">同じ香りを再注文できますか？</span>
+            <span class="faq-icon w-5 h-5 flex-shrink-0 transition-transform duration-300">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="px-6 pb-6 text-sumi-l leading-relaxed">
+              はい、お作りいただいた香りのレシピは全て記録しておりますので、リピートオーダーが可能です。オンラインショップまたはお電話にてご注文いただけます。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="py-20 lg:py-28 bg-sand/50" id="cta">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center reveal">
+      <p class="text-xs tracking-[0.3em] text-gold uppercase mb-4">Book Now</p>
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-normal tracking-wide mb-6">
+        あなただけの香りを<br class="md:hidden" />創りませんか
+      </h2>
+      <p class="text-sumi-l leading-relaxed max-w-2xl mx-auto mb-10">
+        浅草 露で、世界にひとつだけのオリジナルフレグランスを。<br class="hidden md:inline" />
+        ご予約をお待ちしております。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/pricing.html"
+           class="inline-flex items-center justify-center px-10 py-4 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi-l transition-colors duration-300">
+          ワークショップを予約
+          <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+          </svg>
+        </a>
+        <a href="/contact.html"
+           class="inline-flex items-center justify-center px-10 py-4 border border-sumi/30 text-sumi text-sm tracking-widest uppercase hover:bg-sumi/5 transition-colors duration-300">
+          お問い合わせ
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-sumi text-cream py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+        <!-- Brand -->
+        <div class="lg:col-span-1">
+          <a href="/index.html" class="text-xl tracking-[0.25em] font-normal text-cream hover:text-gold-l transition-colors">TSUYU</a>
+          <p class="mt-4 text-sm text-cream/60 leading-relaxed">
+            浅草で、世界にひとつだけの<br />香りを創る調香ワークショップ
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-sm tracking-widest uppercase text-cream/40 mb-4">Services</h4>
+          <ul class="space-y-3">
+            <li><a href="/experience.html" class="text-sm text-cream/70 hover:text-cream transition-colors">ワークショップ体験</a></li>
+            <li><a href="/pricing.html" class="text-sm text-cream/70 hover:text-cream transition-colors">プラン・料金</a></li>
+            <li><a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">オンラインショップ</a></li>
+            <li><a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">法人・団体向け</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm tracking-widest uppercase text-cream/40 mb-4">Information</h4>
+          <ul class="space-y-3">
+            <li><a href="/about.html" class="text-sm text-cream/70 hover:text-cream transition-colors">私たちについて</a></li>
+            <li><a href="#faq" class="text-sm text-cream/70 hover:text-cream transition-colors">よくあるご質問</a></li>
+            <li><a href="/contact.html" class="text-sm text-cream/70 hover:text-cream transition-colors">お問い合わせ</a></li>
+            <li><a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">アクセス</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="text-sm tracking-widest uppercase text-cream/40 mb-4">Contact</h4>
+          <address class="not-italic text-sm text-cream/70 leading-relaxed">
+            〒111-0032<br />
+            東京都台東区浅草1-2-3<br />
+            TSUYUビル 2F<br /><br />
+            <a href="tel:03-1234-5678" class="hover:text-cream transition-colors">03-1234-5678</a><br />
+            <a href="mailto:info@tsuyu-asakusa.jp" class="hover:text-cream transition-colors">info@tsuyu-asakusa.jp</a>
+          </address>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <div class="pt-8 border-t border-cream/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-cream/40">&copy; 2024 浅草 露 TSUYU ASAKUSA. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="X (Twitter)">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="LINE">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Mobile menu toggle
+    (function() {
+      var btn = document.getElementById('mobile-menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      var line1 = document.getElementById('menu-line-1');
+      var line2 = document.getElementById('menu-line-2');
+      var line3 = document.getElementById('menu-line-3');
+      var isOpen = false;
+
+      btn.addEventListener('click', function() {
+        isOpen = !isOpen;
+        if (isOpen) {
+          menu.classList.remove('hidden');
+          menu.classList.add('flex');
+          line1.style.transform = 'rotate(45deg) translate(4px, 4px)';
+          line2.style.opacity = '0';
+          line3.style.transform = 'rotate(-45deg) translate(4px, -4px)';
+          line3.style.width = '1.5rem';
+        } else {
+          menu.classList.add('hidden');
+          menu.classList.remove('flex');
+          line1.style.transform = '';
+          line2.style.opacity = '1';
+          line3.style.transform = '';
+          line3.style.width = '1rem';
+        }
+      });
+
+      // Close on link click
+      var links = menu.querySelectorAll('a');
+      links.forEach(function(link) {
+        link.addEventListener('click', function() {
+          isOpen = false;
+          menu.classList.add('hidden');
+          menu.classList.remove('flex');
+          line1.style.transform = '';
+          line2.style.opacity = '1';
+          line3.style.transform = '';
+          line3.style.width = '1rem';
+        });
+      });
+    })();
+
+    // Scroll reveal
+    (function() {
+      var reveals = document.querySelectorAll('.reveal');
+      function checkReveal() {
+        reveals.forEach(function(el) {
+          var top = el.getBoundingClientRect().top;
+          if (top < window.innerHeight - 80) {
+            el.classList.add('visible');
+          }
+        });
+      }
+      window.addEventListener('scroll', checkReveal);
+      checkReveal();
+    })();
+
+    // FAQ Accordion
+    (function() {
+      var faqBtns = document.querySelectorAll('.faq-btn');
+      faqBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var item = btn.closest('.faq-item');
+          var isOpen = item.classList.contains('open');
+          
+          // Close all items
+          document.querySelectorAll('.faq-item').forEach(function(i) {
+            i.classList.remove('open');
+          });
+          
+          // Open clicked item if it was closed
+          if (!isOpen) {
+            item.classList.add('open');
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
