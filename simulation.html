@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>香りシミュレーター | 香の舎 ASAKUSA</title>
+  <meta name="description" content="あなたにぴったりの香りを見つける診断シミュレーター。5つの質問に答えて、オリジナルフレグランスのレシピを発見しましょう。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: '#FDFAF5',
+            gold: '#C9A84C',
+            charcoal: '#2C2C2C',
+            blush: '#F5E6E0',
+            softgold: '#E8D5A3'
+          },
+          fontFamily: {
+            sans: ['system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: system-ui, sans-serif; }
+    
+    /* Fade transitions */
+    .fade-enter { opacity: 0; transform: translateY(20px); }
+    .fade-enter-active { opacity: 1; transform: translateY(0); transition: all 0.5s ease-out; }
+    .fade-exit { opacity: 1; transform: translateY(0); }
+    .fade-exit-active { opacity: 0; transform: translateY(-20px); transition: all 0.3s ease-in; }
+    
+    /* Progress bar animation */
+    .progress-bar { transition: width 0.5s ease-out; }
+    
+    /* Choice hover effect */
+    .choice-btn { transition: all 0.3s ease; }
+    .choice-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15); }
+    
+    /* Gradient circle animation */
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+    .gradient-circle { animation: pulse-soft 4s ease-in-out infinite; }
+    
+    /* Screen transitions */
+    .screen { display: none; }
+    .screen.active { display: flex; }
+  </style>
+</head>
+<body class="bg-ivory text-charcoal min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-ivory/95 backdrop-blur-sm border-b border-charcoal/10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-14 sm:h-16">
+        <!-- Logo -->
+        <a href="/index.html" class="text-lg tracking-widest font-light text-charcoal hover:text-gold transition-colors">
+          TSUYU
+        </a>
+        
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="/index.html" class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Home</a>
+          <a href="/shop.html" class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Shop</a>
+          <a href="/reservation.html" class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Reservation</a>
+          <a href="/contact.html" class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Contact</a>
+        </div>
+        
+        <!-- Language Switcher -->
+        <div class="flex items-center gap-1 text-sm">
+          <button onclick="setLang('ja')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="ja">🇯🇵</button>
+          <button onclick="setLang('en')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="en">🇺🇸</button>
+          <button onclick="setLang('zh')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="zh">🇨🇳</button>
+          <button onclick="setLang('ko')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="ko">🇰🇷</button>
+          <button onclick="setLang('es')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="es">🇪🇸</button>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden p-2" onclick="toggleMobileMenu()" aria-label="メニュー">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-ivory border-t border-charcoal/10">
+      <div class="px-4 py-4 space-y-3">
+        <a href="/index.html" class="block text-sm text-charcoal/70 hover:text-charcoal">Home</a>
+        <a href="/shop.html" class="block text-sm text-charcoal/70 hover:text-charcoal">Shop</a>
+        <a href="/reservation.html" class="block text-sm text-charcoal/70 hover:text-charcoal">Reservation</a>
+        <a href="/contact.html" class="block text-sm text-charcoal/70 hover:text-charcoal">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="pt-14 sm:pt-16 min-h-screen flex flex-col">
+    
+    <!-- Progress Bar -->
+    <div id="progress-container" class="hidden fixed top-14 sm:top-16 left-0 right-0 h-1 bg-charcoal/10 z-40">
+      <div id="progress-bar" class="progress-bar h-full bg-gold" style="width: 0%"></div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen active flex-1 flex-col items-center justify-center px-6 py-12">
+      <div class="max-w-md text-center fade-enter-active">
+        <div class="w-20 h-20 mx-auto mb-8 rounded-full bg-gradient-to-br from-blush to-softgold flex items-center justify-center">
+          <span class="text-3xl">🌸</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-light mb-4" data-i18n="welcome_title">あなただけの香りを見つけましょう</h1>
+        <p class="text-charcoal/60 leading-relaxed mb-8" data-i18n="welcome_desc">
+          5つの質問に答えるだけで、あなたにぴったりの香りのレシピをご提案します。心を落ち着けて、直感で選んでください。
+        </p>
+        <button 
+          onclick="startQuiz()" 
+          class="inline-flex items-center gap-2 px-8 py-4 bg-gold text-white rounded-full text-sm tracking-wide hover:bg-gold/90 transition-colors"
+        >
+          <span data-i18n="start_btn">はじめる</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Question Screen -->
+    <div id="question-screen" class="screen flex-1 flex-col items-center justify-center px-6 py-12">
+      <div class="max-w-lg w-full">
+        <p class="text-center text-sm text-charcoal/50 mb-2">
+          <span data-i18n="question_label">質問</span> <span id="current-q">1</span> / 5
+        </p>
+        <h2 id="question-text" class="text-xl sm:text-2xl font-light text-center mb-8"></h2>
+        <div id="choices" class="grid grid-cols-2 gap-4"></div>
+      </div>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="result-screen" class="screen flex-1 flex-col items-center justify-center px-6 py-12">
+      <div class="max-w-md w-full text-center">
+        <p class="text-sm text-gold tracking-wide mb-4" data-i18n="result_label">あなたの香りレシピ</p>
+        
+        <!-- Gradient Circle -->
+        <div id="result-circle" class="gradient-circle w-48 h-48 mx-auto mb-8 rounded-full shadow-lg"></div>
+        
+        <h2 id="result-name" class="text-2xl sm:text-3xl font-light mb-4"></h2>
+        <p id="result-description" class="text-charcoal/60 leading-relaxed mb-6"></p>
+        
+        <!-- Recipe -->
+        <div id="recipe-list" class="bg-white/50 rounded-2xl p-6 mb-8 text-left"></div>
+        
+        <!-- CTA -->
+        <a 
+          href="/reservation.html" 
+          class="inline-flex items-center gap-2 px-8 py-4 bg-charcoal text-ivory rounded-full text-sm tracking-wide hover:bg-charcoal/90 transition-colors"
+        >
+          <span data-i18n="cta_workshop">ワークショップで実際に作ってみませんか？</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        
+        <button 
+          onclick="resetQuiz()" 
+          class="block mx-auto mt-6 text-sm text-charcoal/50 hover:text-charcoal transition-colors"
+          data-i18n="retry_btn"
+        >
+          もう一度診断する
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-ivory/70 py-8">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <p class="text-sm">&copy; 2024 香の舎 ASAKUSA. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // i18n translations
+    const i18n = {
+      ja: {
+        welcome_title: 'あなただけの香りを見つけましょう',
+        welcome_desc: '5つの質問に答えるだけで、あなたにぴったりの香りのレシピをご提案します。心を落ち着けて、直感で選んでください。',
+        start_btn: 'はじめる',
+        question_label: '質問',
+        result_label: 'あなたの香りレシピ',
+        cta_workshop: 'ワークショップで実際に作ってみませんか？',
+        retry_btn: 'もう一度診断する',
+        q1: 'どんな気分の香りにしたいですか？',
+        q1_a1: '🌿 フレッシュ',
+        q1_a2: '💕 ロマンティック',
+        q1_a3: '🌙 ミステリアス',
+        q1_a4: '🍃 ナチュラル',
+        q2: 'あなたらしい季節は？',
+        q2_a1: '🌸 春',
+        q2_a2: '☀️ 夏',
+        q2_a3: '🍂 秋',
+        q2_a4: '❄️ 冬',
+        q3: '心が落ち着く場所は？',
+        q3_a1: '🌲 森',
+        q3_a2: '🏖️ ビーチ',
+        q3_a3: '☕ カフェ',
+        q3_a4: '💐 花屋',
+        q4: '好きな時間帯は？',
+        q4_a1: '🌅 朝',
+        q4_a2: '☀️ 昼',
+        q4_a3: '🌆 夕方',
+        q4_a4: '🌙 夜',
+        q5: '香りの強さは？',
+        q5_a1: '💨 ライト',
+        q5_a2: '🌊 ミディアム',
+        q5_a3: '🔥 ボールド'
+      },
+      en: {
+        welcome_title: 'Discover Your Signature Scent',
+        welcome_desc: 'Answer 5 simple questions and we\'ll create a personalized fragrance recipe just for you. Relax and follow your intuition.',
+        start_btn: 'Start',
+        question_label: 'Question',
+        result_label: 'Your Fragrance Recipe',
+        cta_workshop: 'Create it at our workshop!',
+        retry_btn: 'Try again',
+        q1: 'What mood do you want your scent to evoke?',
+        q1_a1: '🌿 Fresh',
+        q1_a2: '💕 Romantic',
+        q1_a3: '🌙 Mysterious',
+        q1_a4: '🍃 Natural',
+        q2: 'Which season represents you best?',
+        q2_a1: '🌸 Spring',
+        q2_a2: '☀️ Summer',
+        q2_a3: '🍂 Autumn',
+        q2_a4: '❄️ Winter',
+        q3: 'Where do you feel most at peace?',
+        q3_a1: '🌲 Forest',
+        q3_a2: '🏖️ Beach',
+        q3_a3: '☕ Café',
+        q3_a4: '💐 Flower shop',
+        q4: 'What\'s your favorite time of day?',
+        q4_a1: '🌅 Morning',
+        q4_a2: '☀️ Afternoon',
+        q4_a3: '🌆 Evening',
+        q4_a4: '🌙 Night',
+        q5: 'How strong do you like your fragrance?',
+        q5_a1: '💨 Light',
+        q5_a2: '🌊 Moderate',
+        q5_a3: '🔥 Bold'
+      },
+      zh: {
+        welcome_title: '发现属于你的香气',
+        welcome_desc: '回答5个简单问题，我们将为您量身定制香水配方。放松心情，跟随直觉选择。',
+        start_btn: '开始',
+        question_label: '问题',
+        result_label: '您的香水配方',
+        cta_workshop: '来工坊亲手制作吧！',
+        retry_btn: '重新测试',
+        q1: '您想要什么样的香气氛围？',
+        q1_a1: '🌿 清新',
+        q1_a2: '💕 浪漫',
+        q1_a3: '🌙 神秘',
+        q1_a4: '🍃 自然',
+        q2: '哪个季节最能代表您？',
+        q2_a1: '🌸 春',
+        q2_a2: '☀️ 夏',
+        q2_a3: '🍂 秋',
+        q2_a4: '❄️ 冬',
+        q3: '您在哪里感到最放松？',
+        q3_a1: '🌲 森林',
+        q3_a2: '🏖️ 海滩',
+        q3_a3: '☕ 咖啡馆',
+        q3_a4: '💐 花店',
+        q4: '您最喜欢什么时间段？',
+        q4_a1: '🌅 早晨',
+        q4_a2: '☀️ 下午',
+        q4_a3: '🌆 傍晚',
+        q4_a4: '🌙 夜晚',
+        q5: '您喜欢多浓的香味？',
+        q5_a1: '💨 淡雅',
+        q5_a2: '🌊 适中',
+        q5_a3: '🔥 浓郁'
+      },
+      ko: {
+        welcome_title: '당신만의 향기를 찾아보세요',
+        welcome_desc: '5가지 질문에 답하면, 당신에게 딱 맞는 향수 레시피를 제안해 드립니다. 편안하게 직감을 따라 선택하세요.',
+        start_btn: '시작하기',
+        question_label: '질문',
+        result_label: '당신의 향수 레시피',
+        cta_workshop: '워크샵에서 직접 만들어 보세요!',
+        retry_btn: '다시 테스트',
+        q1: '어떤 분위기의 향기를 원하시나요?',
+        q1_a1: '🌿 프레시',
+        q1_a2: '💕 로맨틱',
+        q1_a3: '🌙 미스터리',
+        q1_a4: '🍃 내추럴',
+        q2: '당신을 가장 잘 나타내는 계절은?',
+        q2_a1: '🌸 봄',
+        q2_a2: '☀️ 여름',
+        q2_a3: '🍂 가을',
+        q2_a4: '❄️ 겨울',
+        q3: '마음이 편안해지는 장소는?',
+        q3_a1: '🌲 숲',
+        q3_a2: '🏖️ 해변',
+        q3_a3: '☕ 카페',
+        q3_a4: '💐 꽃집',
+        q4: '좋아하는 시간대는?',
+        q4_a1: '🌅 아침',
+        q4_a2: '☀️ 오후',
+        q4_a3: '🌆 저녁',
+        q4_a4: '🌙 밤',
+        q5: '향의 강도는?',
+        q5_a1: '💨 가벼운',
+        q5_a2: '🌊 보통',
+        q5_a3: '🔥 진한'
+      },
+      es: {
+        welcome_title: 'Descubre tu aroma único',
+        welcome_desc: 'Responde 5 preguntas sencillas y te sugeriremos una receta de fragancia personalizada. Relájate y sigue tu intuición.',
+        start_btn: 'Empezar',
+        question_label: 'Pregunta',
+        result_label: 'Tu receta de fragancia',
+        cta_workshop: '¡Créala en nuestro taller!',
+        retry_btn: 'Intentar de nuevo',
+        q1: '¿Qué estado de ánimo quieres que evoque tu aroma?',
+        q1_a1: '🌿 Fresco',
+        q1_a2: '💕 Romántico',
+        q1_a3: '🌙 Misterioso',
+        q1_a4: '🍃 Natural',
+        q2: '¿Qué estación te representa mejor?',
+        q2_a1: '🌸 Primavera',
+        q2_a2: '☀️ Verano',
+        q2_a3: '🍂 Otoño',
+        q2_a4: '❄️ Invierno',
+        q3: '¿Dónde te sientes más en paz?',
+        q3_a1: '🌲 Bosque',
+        q3_a2: '🏖️ Playa',
+        q3_a3: '☕ Cafetería',
+        q3_a4: '💐 Florería',
+        q4: '¿Cuál es tu momento favorito del día?',
+        q4_a1: '🌅 Mañana',
+        q4_a2: '☀️ Tarde',
+        q4_a3: '🌆 Atardecer',
+        q4_a4: '🌙 Noche',
+        q5: '¿Qué intensidad de fragancia prefieres?',
+        q5_a1: '💨 Ligera',
+        q5_a2: '🌊 Moderada',
+        q5_a3: '🔥 Intensa'
+      }
+    };
+
+    // Questions data
+    const questions = [
+      { key: 'q1', answers: ['q1_a1', 'q1_a2', 'q1_a3', 'q1_a4'], values: ['fresh', 'romantic', 'mysterious', 'natural'] },
+      { key: 'q2', answers: ['q2_a1', 'q2_a2', 'q2_a3', 'q2_a4'], values: ['spring', 'summer', 'autumn', 'winter'] },
+      { key: 'q3', answers: ['q3_a1', 'q3_a2', 'q3_a3', 'q3_a4'], values: ['forest', 'beach', 'cafe', 'flower'] },
+      { key: 'q4', answers: ['q4_a1', 'q4_a2', 'q4_a3', 'q4_a4'], values: ['morning', 'afternoon', 'evening', 'night'] },
+      { key: 'q5', answers: ['q5_a1', 'q5_a2', 'q5_a3'], values: ['light', 'moderate', 'bold'] }
+    ];
+
+    // Preset recipes
+    const recipes = {
+      'fresh-morning': {
+        name: { ja: '朝露の目覚め', en: 'Morning Dew Awakening', zh: '晨露苏醒', ko: '아침 이슬의 각성', es: 'Despertar del Rocío' },
+        desc: { 
+          ja: '爽やかな柑橘と透明感のあるグリーンノートが織りなす、清々しい朝の香り。新しい一日の始まりにふさわしい、希望に満ちた香りです。',
+          en: 'A refreshing blend of citrus and transparent green notes, perfect for starting a new day filled with hope.',
+          zh: '清新柑橘与通透绿叶交织，宛如充满希望的清晨。',
+          ko: '상쾌한 시트러스와 투명한 그린 노트가 어우러진 희망찬 아침의 향기.',
+          es: 'Una mezcla refrescante de cítricos y notas verdes transparentes, perfecta para un nuevo día lleno de esperanza.'
+        },
+        ingredients: [
+          { name: { ja: 'ベルガモット', en: 'Bergamot', zh: '佛手柑', ko: '베르가못', es: 'Bergamota' }, percent: 40 },
+          { name: { ja: 'グリーンティー', en: 'Green Tea', zh: '绿茶', ko: '녹차', es: 'Té Verde' }, percent: 35 },
+          { name: { ja: 'ホワイトムスク', en: 'White Musk', zh: '白麝香', ko: '화이트 머스크', es: 'Almizcle Blanco' }, percent: 25 }
+        ],
+        gradient: 'linear-gradient(135deg, #a8e6cf 0%, #dcedc1 50%, #ffd3a5 100%)'
+      },
+      'romantic-flower': {
+        name: { ja: '花園のワルツ', en: 'Garden Waltz', zh: '花园华尔兹', ko: '꽃밭의 왈츠', es: 'Vals del Jardín' },
+        desc: {
+          ja: '甘く優雅なローズとジャスミンが踊る、ロマンティックな香り。まるで花園を歩いているような、幸福感に包まれます。',
+          en: 'Sweet, elegant rose and jasmine dance together in this romantic fragrance, wrapping you in garden bliss.',
+          zh: '甜美优雅的玫瑰与茉莉共舞，宛如漫步花园般幸福。',
+          ko: '달콤하고 우아한 장미와 자스민이 춤추는 로맨틱한 향기.',
+          es: 'Rosa dulce y elegante bailando con jazmín en esta fragancia romántica envuelta en felicidad.'
+        },
+        ingredients: [
+          { name: { ja: 'ローズ', en: 'Rose', zh: '玫瑰', ko: '장미', es: 'Rosa' }, percent: 45 },
+          { name: { ja: 'ジャスミン', en: 'Jasmine', zh: '茉莉', ko: '자스민', es: 'Jazmín' }, percent: 30 },
+          { name: { ja: 'ピオニー', en: 'Peony', zh: '牡丹', ko: '모란', es: 'Peonía' }, percent: 25 }
+        ],
+        gradient: 'linear-gradient(135deg, #ffc8dd 0%, #ffafcc 50%, #bde0fe 100%)'
+      },
+      'mysterious-night': {
+        name: { ja: '月夜の秘密', en: 'Moonlit Secret', zh: '月夜秘语', ko: '달빛의 비밀', es: 'Secreto de Luna' },
+        desc: {
+          ja: '深みのあるウードとアンバーが奏でる、神秘的な夜の香り。静かな月明かりの下で、心の奥深くへと誘います。',
+          en: 'Deep oud and amber create a mysterious nocturnal fragrance, inviting you into the depths of a moonlit night.',
+          zh: '深沉乌木与琥珀交织，神秘月夜引你入梦。',
+          ko: '깊은 우드와 앰버가 연주하는 신비로운 밤의 향기.',
+          es: 'Oud profundo y ámbar crean una fragancia nocturna misteriosa bajo la luz de la luna.'
+        },
+        ingredients: [
+          { name: { ja: 'ウード', en: 'Oud', zh: '乌木', ko: '우드', es: 'Oud' }, percent: 40 },
+          { name: { ja: 'アンバー', en: 'Amber', zh: '琥珀', ko: '앰버', es: 'Ámbar' }, percent: 35 },
+          { name: { ja: 'サンダルウッド', en: 'Sandalwood', zh: '檀香', ko: '샌달우드', es: 'Sándalo' }, percent: 25 }
+        ],
+        gradient: 'linear-gradient(135deg, #2c3e50 0%, #4a4a4a 50%, #c9a84c 100%)'
+      },
+      'natural-forest': {
+        name: { ja: '森林浴', en: 'Forest Bathing', zh: '森林浴', ko: '산림욕', es: 'Baño de Bosque' },
+        desc: {
+          ja: 'ヒノキとシダーウッドの穏やかな香りが、深い森の中にいるような安らぎをもたらします。自然の力で心身をリフレッシュ。',
+          en: 'Calming hinoki and cedarwood transport you to a peaceful forest, refreshing mind and body with nature\'s embrace.',
+          zh: '丝柏与雪松的宁静香气，仿佛置身深林，身心焕然一新。',
+          ko: '편백과 시더우드의 평온한 향기가 깊은 숲속의 안식을 선사합니다.',
+          es: 'Hinoki y cedro te transportan a un bosque tranquilo, refrescando cuerpo y mente con el abrazo de la naturaleza.'
+        },
+        ingredients: [
+          { name: { ja: 'ヒノキ', en: 'Hinoki', zh: '丝柏', ko: '편백', es: 'Hinoki' }, percent: 40 },
+          { name: { ja: 'シダーウッド', en: 'Cedarwood', zh: '雪松', ko: '시더우드', es: 'Cedro' }, percent: 35 },
+          { name: { ja: 'モス', en: 'Moss', zh: '苔藓', ko: '이끼', es: 'Musgo' }, percent: 25 }
+        ],
+        gradient: 'linear-gradient(135deg, #134e5e 0%, #71b280 50%, #e8d5a3 100%)'
+      },
+      'summer-beach': {
+        name: { ja: '潮風のメロディ', en: 'Ocean Breeze Melody', zh: '海风旋律', ko: '바닷바람 멜로디', es: 'Melodía de Brisa Marina' },
+        desc: {
+          ja: 'ココナッツとマリンノートが奏でる、夏のビーチの香り。波の音が聞こえてくるような、開放感あふれる一品です。',
+          en: 'Coconut and marine notes compose a summer beach fragrance, evoking the sound of waves and endless freedom.',
+          zh: '椰子与海洋音符谱写夏日海滩，仿佛听见海浪声，自由无限。',
+          ko: '코코넛과 마린 노트가 연주하는 여름 해변의 향기.',
+          es: 'Coco y notas marinas componen una fragancia de playa veraniega, evocando el sonido de las olas y libertad infinita.'
+        },
+        ingredients: [
+          { name: { ja: 'ココナッツ', en: 'Coconut', zh: '椰子', ko: '코코넛', es: 'Coco' }, percent: 35 },
+          { name: { ja: 'シーソルト', en: 'Sea Salt', zh: '海盐', ko: '바다 소금', es: 'Sal Marina' }, percent: 35 },
+          { name: { ja: 'ティアレ', en: 'Tiare', zh: '栀子花', ko: '티아레', es: 'Tiaré' }, percent: 30 }
+        ],
+        gradient: 'linear-gradient(135deg, #00d2d3 0%, #54a0ff 50%, #ffeaa7 100%)'
+      },
+      'autumn-cafe': {
+        name: { ja: 'カフェの午後', en: 'Café Afternoon', zh: '咖啡馆午后', ko: '카페의 오후', es: 'Tarde de Café' },
+        desc: {
+          ja: 'コーヒーとバニラの温かみのある香りが、穏やかな午後のひとときを演出。心地よい空間に包まれているような安心感。',
+          en: 'Warm coffee and vanilla create a cozy afternoon atmosphere, wrapping you in comforting tranquility.',
+          zh: '咖啡与香草的温暖香气，营造宁静午后，让人倍感安心。',
+          ko: '커피와 바닐라의 따뜻한 향기가 평온한 오후의 시간을 연출합니다.',
+          es: 'Café cálido y vainilla crean una atmósfera de tarde acogedora, envolviéndote en tranquilidad reconfortante.'
+        },
+        ingredients: [
+          { name: { ja: 'コーヒー', en: 'Coffee', zh: '咖啡', ko: '커피', es: 'Café' }, percent: 40 },
+          { name: { ja: 'バニラ', en: 'Vanilla', zh: '香草', ko: '바닐라', es: 'Vainilla' }, percent: 35 },
+          { name: { ja: 'キャラメル', en: 'Caramel', zh: '焦糖', ko: '캐러멜', es: 'Caramelo' }, percent: 25 }
+        ],
+        gradient: 'linear-gradient(135deg, #6c5b4c 0%, #c9a84c 50%, #f5e6e0 100%)'
+      },
+      'winter-evening': {
+        name: { ja: '暖炉のぬくもり', en: 'Fireside Warmth', zh: '壁炉温暖', ko: '벽난로의 온기', es: 'Calor de Chimenea' },
+        desc: {
+          ja: 'スパイシーなシナモンとウッディノートが織りなす、冬の夕暮れの香り。暖かな暖炉の前で過ごすような、心温まる一品。',
+          en: 'Spicy cinnamon and woody notes weave a winter evening fragrance, like warming yourself by a cozy fireplace.',
+          zh: '辛香肉桂与木质香调交织，如冬日黄昏壁炉旁的温暖。',
+          ko: '스파이시한 시나몬과 우디 노트가 엮어내는 겨울 저녁의 향기.',
+          es: 'Canela especiada y notas amaderadas tejen una fragancia de atardecer invernal, como calentarse junto a una chimenea.'
+        },
+        ingredients: [
+          { name: { ja: 'シナモン', en: 'Cinnamon', zh: '肉桂', ko: '시나몬', es: 'Canela' }, percent: 35 },
+          { name: { ja: 'ベチバー', en: 'Vetiver', zh: '香根草', ko: '베티버', es: 'Vetiver' }, percent: 35 },
+          { name: { ja: 'トンカビーン', en: 'Tonka Bean', zh: '零陵香豆', ko: '통카빈', es: 'Haba Tonka' }, percent: 30 }
+        ],
+        gradient: 'linear-gradient(135deg, #8b4513 0%, #d4a574 50%, #2c2c2c 100%)'
+      },
+      'spring-light': {
+        name: { ja: '桜舞う風', en: 'Dancing Cherry Blossoms', zh: '樱花飘舞', ko: '벚꽃이 춤추는 바람', es: 'Danza de Cerezos' },
+        desc: {
+          ja: '桜とホワイトフローラルが軽やかに舞う、春の訪れを告げる香り。希望と新しい出会いを予感させる、透明感あふれる一品。',
+          en: 'Cherry blossom and white florals dance lightly, heralding spring with hope and the promise of new beginnings.',
+          zh: '樱花与白色花香轻盈起舞，预示着春天的希望与新的邂逅。',
+          ko: '벚꽃과 화이트 플로럴이 가볍게 춤추는 봄의 향기.',
+          es: 'Flor de cerezo y florales blancos bailan ligeramente, anunciando la primavera con esperanza y nuevos comienzos.'
+        },
+        ingredients: [
+          { name: { ja: '桜', en: 'Cherry Blossom', zh: '樱花', ko: '벚꽃', es: 'Flor de Cerezo' }, percent: 45 },
+          { name: { ja: 'ホワイトティー', en: 'White Tea', zh: '白茶', ko: '화이트 티', es: 'Té Blanco' }, percent: 30 },
+          { name: { ja: 'ピンクペッパー', en: 'Pink Pepper', zh: '粉红胡椒', ko: '핑크 페퍼', es: 'Pimienta Rosa' }, percent: 25 }
+        ],
+        gradient: 'linear-gradient(135deg, #ffb7c5 0%, #fce4ec 50%, #e8f5e9 100%)'
+      }
+    };
+
+    // State
+    let currentLang = 'ja';
+    let currentQuestion = 0;
+    let answers = [];
+
+    // Language switcher
+    function setLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang] && i18n[lang][key]) {
+          el.textContent = i18n[lang][key];
+        }
+      });
+      // Update active state
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('bg-gold/20');
+        if (btn.getAttribute('data-lang') === lang) {
+          btn.classList.add('bg-gold/20');
+        }
+      });
+      // Re-render current question if on question screen
+      if (document.getElementById('question-screen').classList.contains('active')) {
+        renderQuestion();
+      }
+    }
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Start quiz
+    function startQuiz() {
+      currentQuestion = 0;
+      answers = [];
+      showScreen('question-screen');
+      document.getElementById('progress-container').classList.remove('hidden');
+      renderQuestion();
+    }
+
+    // Render question
+    function renderQuestion() {
+      const q = questions[currentQuestion];
+      const lang = currentLang;
+      
+      document.getElementById('current-q').textContent = currentQuestion + 1;
+      document.getElementById('question-text').textContent = i18n[lang][q.key];
+      
+      const choicesContainer = document.getElementById('choices');
+      choicesContainer.innerHTML = '';
+      
+      q.answers.forEach((ansKey, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn bg-white p-6 rounded-2xl border border-charcoal/10 text-center hover:border-gold/50';
+        btn.innerHTML = `<span class="text-lg">${i18n[lang][ansKey]}</span>`;
+        btn.onclick = () => selectAnswer(q.values[idx]);
+        choicesContainer.appendChild(btn);
+      });
+      
+      // Update progress bar
+      const progress = ((currentQuestion) / questions.length) * 100;
+      document.getElementById('progress-bar').style.width = progress + '%';
+    }
+
+    // Select answer
+    function selectAnswer(value) {
+      answers.push(value);
+      
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        // Show result
+        document.getElementById('progress-bar').style.width = '100%';
+        setTimeout(() => {
+          showResult();
+        }, 300);
+      }
+    }
+
+    // Calculate result based on answers
+    function calculateRecipe() {
+      const [mood, season, place, time, intensity] = answers;
+      
+      // Map combinations to recipes
+      if (mood === 'fresh' && (time === 'morning' || time === 'afternoon')) return 'fresh-morning';
+      if (mood === 'romantic' && place === 'flower') return 'romantic-flower';
+      if (mood === 'mysterious' && (time === 'night' || time === 'evening')) return 'mysterious-night';
+      if (mood === 'natural' && place === 'forest') return 'natural-forest';
+      if (season === 'summer' && place === 'beach') return 'summer-beach';
+      if (place === 'cafe' && (time === 'afternoon' || time === 'evening')) return 'autumn-cafe';
+      if (season === 'winter' && time === 'evening') return 'winter-evening';
+      if (season === 'spring' && intensity === 'light') return 'spring-light';
+      
+      // Default fallbacks based on mood
+      const moodMap = {
+        'fresh': 'fresh-morning',
+        'romantic': 'romantic-flower',
+        'mysterious': 'mysterious-night',
+        'natural': 'natural-forest'
+      };
+      return moodMap[mood] || 'fresh-morning';
+    }
+
+    // Show result
+    function showResult() {
+      const recipeKey = calculateRecipe();
+      const recipe = recipes[recipeKey];
+      const lang = currentLang;
+      
+      document.getElementById('result-name').textContent = recipe.name[lang];
+      document.getElementById('result-description').textContent = recipe.desc[lang];
+      document.getElementById('result-circle').style.background = recipe.gradient;
+      
+      // Render recipe list
+      const recipeList = document.getElementById('recipe-list');
+      recipeList.innerHTML = `
+        <h3 class="text-sm text-charcoal/50 mb-4 tracking-wide">${lang === 'ja' ? '調合レシピ' : 'Recipe'}</h3>
+        ${recipe.ingredients.map(ing => `
+          <div class="flex items-center justify-between py-2 border-b border-charcoal/10 last:border-0">
+            <span class="text-charcoal">${ing.name[lang]}</span>
+            <span class="text-gold font-medium">${ing.percent}%</span>
+          </div>
+        `).join('')}
+      `;
+      
+      document.getElementById('progress-container').classList.add('hidden');
+      showScreen('result-screen');
+    }
+
+    // Reset quiz
+    function resetQuiz() {
+      showScreen('welcome-screen');
+    }
+
+    // Show screen
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+      });
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      setLang('ja');
+    });
+  </script>
+</body>
+</html>
