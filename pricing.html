@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +13,8 @@
   <!-- Google Fonts: Shippori Mincho -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
 
   <!-- Tailwind Config -->
   <script>
@@ -23,17 +25,17 @@
             mincho: ['"Shippori Mincho"', 'Georgia', 'serif'],
           },
           colors: {
-            cream:      '#F5F1EB',
-            'cream-d':  '#EDE8DF',
-            sumi:       '#2C2418',
-            'sumi-l':   '#5C4E3C',
-            gold:       '#B8963E',
-            'gold-l':   '#D4B96A',
-            sand:       '#E8E0D4',
+            cream: '#F5F1EB',
+            'cream-d': '#EDE8DF',
+            sumi: '#2C2418',
+            'sumi-l': '#5C4E3C',
+            gold: '#B8963E',
+            'gold-l': '#D4B96A',
+            sand: '#E8E0D4',
           },
           keyframes: {
             fadeIn: {
-              '0%':   { opacity: '0', transform: 'translateY(20px)' },
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' },
             },
           },
@@ -46,77 +48,72 @@
   </script>
 
   <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Shippori Mincho', Georgia, serif; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
-    .delay-400 { animation-delay: 0.4s; }
-    .delay-600 { animation-delay: 0.6s; }
+    body {
+      font-family: 'Shippori Mincho', Georgia, serif;
+    }
 
-    .anim-hidden { opacity: 0; }
+    .delay-200 {
+      animation-delay: 0.2s;
+    }
 
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-300 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-400 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-600 {
+      animation-delay: 0.6s;
+    }
+
+    .anim-hidden {
+      opacity: 0;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* FAQ Accordion */
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-    .faq-item.open .faq-answer { max-height: 500px; }
-    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
   </style>
 </head>
 
 <body class="bg-cream text-sumi antialiased">
 
   <!-- ===== NAVIGATION ===== -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-cream/95 backdrop-blur-sm border-b border-sumi/10">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 lg:h-20">
-
-        <!-- Logo -->
-        <a href="index.html" id="nav-logo" class="text-lg tracking-[0.25em] font-normal text-sumi transition-colors duration-500">
-          TSUYU
-        </a>
-
-        <!-- Desktop Links -->
-        <div class="hidden lg:flex items-center gap-10">
-          <a href="experience.html" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Experience</a>
-          <a href="pricing.html" class="text-sm tracking-widest text-gold hover:text-gold transition-colors duration-300 uppercase">Plans</a>
-          <a href="#" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Online Shop</a>
-          <a href="#" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">About</a>
-          <a href="#" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Contact</a>
-        </div>
-
-        <!-- CTA + Hamburger -->
-        <div class="flex items-center gap-4">
-          <a href="#cta"
-             class="hidden md:inline-flex items-center px-6 py-2.5 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi-l transition-colors duration-300">
-            ご予約
-          </a>
-          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
-            <span id="menu-line-1" class="block w-6 h-px bg-sumi transition-all duration-300"></span>
-            <span id="menu-line-2" class="block w-6 h-px bg-sumi transition-all duration-300"></span>
-            <span id="menu-line-3" class="block w-4 h-px bg-sumi transition-all duration-300 ml-auto"></span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
-      <a href="experience.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
-      <a href="pricing.html" class="text-lg tracking-widest text-gold hover:text-gold transition-colors uppercase">Plans</a>
-      <a href="#" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Online Shop</a>
-      <a href="#" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
-      <a href="#" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
-      <a href="#cta" class="mt-4 px-8 py-3 bg-sumi text-cream text-sm tracking-widest uppercase">ご予約はこちら</a>
-    </div>
-  </nav>
+  <div th:replace="~{common/nav :: navbar}"></div>
 
   <!-- ===== HEADER SECTION ===== -->
   <section class="pt-32 pb-20 lg:pt-40 lg:pb-28">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-      <p class="text-xs tracking-[0.3em] text-gold uppercase mb-4 anim-hidden animate-fade-in delay-200">Plans & Pricing</p>
+      <p class="text-xs tracking-[0.3em] text-gold uppercase mb-4 anim-hidden animate-fade-in delay-200">Plans & Pricing
+      </p>
       <h1 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-wide mb-6 anim-hidden animate-fade-in delay-300">
         プラン・料金案内
       </h1>
@@ -151,32 +148,37 @@
 
           <ul class="space-y-3 mb-8 flex-grow">
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>体験時間：約60分</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>香料：12種類から選択</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>完成品：15mlボトル × 1本</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>レシピカードお渡し</span>
             </li>
           </ul>
 
-          <a href="#cta" class="block w-full text-center py-4 border border-sumi text-sumi text-sm tracking-widest uppercase hover:bg-sumi hover:text-cream transition-colors duration-300">
+          <a href="#cta"
+            class="block w-full text-center py-4 border border-sumi text-sumi text-sm tracking-widest uppercase hover:bg-sumi hover:text-cream transition-colors duration-300">
             このプランを予約
           </a>
         </div>
@@ -204,44 +206,51 @@
 
           <ul class="space-y-3 mb-8 flex-grow">
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>体験時間：約90分</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>香料：20種類以上から選択</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>完成品：30mlボトル × 1本</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>香りの基礎講座付き</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>オリジナルギフトボックス</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>季節の和菓子とお茶付き</span>
             </li>
           </ul>
 
-          <a href="#cta" class="block w-full text-center py-4 bg-gold text-sumi text-sm tracking-widest uppercase hover:bg-gold-l transition-colors duration-300">
+          <a href="#cta"
+            class="block w-full text-center py-4 bg-gold text-sumi text-sm tracking-widest uppercase hover:bg-gold-l transition-colors duration-300">
             このプランを予約
           </a>
         </div>
@@ -265,44 +274,51 @@
 
           <ul class="space-y-3 mb-8 flex-grow">
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>体験時間：約120分</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>香料：全種類から選択可能</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>完成品：30mlボトル × 2本</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>完全プライベート空間</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>記念撮影サービス</span>
             </li>
             <li class="flex items-start gap-3 text-sm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
               <span>追加1名様 +¥6,000</span>
             </li>
           </ul>
 
-          <a href="#cta" class="block w-full text-center py-4 border border-sumi text-sumi text-sm tracking-widest uppercase hover:bg-sumi hover:text-cream transition-colors duration-300">
+          <a href="#cta"
+            class="block w-full text-center py-4 border border-sumi text-sumi text-sm tracking-widest uppercase hover:bg-sumi hover:text-cream transition-colors duration-300">
             このプランを予約
           </a>
         </div>
@@ -367,12 +383,14 @@
               <td class="p-4 lg:p-6 text-sumi-l">香りの基礎講座</td>
               <td class="p-4 lg:p-6 text-center text-sumi-l">—</td>
               <td class="p-4 lg:p-6 text-center bg-sumi/5">
-                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </td>
               <td class="p-4 lg:p-6 text-center">
-                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </td>
@@ -381,12 +399,14 @@
               <td class="p-4 lg:p-6 text-sumi-l">ギフトボックス</td>
               <td class="p-4 lg:p-6 text-center text-sumi-l">—</td>
               <td class="p-4 lg:p-6 text-center bg-sumi/5">
-                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </td>
               <td class="p-4 lg:p-6 text-center">
-                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </td>
@@ -395,12 +415,14 @@
               <td class="p-4 lg:p-6 text-sumi-l">お茶・和菓子</td>
               <td class="p-4 lg:p-6 text-center text-sumi-l">—</td>
               <td class="p-4 lg:p-6 text-center bg-sumi/5">
-                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </td>
               <td class="p-4 lg:p-6 text-center">
-                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </td>
@@ -410,7 +432,8 @@
               <td class="p-4 lg:p-6 text-center text-sumi-l">—</td>
               <td class="p-4 lg:p-6 text-center bg-sumi/5 text-sumi-l">—</td>
               <td class="p-4 lg:p-6 text-center">
-                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <svg class="w-5 h-5 text-gold mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </td>
@@ -435,14 +458,14 @@
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
           <a href="#"
-             class="inline-flex items-center justify-center px-10 py-4 bg-gold text-sumi text-sm tracking-widest uppercase hover:bg-gold-l transition-colors duration-300">
+            class="inline-flex items-center justify-center px-10 py-4 bg-gold text-sumi text-sm tracking-widest uppercase hover:bg-gold-l transition-colors duration-300">
             オンライン予約
             <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
             </svg>
           </a>
           <a href="tel:03-0000-0000"
-             class="inline-flex items-center justify-center px-10 py-4 border border-cream/30 text-cream text-sm tracking-widest uppercase hover:bg-cream/10 transition-colors duration-300">
+            class="inline-flex items-center justify-center px-10 py-4 border border-cream/30 text-cream text-sm tracking-widest uppercase hover:bg-cream/10 transition-colors duration-300">
             電話で予約
           </a>
         </div>
@@ -547,8 +570,10 @@
         <div>
           <h4 class="text-xs tracking-widest uppercase text-cream/40 mb-4">Menu</h4>
           <ul class="space-y-3">
-            <li><a href="experience.html" class="text-sm text-cream/70 hover:text-cream transition-colors">ワークショップ体験</a></li>
-            <li><a href="pricing.html" class="text-sm text-cream/70 hover:text-cream transition-colors">プラン・料金案内</a></li>
+            <li><a href="experience.html" class="text-sm text-cream/70 hover:text-cream transition-colors">ワークショップ体験</a>
+            </li>
+            <li><a href="pricing.html" class="text-sm text-cream/70 hover:text-cream transition-colors">プラン・料金案内</a>
+            </li>
             <li><a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">オンラインショップ</a></li>
             <li><a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">私たちについて</a></li>
           </ul>
@@ -572,7 +597,8 @@
             <p>〒111-0032</p>
             <p>東京都台東区浅草1-2-3</p>
             <p>TSUYUビル 2F</p>
-            <p class="pt-2"><a href="tel:03-0000-0000" class="hover:text-cream transition-colors">TEL: 03-0000-0000</a></p>
+            <p class="pt-2"><a href="tel:03-0000-0000" class="hover:text-cream transition-colors">TEL: 03-0000-0000</a>
+            </p>
           </address>
         </div>
       </div>
@@ -585,17 +611,20 @@
         <div class="flex gap-6">
           <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="Instagram">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
             </svg>
           </a>
           <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="X">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
           </a>
           <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="LINE">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.105.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+              <path
+                d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.105.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
             </svg>
           </a>
         </div>
@@ -613,7 +642,7 @@
     const menuLine3 = document.getElementById('menu-line-3');
     let menuOpen = false;
 
-    mobileMenuBtn.addEventListener('click', function() {
+    mobileMenuBtn.addEventListener('click', function () {
       menuOpen = !menuOpen;
       if (menuOpen) {
         mobileMenu.classList.remove('hidden');
@@ -633,8 +662,8 @@
     });
 
     // Close menu on link click
-    document.querySelectorAll('#mobile-menu a').forEach(function(link) {
-      link.addEventListener('click', function() {
+    document.querySelectorAll('#mobile-menu a').forEach(function (link) {
+      link.addEventListener('click', function () {
         mobileMenu.classList.add('hidden');
         mobileMenu.classList.remove('flex');
         menuOpen = false;
@@ -648,7 +677,7 @@
     // Scroll Reveal Animation
     function revealOnScroll() {
       const reveals = document.querySelectorAll('.reveal');
-      reveals.forEach(function(el) {
+      reveals.forEach(function (el) {
         const windowHeight = window.innerHeight;
         const revealTop = el.getBoundingClientRect().top;
         const revealPoint = 100;
@@ -662,16 +691,16 @@
     window.addEventListener('load', revealOnScroll);
 
     // FAQ Accordion
-    document.querySelectorAll('.faq-toggle').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+    document.querySelectorAll('.faq-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
         const item = this.closest('.faq-item');
         const wasOpen = item.classList.contains('open');
-        
+
         // Close all
-        document.querySelectorAll('.faq-item').forEach(function(faq) {
+        document.querySelectorAll('.faq-item').forEach(function (faq) {
           faq.classList.remove('open');
         });
-        
+
         // Open clicked if it was closed
         if (!wasOpen) {
           item.classList.add('open');
@@ -681,4 +710,5 @@
   </script>
 
 </body>
+
 </html>

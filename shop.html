@@ -66,52 +66,7 @@
 <body class="bg-cream text-sumi antialiased">
 
   <!-- ===== NAVIGATION ===== -->
-  <nav id="navbar"
-    class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-sumi/10 transition-all duration-500">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 lg:h-20">
-        <a href="index.html"
-          class="text-lg tracking-[0.25em] font-normal text-sumi transition-colors duration-500">TSUYU</a>
-        <div class="hidden lg:flex items-center gap-10">
-          <a href="experience.html"
-            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Experience</a>
-          <a href="pricing.html"
-            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Plans</a>
-          <a href="shop.html"
-            class="text-sm tracking-widest text-sumi hover:text-sumi transition-colors duration-300 uppercase border-b border-gold pb-1">Online
-            Shop</a>
-          <a href="about.html"
-            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">About</a>
-          <a href="contact.html"
-            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Contact</a>
-        </div>
-        <div class="flex items-center gap-4">
-          <a href="pricing.html"
-            class="hidden md:inline-flex items-center px-6 py-2.5 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi-l transition-colors duration-300">ご予約</a>
-          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
-            <span class="block w-6 h-px bg-sumi transition-all duration-300"></span>
-            <span class="block w-6 h-px bg-sumi transition-all duration-300"></span>
-            <span class="block w-4 h-px bg-sumi transition-all duration-300 ml-auto"></span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu"
-      class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
-      <a href="experience.html"
-        class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
-      <a href="pricing.html"
-        class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
-      <a href="shop.html" class="text-lg tracking-widest text-sumi hover:text-sumi transition-colors uppercase">Online
-        Shop</a>
-      <a href="about.html"
-        class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
-      <a href="contact.html"
-        class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
-      <a href="pricing.html" class="mt-4 px-8 py-3 bg-sumi text-cream text-sm tracking-widest uppercase">ご予約はこちら</a>
-    </div>
-  </nav>
+  <div th:replace="~{common/nav :: navbar}"></div>
 
   <!-- ===== HERO HEADER ===== -->
   <section class="pt-32 pb-16 lg:pt-40 lg:pb-24 bg-cream">
