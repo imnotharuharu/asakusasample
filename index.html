@@ -106,6 +106,16 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Language Switcher */
+    .lang-switch button {
+      transition: all 0.2s ease;
+    }
+
+    .lang-switch button.active {
+      color: #B8963E;
+      font-weight: 500;
+    }
   </style>
 </head>
 
@@ -138,37 +148,45 @@
         </div>
 
         <div class="flex items-center gap-4">
-          <a href="reservation.html" id="nav-cta"
-            class="hidden md:inline-flex items-center px-6 py-2.5 bg-white/10 border border-white/30 text-white text-sm tracking-widest uppercase hover:bg-white/20 transition-colors duration-300">
-            ご予約
-          </a>
-          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
-            <span id="menu-line-1" class="block w-6 h-px bg-white transition-all duration-300"></span>
-            <span id="menu-line-2" class="block w-6 h-px bg-white transition-all duration-300"></span>
-            <span id="menu-line-3" class="block w-4 h-px bg-white transition-all duration-300 ml-auto"></span>
-          </button>
+          <!-- Language Switcher + CTA + Hamburger -->
+          <div class="flex items-center gap-4">
+            <!-- Language Switcher -->
+            <div class="lang-switch hidden md:flex items-center gap-1 text-sm" id="lang-switch-desktop">
+              <button id="lang-ja" class="px-2 py-1 text-white/80 hover:text-white transition-colors">JP</button>
+              <span class="text-white/40">/</span>
+              <button id="lang-en" class="px-2 py-1 text-white/80 hover:text-white transition-colors">EN</button>
+            </div>
+            <a href="reservation.html" id="nav-cta"
+              class="hidden md:inline-flex items-center px-6 py-2.5 bg-white/10 border border-white/30 text-white text-sm tracking-widest uppercase hover:bg-white/20 transition-colors duration-300">
+              ご予約
+            </a>
+            <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
+              <span id="menu-line-1" class="block w-6 h-px bg-white transition-all duration-300"></span>
+              <span id="menu-line-2" class="block w-6 h-px bg-white transition-all duration-300"></span>
+              <span id="menu-line-3" class="block w-4 h-px bg-white transition-all duration-300 ml-auto"></span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div id="mobile-menu"
-      class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
-      <a href="experience.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
-      <a href="reservation.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Reservation</a>
-      <a href="pricing.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
-      <a href="shop.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Online
-        Shop</a>
-      <a href="about.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
-      <a href="contact.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
-      <a href="pricing.html"
-        class="mobile-nav-link mt-4 px-8 py-3 bg-sumi text-cream text-sm tracking-widest uppercase">ご予約はこちら</a>
-    </div>
+      <div id="mobile-menu"
+        class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
+        <a href="experience.html"
+          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
+        <a href="reservation.html"
+          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Reservation</a>
+        <a href="pricing.html"
+          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
+        <a href="shop.html"
+          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Online
+          Shop</a>
+        <a href="about.html"
+          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
+        <a href="contact.html"
+          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
+        <a href="pricing.html"
+          class="mobile-nav-link mt-4 px-8 py-3 bg-sumi text-cream text-sm tracking-widest uppercase">ご予約はこちら</a>
+      </div>
   </nav>
 
   <!-- ===== HERO ===== -->
