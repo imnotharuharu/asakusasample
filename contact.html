@@ -4,13 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>お問い合わせ・アクセス | 浅草 露ーTSUYU ASAKUSA</title>
-  <meta name="description" content="浅草 露へのお問い合わせ・アクセス情報。浅草駅から徒歩5分。ワークショップのご予約・ご質問はこちらから。" />
+  <title data-i18n="meta.title">お問い合わせ・アクセス | 浅草 露ーTSUYU ASAKUSA</title>
+  <meta name="description" data-i18n="meta.description" content="浅草 露へのお問い合わせ・アクセス情報。浅草駅から徒歩5分。" />
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Fonts: Shippori Mincho -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&display=swap"
@@ -20,16 +17,11 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            mincho: ['"Shippori Mincho"', 'Georgia', 'serif'],
-          },
+          fontFamily: { mincho: ['"Shippori Mincho"', 'Georgia', 'serif'] },
           colors: {
-            cream: '#F5F1EB',
-            'cream-d': '#EDE8DF',
-            sumi: '#2C2418',
-            'sumi-l': '#5C4E3C',
-            gold: '#B8963E',
-            'gold-l': '#D4B96A',
+            cream: '#F5F1EB', 'cream-d': '#EDE8DF',
+            sumi: '#2C2418', 'sumi-l': '#5C4E3C',
+            gold: '#B8963E', 'gold-l': '#D4B96A',
             sand: '#E8E0D4',
           },
         },
@@ -63,82 +55,85 @@
       outline: none;
       border-color: #B8963E;
     }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
   </style>
 </head>
 
 <body class="bg-cream text-sumi antialiased">
 
-  <!-- ===== NAVIGATION ===== -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <!-- NAVIGATION -->
+  <nav id="navbar"
+    class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-sumi/10 transition-all duration-500">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
-
-        <a href="index.html" id="nav-logo"
-          class="text-lg tracking-[0.25em] font-normal text-white transition-colors duration-500">
-          TSUYU
-        </a>
-
-        <div class="hidden lg:flex items-center gap-10" id="nav-links">
+        <a href="index.html" class="text-lg tracking-[0.25em] font-normal text-sumi">TSUYU</a>
+        <div class="hidden lg:flex items-center gap-10">
           <a href="experience.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Experience</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
           <a href="reservation.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Reservation</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Reservation</a>
           <a href="pricing.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Plans</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
           <a href="shop.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Online
-            Shop</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Shop</a>
           <a href="about.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">About</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
           <a href="contact.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Contact</a>
+            class="text-sm tracking-widest text-gold hover:text-gold transition-colors uppercase">Contact</a>
         </div>
-
         <div class="flex items-center gap-4">
-          <a href="pricing.html" id="nav-cta"
-            class="hidden md:inline-flex items-center px-6 py-2.5 bg-white/10 border border-white/30 text-white text-sm tracking-widest uppercase hover:bg-white/20 transition-colors duration-300">
-            ご予約
-          </a>
-          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
-            <span id="menu-line-1" class="block w-6 h-px bg-white transition-all duration-300"></span>
-            <span id="menu-line-2" class="block w-6 h-px bg-white transition-all duration-300"></span>
-            <span id="menu-line-3" class="block w-4 h-px bg-white transition-all duration-300 ml-auto"></span>
+          <div class="flex items-center border border-sumi/20 text-sm">
+            <button onclick="setLanguage('ja')" class="lang-btn px-2 py-1 transition-colors" data-lang="ja">JP</button>
+            <span class="text-sumi/30">|</span>
+            <button onclick="setLanguage('en')" class="lang-btn px-2 py-1 transition-colors" data-lang="en">EN</button>
+          </div>
+          <a href="reservation.html"
+            class="hidden md:inline-flex items-center px-6 py-2.5 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi-l transition-colors"
+            data-i18n="nav.reserve">ご予約</a>
+          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニュー">
+            <span class="block w-6 h-px bg-sumi"></span>
+            <span class="block w-6 h-px bg-sumi"></span>
+            <span class="block w-4 h-px bg-sumi ml-auto"></span>
           </button>
         </div>
       </div>
     </div>
-
     <div id="mobile-menu"
       class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
-      <a href="experience.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
-      <a href="pricing.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
-      <a href="shop.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Online
-        Shop</a>
-      <a href="about.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
-      <a href="contact.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
-      <a href="pricing.html"
-        class="mobile-nav-link mt-4 px-8 py-3 bg-sumi text-cream text-sm tracking-widest uppercase">ご予約はこちら</a>
+      <a href="experience.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">Experience</a>
+      <a href="reservation.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">Reservation</a>
+      <a href="pricing.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">Plans</a>
+      <a href="shop.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">Shop</a>
+      <a href="about.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">About</a>
+      <a href="contact.html" class="text-lg tracking-widest text-gold uppercase">Contact</a>
     </div>
   </nav>
 
-  <!-- ===== HERO HEADER ===== -->
+  <!-- HEADER -->
   <section class="pt-32 pb-16 lg:pt-40 lg:pb-24 bg-cream">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center">
       <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4">Contact & Access</p>
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-wide mb-6">お問い合わせ・アクセス</h1>
-      <p class="text-sumi-l leading-relaxed max-w-2xl mx-auto">
-        ご質問・ご相談はお気軽にお問い合わせください。<br class="hidden md:block" />
-        ワークショップのご予約もこちらから承っております。
-      </p>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-wide mb-6" data-i18n="header.title">お問い合わせ・アクセス
+      </h1>
+      <p class="text-sumi-l leading-relaxed max-w-2xl mx-auto" data-i18n="header.subtitle">
+        ご質問・ご相談はお気軽にお問い合わせください。ワークショップのご予約もこちらから承っております。</p>
     </div>
   </section>
 
-  <!-- ===== ACCESS & MAP ===== -->
+  <!-- ACCESS & MAP -->
   <section class="py-16 lg:py-24 bg-sand/30">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 items-start">
@@ -158,14 +153,14 @@
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
             </svg>
-            Google Mapsで開く
+            <span data-i18n="access.openmap">Google Mapsで開く</span>
           </a>
         </div>
 
         <!-- Access Info -->
         <div class="reveal order-1 lg:order-2">
           <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4">Access</p>
-          <h2 class="text-2xl md:text-3xl font-normal tracking-wide mb-8">アクセス</h2>
+          <h2 class="text-2xl md:text-3xl font-normal tracking-wide mb-8" data-i18n="access.title">アクセス</h2>
 
           <div class="space-y-6">
             <div class="flex gap-4">
@@ -177,11 +172,9 @@
                 </svg>
               </div>
               <div>
-                <h3 class="font-normal mb-1">所在地</h3>
-                <p class="text-sm text-sumi-l leading-relaxed">
-                  〒111-0032<br />
-                  東京都台東区浅草2-1-1 浅草ビル3F
-                </p>
+                <h3 class="font-normal mb-1" data-i18n="access.address.label">所在地</h3>
+                <p class="text-sm text-sumi-l leading-relaxed" data-i18n="access.address.value">
+                  〒111-0032<br />東京都台東区浅草2-1-1 浅草ビル3F</p>
               </div>
             </div>
 
@@ -193,11 +186,9 @@
                 </svg>
               </div>
               <div>
-                <h3 class="font-normal mb-1">営業時間</h3>
-                <p class="text-sm text-sumi-l leading-relaxed">
-                  10:00 - 18:00（最終受付 17:00）<br />
-                  定休日：毎週火曜日
-                </p>
+                <h3 class="font-normal mb-1" data-i18n="access.hours.label">営業時間</h3>
+                <p class="text-sm text-sumi-l leading-relaxed" data-i18n="access.hours.value">10:00 - 18:00（最終受付
+                  17:00）<br />定休日：毎週火曜日</p>
               </div>
             </div>
 
@@ -209,10 +200,9 @@
                 </svg>
               </div>
               <div>
-                <h3 class="font-normal mb-1">電話番号</h3>
-                <p class="text-sm text-sumi-l">
-                  <a href="tel:03-1234-5678" class="hover:text-gold transition-colors">03-1234-5678</a>
-                </p>
+                <h3 class="font-normal mb-1" data-i18n="access.phone.label">電話番号</h3>
+                <p class="text-sm text-sumi-l"><a href="tel:03-1234-5678"
+                    class="hover:text-gold transition-colors">03-1234-5678</a></p>
               </div>
             </div>
 
@@ -224,38 +214,36 @@
                 </svg>
               </div>
               <div>
-                <h3 class="font-normal mb-1">メールアドレス</h3>
-                <p class="text-sm text-sumi-l">
-                  <a href="mailto:info@tsuyu-asakusa.jp"
-                    class="hover:text-gold transition-colors">info@tsuyu-asakusa.jp</a>
-                </p>
+                <h3 class="font-normal mb-1" data-i18n="access.email.label">メールアドレス</h3>
+                <p class="text-sm text-sumi-l"><a href="mailto:info@tsuyu-asakusa.jp"
+                    class="hover:text-gold transition-colors">info@tsuyu-asakusa.jp</a></p>
               </div>
             </div>
           </div>
 
-          <!-- Access by Train -->
+          <!-- Train Access -->
           <div class="mt-10 pt-8 border-t border-sumi/10">
-            <h3 class="font-normal mb-4">電車でのアクセス</h3>
+            <h3 class="font-normal mb-4" data-i18n="access.train.title">電車でのアクセス</h3>
             <ul class="space-y-3 text-sm text-sumi-l">
               <li class="flex gap-3">
                 <span
                   class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-orange-500 text-white text-xs rounded">G</span>
-                <span>東京メトロ銀座線「浅草駅」1番出口より徒歩5分</span>
+                <span data-i18n="access.train.ginza">東京メトロ銀座線「浅草駅」1番出口より徒歩5分</span>
               </li>
               <li class="flex gap-3">
                 <span
                   class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-purple-600 text-white text-xs rounded">A</span>
-                <span>都営浅草線「浅草駅」A4出口より徒歩4分</span>
+                <span data-i18n="access.train.asakusa">都営浅草線「浅草駅」A4出口より徒歩4分</span>
               </li>
               <li class="flex gap-3">
                 <span
                   class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-sky-500 text-white text-xs rounded">TS</span>
-                <span>東武スカイツリーライン「浅草駅」より徒歩6分</span>
+                <span data-i18n="access.train.tobu">東武スカイツリーライン「浅草駅」より徒歩6分</span>
               </li>
               <li class="flex gap-3">
                 <span
                   class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-red-500 text-white text-xs rounded">TX</span>
-                <span>つくばエクスプレス「浅草駅」A1出口より徒歩8分</span>
+                <span data-i18n="access.train.tx">つくばエクスプレス「浅草駅」A1出口より徒歩8分</span>
               </li>
             </ul>
           </div>
@@ -264,25 +252,28 @@
     </div>
   </section>
 
-  <!-- ===== CONTACT FORM ===== -->
+  <!-- CONTACT FORM -->
   <section class="py-16 lg:py-24 bg-cream">
     <div class="mx-auto max-w-3xl px-6 lg:px-8">
       <div class="text-center mb-12">
         <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4 reveal">Contact Form</p>
-        <h2 class="text-2xl md:text-3xl font-normal tracking-wide mb-4 reveal">お問い合わせフォーム</h2>
-        <p class="text-sm text-sumi-l reveal">ご質問・ご相談は下記フォームよりお気軽にお問い合わせください。<br />2営業日以内にご返信いたします。</p>
+        <h2 class="text-2xl md:text-3xl font-normal tracking-wide mb-4 reveal" data-i18n="form.title">お問い合わせフォーム</h2>
+        <p class="text-sm text-sumi-l reveal" data-i18n="form.subtitle">ご質問・ご相談は下記フォームよりお気軽にお問い合わせください。2営業日以内にご返信いたします。
+        </p>
       </div>
 
       <form id="contact-form" class="reveal space-y-6">
         <div class="grid md:grid-cols-2 gap-6">
           <div>
-            <label for="name" class="block text-sm mb-2">お名前 <span class="text-gold">*</span></label>
+            <label for="name" class="block text-sm mb-2"><span data-i18n="form.name">お名前</span> <span
+                class="text-gold">*</span></label>
             <input type="text" id="name" name="name" required
               class="w-full px-4 py-3 bg-cream border border-sumi/20 text-sumi placeholder:text-sumi/40 transition-colors"
-              placeholder="山田 太郎" />
+              data-i18n-placeholder="form.name_placeholder" placeholder="山田 太郎" />
           </div>
           <div>
-            <label for="email" class="block text-sm mb-2">メールアドレス <span class="text-gold">*</span></label>
+            <label for="email" class="block text-sm mb-2"><span data-i18n="form.email">メールアドレス</span> <span
+                class="text-gold">*</span></label>
             <input type="email" id="email" name="email" required
               class="w-full px-4 py-3 bg-cream border border-sumi/20 text-sumi placeholder:text-sumi/40 transition-colors"
               placeholder="example@email.com" />
@@ -291,45 +282,36 @@
 
         <div class="grid md:grid-cols-2 gap-6">
           <div>
-            <label for="phone" class="block text-sm mb-2">電話番号</label>
+            <label for="phone" class="block text-sm mb-2" data-i18n="form.phone">電話番号</label>
             <input type="tel" id="phone" name="phone"
               class="w-full px-4 py-3 bg-cream border border-sumi/20 text-sumi placeholder:text-sumi/40 transition-colors"
               placeholder="03-1234-5678" />
           </div>
           <div>
-            <label for="category" class="block text-sm mb-2">お問い合わせ種別 <span class="text-gold">*</span></label>
-            <select id="category" name="category" required
+            <label for="subject" class="block text-sm mb-2"><span data-i18n="form.subject">お問い合わせ種別</span> <span
+                class="text-gold">*</span></label>
+            <select id="subject" name="subject" required
               class="w-full px-4 py-3 bg-cream border border-sumi/20 text-sumi transition-colors">
-              <option value="">選択してください</option>
-              <option value="reservation">ワークショップのご予約</option>
-              <option value="question">ワークショップについてのご質問</option>
-              <option value="shop">オンラインショップについて</option>
-              <option value="corporate">法人・団体のお客様</option>
-              <option value="media">メディア・取材のご依頼</option>
-              <option value="other">その他</option>
+              <option value="" data-i18n="form.subject_select">選択してください</option>
+              <option value="workshop" data-i18n="form.subject_workshop">ワークショップについて</option>
+              <option value="shop" data-i18n="form.subject_shop">オンラインショップについて</option>
+              <option value="other" data-i18n="form.subject_other">その他</option>
             </select>
           </div>
         </div>
 
         <div>
-          <label for="message" class="block text-sm mb-2">お問い合わせ内容 <span class="text-gold">*</span></label>
+          <label for="message" class="block text-sm mb-2"><span data-i18n="form.message">お問い合わせ内容</span> <span
+              class="text-gold">*</span></label>
           <textarea id="message" name="message" rows="6" required
             class="w-full px-4 py-3 bg-cream border border-sumi/20 text-sumi placeholder:text-sumi/40 transition-colors resize-none"
-            placeholder="お問い合わせ内容をご記入ください"></textarea>
+            data-i18n-placeholder="form.message_placeholder" placeholder="お問い合わせ内容をご記入ください"></textarea>
         </div>
 
-        <div class="flex items-start gap-3">
-          <input type="checkbox" id="privacy" name="privacy" required
-            class="mt-1 w-4 h-4 border-sumi/20 text-gold focus:ring-gold" />
-          <label for="privacy" class="text-sm text-sumi-l">
-            <a href="#" class="text-gold hover:underline">プライバシーポリシー</a>に同意します <span class="text-gold">*</span>
-          </label>
-        </div>
-
-        <div class="text-center pt-4">
+        <div class="text-center">
           <button type="submit"
-            class="inline-flex items-center justify-center px-12 py-4 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi-l transition-all duration-300">
-            送信する
+            class="inline-flex items-center px-10 py-4 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi-l transition-colors">
+            <span data-i18n="form.submit">送信する</span>
             <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
@@ -338,232 +320,278 @@
         </div>
       </form>
 
-      <!-- Success Message (hidden by default) -->
-      <div id="success-message" class="hidden text-center py-12">
-        <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center border-2 border-gold rounded-full">
-          <svg class="w-8 h-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      <!-- Success Message -->
+      <div id="form-success" class="hidden text-center py-12">
+        <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-gold/10 flex items-center justify-center">
+          <svg class="w-8 h-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
         </div>
-        <h3 class="text-xl font-normal mb-2">お問い合わせを受け付けました</h3>
-        <p class="text-sm text-sumi-l">2営業日以内にご返信いたします。<br />しばらくお待ちくださいませ。</p>
+        <h3 class="text-xl font-normal mb-2" data-i18n="form.success.title">送信が完了しました</h3>
+        <p class="text-sumi-l" data-i18n="form.success.message">お問い合わせいただきありがとうございます。2営業日以内にご返信いたします。</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== FAQ ===== -->
+  <!-- FAQ -->
   <section class="py-16 lg:py-24 bg-sand/30">
     <div class="mx-auto max-w-3xl px-6 lg:px-8">
-      <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4 text-center reveal">FAQ</p>
-      <h2 class="text-2xl md:text-3xl font-normal tracking-wide text-center mb-12 reveal">よくあるご質問</h2>
-
+      <div class="text-center mb-12 reveal">
+        <p class="text-xs tracking-[0.3em] text-gold uppercase mb-4">FAQ</p>
+        <h2 class="text-2xl md:text-3xl font-normal tracking-wide" data-i18n="faq.title">よくあるご質問</h2>
+      </div>
       <div class="space-y-4">
-        <!-- FAQ 1 -->
-        <div class="reveal border border-sumi/10 bg-cream">
-          <button class="faq-btn w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-            <span class="font-normal pr-4">予約なしでも参加できますか？</span>
-            <svg class="faq-icon w-5 h-5 flex-shrink-0 text-gold transition-transform duration-300" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
+        <div class="faq-item reveal border border-sumi/10 bg-cream">
+          <button class="faq-question w-full flex items-center justify-between p-6 text-left" onclick="toggleFaq(this)">
+            <span class="font-medium" data-i18n="faq.q1">当日予約は可能ですか？</span>
+            <span class="faq-icon text-gold text-2xl transition-transform">+</span>
           </button>
-          <div class="faq-content hidden px-6 pb-6">
-            <p class="text-sm text-sumi-l leading-relaxed">
-              基本的には事前予約制となっております。当日空きがある場合はご参加いただけることもございますが、確実にご参加いただくためにも事前のご予約をおすすめいたします。</p>
+          <div class="faq-answer px-6 text-sumi-l text-sm leading-relaxed">
+            <p class="pb-6" data-i18n="faq.a1">空きがあれば当日予約も可能ですが、事前予約をお勧めしております。お電話にてお問い合わせください。</p>
           </div>
         </div>
-
-        <!-- FAQ 2 -->
-        <div class="reveal border border-sumi/10 bg-cream">
-          <button class="faq-btn w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-            <span class="font-normal pr-4">キャンセルや日程変更はできますか？</span>
-            <svg class="faq-icon w-5 h-5 flex-shrink-0 text-gold transition-transform duration-300" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
+        <div class="faq-item reveal border border-sumi/10 bg-cream">
+          <button class="faq-question w-full flex items-center justify-between p-6 text-left" onclick="toggleFaq(this)">
+            <span class="font-medium" data-i18n="faq.q2">遅刻した場合はどうなりますか？</span>
+            <span class="faq-icon text-gold text-2xl transition-transform">+</span>
           </button>
-          <div class="faq-content hidden px-6 pb-6">
-            <p class="text-sm text-sumi-l leading-relaxed">
-              3日前までのキャンセル・変更は無料で承っております。2日前〜前日は50%、当日は100%のキャンセル料が発生いたします。日程変更をご希望の場合は、お早めにご連絡ください。</p>
+          <div class="faq-answer px-6 text-sumi-l text-sm leading-relaxed">
+            <p class="pb-6" data-i18n="faq.a2">15分以上の遅刻の場合、ワークショップの時間が短縮される場合がございます。余裕を持ってお越しください。</p>
           </div>
         </div>
-
-        <!-- FAQ 3 -->
-        <div class="reveal border border-sumi/10 bg-cream">
-          <button class="faq-btn w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-            <span class="font-normal pr-4">駐車場はありますか？</span>
-            <svg class="faq-icon w-5 h-5 flex-shrink-0 text-gold transition-transform duration-300" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
+        <div class="faq-item reveal border border-sumi/10 bg-cream">
+          <button class="faq-question w-full flex items-center justify-between p-6 text-left" onclick="toggleFaq(this)">
+            <span class="font-medium" data-i18n="faq.q3">車椅子での来店は可能ですか？</span>
+            <span class="faq-icon text-gold text-2xl transition-transform">+</span>
           </button>
-          <div class="faq-content hidden px-6 pb-6">
-            <p class="text-sm text-sumi-l leading-relaxed">
-              専用駐車場のご用意はございません。お車でお越しの際は、近隣のコインパーキングをご利用ください。公共交通機関でのご来店をおすすめいたします。</p>
+          <div class="faq-answer px-6 text-sumi-l text-sm leading-relaxed">
+            <p class="pb-6" data-i18n="faq.a3">当ビルにはエレベーターがございます。車椅子でのご来店も歓迎しております。事前にお知らせいただけると、よりスムーズにご案内できます。</p>
           </div>
         </div>
-
-        <!-- FAQ 4 -->
-        <div class="reveal border border-sumi/10 bg-cream">
-          <button class="faq-btn w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-            <span class="font-normal pr-4">子供も参加できますか？</span>
-            <svg class="faq-icon w-5 h-5 flex-shrink-0 text-gold transition-transform duration-300" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
+        <div class="faq-item reveal border border-sumi/10 bg-cream">
+          <button class="faq-question w-full flex items-center justify-between p-6 text-left" onclick="toggleFaq(this)">
+            <span class="font-medium" data-i18n="faq.q4">ペット同伴は可能ですか？</span>
+            <span class="faq-icon text-gold text-2xl transition-transform">+</span>
           </button>
-          <div class="faq-content hidden px-6 pb-6">
-            <p class="text-sm text-sumi-l leading-relaxed">
-              小学生以上のお子様からご参加いただけます。ただし、香料を扱うため、保護者の方の同伴をお願いしております。なお、乳幼児をお連れの方は事前にご相談ください。</p>
-          </div>
-        </div>
-
-        <!-- FAQ 5 -->
-        <div class="reveal border border-sumi/10 bg-cream">
-          <button class="faq-btn w-full flex items-center justify-between p-6 text-left" aria-expanded="false">
-            <span class="font-normal pr-4">外国語対応はしていますか？</span>
-            <svg class="faq-icon w-5 h-5 flex-shrink-0 text-gold transition-transform duration-300" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
-          <div class="faq-content hidden px-6 pb-6">
-            <p class="text-sm text-sumi-l leading-relaxed">英語での対応が可能です。また、英語・中国語・韓国語の説明資料をご用意しております。ご予約時にお申し出ください。</p>
+          <div class="faq-answer px-6 text-sumi-l text-sm leading-relaxed">
+            <p class="pb-6" data-i18n="faq.a4">申し訳ございませんが、香料を扱う関係上、ペットの同伴はご遠慮いただいております。</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== CTA ===== -->
-  <section class="py-20 lg:py-28 bg-sumi text-cream">
-    <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-      <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4 reveal">Reservation</p>
-      <h2 class="text-2xl md:text-3xl lg:text-4xl font-normal tracking-wide mb-6 reveal">ワークショップのご予約</h2>
-      <p class="text-cream/70 leading-relaxed max-w-xl mx-auto mb-10 reveal">
-        世界にひとつ、あなただけの香りを創る体験をしてみませんか？<br />
-        各プランの詳細・ご予約はこちらから。
-      </p>
-      <a href="pricing.html"
-        class="reveal inline-flex items-center justify-center px-10 py-4 bg-gold text-sumi text-sm tracking-widest uppercase hover:bg-gold-l transition-all duration-300">
-        プラン・料金を見る
-        <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="bg-sumi text-cream/80 pt-16 pb-8">
+  <!-- FOOTER -->
+  <footer class="bg-sumi text-cream/70 py-16">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="grid md:grid-cols-4 gap-10 mb-12">
         <div class="md:col-span-2">
-          <a href="index.html" class="text-xl tracking-[0.3em] text-cream">TSUYU</a>
-          <p class="mt-4 text-sm leading-relaxed text-cream/60">
-            浅草 露ーTSUYU ASAKUSA<br />
-            世界にひとつ、あなただけの香りを創る調香ワークショップ
-          </p>
+          <a href="index.html" class="text-xl tracking-[0.3em] text-cream mb-4 block">TSUYU</a>
+          <p class="text-sm leading-relaxed" data-i18n="footer.tagline">浅草 露ーTSUYU ASAKUSA<br />世界にひとつ、あなただけの香りを。</p>
         </div>
         <div>
-          <h4 class="text-sm tracking-widest uppercase mb-4 text-cream">Menu</h4>
-          <ul class="space-y-2 text-sm text-cream/60">
-            <li><a href="experience.html" class="hover:text-cream transition-colors">ワークショップ体験</a></li>
-            <li><a href="pricing.html" class="hover:text-cream transition-colors">プラン・料金</a></li>
-            <li><a href="shop.html" class="hover:text-cream transition-colors">オンラインショップ</a></li>
-            <li><a href="about.html" class="hover:text-cream transition-colors">私たちについて</a></li>
-            <li><a href="contact.html" class="hover:text-cream transition-colors">お問い合わせ</a></li>
+          <h4 class="text-cream text-sm tracking-widest uppercase mb-4" data-i18n="footer.menu">Menu</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="experience.html" class="hover:text-cream transition-colors">Experience</a></li>
+            <li><a href="pricing.html" class="hover:text-cream transition-colors">Plans</a></li>
+            <li><a href="shop.html" class="hover:text-cream transition-colors">Online Shop</a></li>
+            <li><a href="about.html" class="hover:text-cream transition-colors">About</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm tracking-widest uppercase mb-4 text-cream">Contact</h4>
-          <address class="not-italic text-sm text-cream/60 space-y-2">
-            <p>〒111-0032</p>
-            <p>東京都台東区浅草2-1-1</p>
-            <p>TEL: 03-1234-5678</p>
-            <p>営業時間: 10:00 - 18:00</p>
-          </address>
+          <h4 class="text-cream text-sm tracking-widest uppercase mb-4" data-i18n="footer.info">Information</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="contact.html" class="hover:text-cream transition-colors" data-i18n="footer.contact">お問い合わせ</a>
+            </li>
+            <li><a href="reservation.html" class="hover:text-cream transition-colors" data-i18n="footer.reserve">ご予約</a>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="border-t border-cream/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-xs text-cream/40">&copy; 2024 浅草 露ーTSUYU ASAKUSA. All rights reserved.</p>
-        <div class="flex gap-6 text-xs text-cream/40">
-          <a href="#" class="hover:text-cream transition-colors">プライバシーポリシー</a>
-          <a href="#" class="hover:text-cream transition-colors">特定商取引法に基づく表記</a>
-        </div>
+      <div class="border-t border-cream/10 pt-8 text-center text-xs text-cream/50">
+        <p>&copy; 2024 浅草 露ーTSUYU ASAKUSA. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-btn').addEventListener('click', function () {
-      var menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-      menu.classList.toggle('flex');
-    });
+    const translations = {
+      ja: {
+        'meta.title': 'お問い合わせ・アクセス | 浅草 露ーTSUYU ASAKUSA',
+        'meta.description': '浅草 露へのお問い合わせ・アクセス情報。浅草駅から徒歩5分。',
+        'nav.reserve': 'ご予約',
+        'header.title': 'お問い合わせ・アクセス',
+        'header.subtitle': 'ご質問・ご相談はお気軽にお問い合わせください。ワークショップのご予約もこちらから承っております。',
+        'access.title': 'アクセス',
+        'access.openmap': 'Google Mapsで開く',
+        'access.address.label': '所在地',
+        'access.address.value': '〒111-0032<br />東京都台東区浅草2-1-1 浅草ビル3F',
+        'access.hours.label': '営業時間',
+        'access.hours.value': '10:00 - 18:00（最終受付 17:00）<br />定休日：毎週火曜日',
+        'access.phone.label': '電話番号',
+        'access.email.label': 'メールアドレス',
+        'access.train.title': '電車でのアクセス',
+        'access.train.ginza': '東京メトロ銀座線「浅草駅」1番出口より徒歩5分',
+        'access.train.asakusa': '都営浅草線「浅草駅」A4出口より徒歩4分',
+        'access.train.tobu': '東武スカイツリーライン「浅草駅」より徒歩6分',
+        'access.train.tx': 'つくばエクスプレス「浅草駅」A1出口より徒歩8分',
+        'form.title': 'お問い合わせフォーム',
+        'form.subtitle': 'ご質問・ご相談は下記フォームよりお気軽にお問い合わせください。2営業日以内にご返信いたします。',
+        'form.name': 'お名前',
+        'form.name_placeholder': '山田 太郎',
+        'form.email': 'メールアドレス',
+        'form.phone': '電話番号',
+        'form.subject': 'お問い合わせ種別',
+        'form.subject_select': '選択してください',
+        'form.subject_workshop': 'ワークショップについて',
+        'form.subject_shop': 'オンラインショップについて',
+        'form.subject_other': 'その他',
+        'form.message': 'お問い合わせ内容',
+        'form.message_placeholder': 'お問い合わせ内容をご記入ください',
+        'form.submit': '送信する',
+        'form.success.title': '送信が完了しました',
+        'form.success.message': 'お問い合わせいただきありがとうございます。2営業日以内にご返信いたします。',
+        'faq.title': 'よくあるご質問',
+        'faq.q1': '当日予約は可能ですか？',
+        'faq.a1': '空きがあれば当日予約も可能ですが、事前予約をお勧めしております。お電話にてお問い合わせください。',
+        'faq.q2': '遅刻した場合はどうなりますか？',
+        'faq.a2': '15分以上の遅刻の場合、ワークショップの時間が短縮される場合がございます。余裕を持ってお越しください。',
+        'faq.q3': '車椅子での来店は可能ですか？',
+        'faq.a3': '当ビルにはエレベーターがございます。車椅子でのご来店も歓迎しております。事前にお知らせいただけると、よりスムーズにご案内できます。',
+        'faq.q4': 'ペット同伴は可能ですか？',
+        'faq.a4': '申し訳ございませんが、香料を扱う関係上、ペットの同伴はご遠慮いただいております。',
+        'footer.tagline': '浅草 露ーTSUYU ASAKUSA<br />世界にひとつ、あなただけの香りを。',
+        'footer.menu': 'メニュー',
+        'footer.info': 'ご案内',
+        'footer.contact': 'お問い合わせ',
+        'footer.reserve': 'ご予約',
+      },
+      en: {
+        'meta.title': 'Contact & Access | TSUYU ASAKUSA',
+        'meta.description': 'Contact and access information for TSUYU ASAKUSA. 5 minutes walk from Asakusa Station.',
+        'nav.reserve': 'Reserve',
+        'header.title': 'Contact & Access',
+        'header.subtitle': 'Feel free to contact us with any questions. Workshop reservations are also accepted here.',
+        'access.title': 'Access',
+        'access.openmap': 'Open in Google Maps',
+        'access.address.label': 'Address',
+        'access.address.value': '〒111-0032<br />Asakusa Building 3F, 2-1-1 Asakusa, Taito-ku, Tokyo',
+        'access.hours.label': 'Hours',
+        'access.hours.value': '10:00 - 18:00 (Last entry 17:00)<br />Closed: Every Tuesday',
+        'access.phone.label': 'Phone',
+        'access.email.label': 'Email',
+        'access.train.title': 'Train Access',
+        'access.train.ginza': 'Tokyo Metro Ginza Line "Asakusa Station" Exit 1, 5 min walk',
+        'access.train.asakusa': 'Toei Asakusa Line "Asakusa Station" Exit A4, 4 min walk',
+        'access.train.tobu': 'Tobu Skytree Line "Asakusa Station" 6 min walk',
+        'access.train.tx': 'Tsukuba Express "Asakusa Station" Exit A1, 8 min walk',
+        'form.title': 'Contact Form',
+        'form.subtitle': 'Please use the form below for inquiries. We will respond within 2 business days.',
+        'form.name': 'Name',
+        'form.name_placeholder': 'Your Name',
+        'form.email': 'Email',
+        'form.phone': 'Phone',
+        'form.subject': 'Subject',
+        'form.subject_select': 'Please select',
+        'form.subject_workshop': 'About Workshop',
+        'form.subject_shop': 'About Online Shop',
+        'form.subject_other': 'Other',
+        'form.message': 'Message',
+        'form.message_placeholder': 'Please enter your message',
+        'form.submit': 'Send',
+        'form.success.title': 'Message Sent',
+        'form.success.message': 'Thank you for your inquiry. We will respond within 2 business days.',
+        'faq.title': 'Frequently Asked Questions',
+        'faq.q1': 'Can I book on the same day?',
+        'faq.a1': 'Same-day bookings are possible if there is availability, but we recommend booking in advance. Please call us to inquire.',
+        'faq.q2': 'What happens if I am late?',
+        'faq.a2': 'If you are more than 15 minutes late, the workshop time may be shortened. Please arrive with time to spare.',
+        'faq.q3': 'Is wheelchair access available?',
+        'faq.a3': 'Our building has an elevator. Wheelchair users are welcome. Please let us know in advance for smoother assistance.',
+        'faq.q4': 'Can I bring my pet?',
+        'faq.a4': 'We apologize, but due to the fragrances we use, pets are not allowed.',
+        'footer.tagline': 'TSUYU ASAKUSA<br />Create your one-of-a-kind fragrance.',
+        'footer.menu': 'Menu',
+        'footer.info': 'Information',
+        'footer.contact': 'Contact',
+        'footer.reserve': 'Reservation',
+      }
+    };
 
-    // Close mobile menu on link click
-    document.querySelectorAll('#mobile-menu a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        document.getElementById('mobile-menu').classList.add('hidden');
-        document.getElementById('mobile-menu').classList.remove('flex');
+    let currentLang = localStorage.getItem('tsuyu-lang') || 'ja';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('tsuyu-lang', lang);
+      document.documentElement.lang = lang;
+      applyTranslations();
+      updateLangButtons();
+    }
+
+    function applyTranslations() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang] && translations[currentLang][key]) {
+          el.innerHTML = translations[currentLang][key];
+        }
       });
-    });
-
-    // Scroll reveal animation
-    function revealOnScroll() {
-      var reveals = document.querySelectorAll('.reveal');
-      reveals.forEach(function (el) {
-        var windowHeight = window.innerHeight;
-        var revealTop = el.getBoundingClientRect().top;
-        var revealPoint = 100;
-        if (revealTop < windowHeight - revealPoint) {
-          el.classList.add('visible');
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[currentLang] && translations[currentLang][key]) {
+          el.placeholder = translations[currentLang][key];
         }
       });
     }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
 
-    // FAQ accordion
-    document.querySelectorAll('.faq-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var content = btn.nextElementSibling;
-        var icon = btn.querySelector('.faq-icon');
-        var isOpen = !content.classList.contains('hidden');
-
-        // Close all other FAQs
-        document.querySelectorAll('.faq-content').forEach(function (c) {
-          c.classList.add('hidden');
-        });
-        document.querySelectorAll('.faq-icon').forEach(function (i) {
-          i.style.transform = 'rotate(0deg)';
-        });
-        document.querySelectorAll('.faq-btn').forEach(function (b) {
-          b.setAttribute('aria-expanded', 'false');
-        });
-
-        // Toggle current
-        if (!isOpen) {
-          content.classList.remove('hidden');
-          icon.style.transform = 'rotate(45deg)';
-          btn.setAttribute('aria-expanded', 'true');
+    function updateLangButtons() {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('text-gold', 'font-medium');
+        btn.classList.add('text-sumi/50');
+        if (btn.dataset.lang === currentLang) {
+          btn.classList.remove('text-sumi/50');
+          btn.classList.add('text-gold', 'font-medium');
         }
       });
+    }
+
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
     });
 
-    // Form submission
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
+    // FAQ toggle
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('open');
+    }
+
+    // Contact form
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      // Hide form, show success message
-      this.classList.add('hidden');
-      document.getElementById('success-message').classList.remove('hidden');
-      // Scroll to success message
-      document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      contactForm.style.display = 'none';
+      formSuccess.classList.remove('hidden');
+    });
+
+    // Scroll reveal
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, observerOptions);
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      applyTranslations();
+      updateLangButtons();
     });
   </script>
-
 </body>
 
 </html>

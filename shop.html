@@ -4,13 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>オンラインショップ | 浅草 露ーTSUYU ASAKUSA</title>
-  <meta name="description" content="浅草 露のオンラインショップ。ワークショップの世界観を引き継いだ和モダンな香り製品をお届けします。" />
+  <title data-i18n="meta.title">オンラインショップ | 浅草 露ーTSUYU ASAKUSA</title>
+  <meta name="description" data-i18n="meta.description" content="浅草 露のオンラインショップ。和モダンな香り製品をお届けします。" />
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Fonts: Shippori Mincho -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&display=swap"
@@ -20,16 +17,11 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            mincho: ['"Shippori Mincho"', 'Georgia', 'serif'],
-          },
+          fontFamily: { mincho: ['"Shippori Mincho"', 'Georgia', 'serif'] },
           colors: {
-            cream: '#F5F1EB',
-            'cream-d': '#EDE8DF',
-            sumi: '#2C2418',
-            'sumi-l': '#5C4E3C',
-            gold: '#B8963E',
-            'gold-l': '#D4B96A',
+            cream: '#F5F1EB', 'cream-d': '#EDE8DF',
+            sumi: '#2C2418', 'sumi-l': '#5C4E3C',
+            gold: '#B8963E', 'gold-l': '#D4B96A',
             sand: '#E8E0D4',
           },
         },
@@ -65,101 +57,89 @@
 
 <body class="bg-cream text-sumi antialiased">
 
-  <!-- ===== NAVIGATION ===== -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <!-- NAVIGATION -->
+  <nav id="navbar"
+    class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-sumi/10 transition-all duration-500">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
-
-        <a href="index.html" id="nav-logo"
-          class="text-lg tracking-[0.25em] font-normal text-white transition-colors duration-500">
-          TSUYU
-        </a>
-
-        <div class="hidden lg:flex items-center gap-10" id="nav-links">
+        <a href="index.html" class="text-lg tracking-[0.25em] font-normal text-sumi">TSUYU</a>
+        <div class="hidden lg:flex items-center gap-10">
           <a href="experience.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Experience</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
           <a href="reservation.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Reservation</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Reservation</a>
           <a href="pricing.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Plans</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
           <a href="shop.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Online
-            Shop</a>
+            class="text-sm tracking-widest text-gold hover:text-gold transition-colors uppercase">Shop</a>
           <a href="about.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">About</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
           <a href="contact.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Contact</a>
+            class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
         </div>
-
         <div class="flex items-center gap-4">
-          <a href="pricing.html" id="nav-cta"
-            class="hidden md:inline-flex items-center px-6 py-2.5 bg-white/10 border border-white/30 text-white text-sm tracking-widest uppercase hover:bg-white/20 transition-colors duration-300">
-            ご予約
-          </a>
-          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
-            <span id="menu-line-1" class="block w-6 h-px bg-white transition-all duration-300"></span>
-            <span id="menu-line-2" class="block w-6 h-px bg-white transition-all duration-300"></span>
-            <span id="menu-line-3" class="block w-4 h-px bg-white transition-all duration-300 ml-auto"></span>
+          <div class="flex items-center border border-sumi/20 text-sm">
+            <button onclick="setLanguage('ja')" class="lang-btn px-2 py-1 transition-colors" data-lang="ja">JP</button>
+            <span class="text-sumi/30">|</span>
+            <button onclick="setLanguage('en')" class="lang-btn px-2 py-1 transition-colors" data-lang="en">EN</button>
+          </div>
+          <a href="reservation.html"
+            class="hidden md:inline-flex items-center px-6 py-2.5 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi-l transition-colors"
+            data-i18n="nav.reserve">ご予約</a>
+          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニュー">
+            <span class="block w-6 h-px bg-sumi"></span>
+            <span class="block w-6 h-px bg-sumi"></span>
+            <span class="block w-4 h-px bg-sumi ml-auto"></span>
           </button>
         </div>
       </div>
     </div>
-
     <div id="mobile-menu"
       class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
-      <a href="experience.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
-      <a href="pricing.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
-      <a href="shop.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Online
-        Shop</a>
-      <a href="about.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
-      <a href="contact.html"
-        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
-      <a href="pricing.html"
-        class="mobile-nav-link mt-4 px-8 py-3 bg-sumi text-cream text-sm tracking-widest uppercase">ご予約はこちら</a>
+      <a href="experience.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">Experience</a>
+      <a href="reservation.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">Reservation</a>
+      <a href="pricing.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">Plans</a>
+      <a href="shop.html" class="text-lg tracking-widest text-gold uppercase">Shop</a>
+      <a href="about.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">About</a>
+      <a href="contact.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi uppercase">Contact</a>
     </div>
   </nav>
 
-  <!-- ===== HERO HEADER ===== -->
+  <!-- HEADER -->
   <section class="pt-32 pb-16 lg:pt-40 lg:pb-24 bg-cream">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center">
       <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4">Online Shop</p>
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-wide mb-6">オンラインショップ</h1>
-      <p class="text-sumi-l leading-relaxed max-w-2xl mx-auto">
-        ワークショップで体験した香りの世界を、ご自宅でもお楽しみいただけます。<br class="hidden md:block" />
-        厳選された香料を使用した、和モダンなフレグランス製品をお届けします。
-      </p>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-wide mb-6" data-i18n="header.title">オンラインショップ
+      </h1>
+      <p class="text-sumi-l leading-relaxed max-w-2xl mx-auto" data-i18n="header.subtitle">
+        ワークショップで体験した香りの世界を、ご自宅でもお楽しみいただけます。厳選された香料を使用した、和モダンなフレグランス製品をお届けします。</p>
     </div>
   </section>
 
-  <!-- ===== CATEGORY FILTER ===== -->
+  <!-- CATEGORY FILTER -->
   <section class="py-8 bg-cream border-y border-sumi/10">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="flex flex-wrap justify-center gap-3 md:gap-6">
         <button class="category-btn px-5 py-2 text-sm tracking-widest uppercase bg-sumi text-cream transition-all"
-          data-category="all">すべて</button>
+          data-category="all" data-i18n="filter.all">すべて</button>
         <button
           class="category-btn px-5 py-2 text-sm tracking-widest uppercase border border-sumi/30 text-sumi/70 hover:bg-sumi hover:text-cream transition-all"
-          data-category="perfume">パフューム</button>
+          data-category="perfume" data-i18n="filter.perfume">パフューム</button>
         <button
           class="category-btn px-5 py-2 text-sm tracking-widest uppercase border border-sumi/30 text-sumi/70 hover:bg-sumi hover:text-cream transition-all"
-          data-category="home">ホームフレグランス</button>
+          data-category="home" data-i18n="filter.home">ホームフレグランス</button>
         <button
           class="category-btn px-5 py-2 text-sm tracking-widest uppercase border border-sumi/30 text-sumi/70 hover:bg-sumi hover:text-cream transition-all"
-          data-category="gift">ギフト</button>
+          data-category="gift" data-i18n="filter.gift">ギフト</button>
       </div>
     </div>
   </section>
 
-  <!-- ===== PRODUCT GRID ===== -->
+  <!-- PRODUCT GRID -->
   <section class="py-16 lg:py-24 bg-cream">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
 
-        <!-- Product 1 -->
         <article class="product-card reveal group" data-category="perfume">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -168,14 +148,15 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Perfume</span>
-              <h3 class="text-lg font-normal">露 オードパルファム 30ml</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">浅草の朝露をイメージした、清々しくも奥深い香り。ヒノキとユズのハーモニー。</p>
-              <p class="text-lg text-sumi mt-2">¥8,800 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p1.name">露 オードパルファム 30ml</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p1.desc">
+                浅草の朝露をイメージした、清々しくも奥深い香り。ヒノキとユズのハーモニー。</p>
+              <p class="text-lg text-sumi mt-2">¥8,800 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
 
-        <!-- Product 2 -->
         <article class="product-card reveal group" data-category="perfume">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -184,14 +165,15 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Perfume</span>
-              <h3 class="text-lg font-normal">露 オードパルファム 50ml</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">露シリーズのフラッグシップ。長く愛される上品な香立ちをお楽しみください。</p>
-              <p class="text-lg text-sumi mt-2">¥13,200 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p2.name">露 オードパルファム 50ml</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p2.desc">
+                露シリーズのフラッグシップ。長く愛される上品な香立ちをお楽しみください。</p>
+              <p class="text-lg text-sumi mt-2">¥13,200 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
 
-        <!-- Product 3 -->
         <article class="product-card reveal group" data-category="perfume">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -200,14 +182,15 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Perfume</span>
-              <h3 class="text-lg font-normal">調香アロマオイル 10ml</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">天然由来の香料をブレンドしたアロマオイル。ディフューザーやバスタイムに。</p>
-              <p class="text-lg text-sumi mt-2">¥3,300 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p3.name">調香アロマオイル 10ml</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p3.desc">
+                天然由来の香料をブレンドしたアロマオイル。ディフューザーやバスタイムに。</p>
+              <p class="text-lg text-sumi mt-2">¥3,300 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
 
-        <!-- Product 4 -->
         <article class="product-card reveal group" data-category="gift">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -216,14 +199,15 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Gift</span>
-              <h3 class="text-lg font-normal">香りのギフトセット</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">人気の香り3種をセットにした特別なギフトボックス。和紙の化粧箱入り。</p>
-              <p class="text-lg text-sumi mt-2">¥15,400 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p4.name">香りのギフトセット</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p4.desc">人気の香り3種をセットにした特別なギフトボックス。和紙の化粧箱入り。
+              </p>
+              <p class="text-lg text-sumi mt-2">¥15,400 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
 
-        <!-- Product 5 -->
         <article class="product-card reveal group" data-category="home">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -232,14 +216,15 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Home Fragrance</span>
-              <h3 class="text-lg font-normal">ルームスプレー 100ml</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">お部屋に上品な香りを。白檀とジャスミンの調和が空間を包みます。</p>
-              <p class="text-lg text-sumi mt-2">¥4,400 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p5.name">ルームスプレー 100ml</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p5.desc">お部屋に上品な香りを。白檀とジャスミンの調和が空間を包みます。
+              </p>
+              <p class="text-lg text-sumi mt-2">¥4,400 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
 
-        <!-- Product 6 -->
         <article class="product-card reveal group" data-category="home">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -248,14 +233,14 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Home Fragrance</span>
-              <h3 class="text-lg font-normal">香り袋（匂い袋）3個セット</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">伝統的な匂い袋を現代風にアレンジ。クローゼットや引き出しに。</p>
-              <p class="text-lg text-sumi mt-2">¥2,750 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p6.name">香り袋（匂い袋）3個セット</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p6.desc">伝統的な匂い袋を現代風にアレンジ。クローゼットや引き出しに。</p>
+              <p class="text-lg text-sumi mt-2">¥2,750 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
 
-        <!-- Product 7 -->
         <article class="product-card reveal group" data-category="home">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -264,14 +249,15 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Home Fragrance</span>
-              <h3 class="text-lg font-normal">和のお香 20本入り</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">天然素材にこだわった上質なお香。沈香と伽羅の深い香りをお楽しみください。</p>
-              <p class="text-lg text-sumi mt-2">¥3,850 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p7.name">和のお香 20本入り</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p7.desc">
+                天然素材にこだわった上質なお香。沈香と伽羅の深い香りをお楽しみください。</p>
+              <p class="text-lg text-sumi mt-2">¥3,850 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
 
-        <!-- Product 8 -->
         <article class="product-card reveal group" data-category="home">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -280,14 +266,15 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Home Fragrance</span>
-              <h3 class="text-lg font-normal">ソイアロマキャンドル</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">大豆由来のソイワックスを使用。約40時間の燃焼時間で長くお楽しみいただけます。</p>
-              <p class="text-lg text-sumi mt-2">¥5,500 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p8.name">ソイアロマキャンドル</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p8.desc">
+                大豆由来のソイワックスを使用。約40時間の燃焼時間で長くお楽しみいただけます。</p>
+              <p class="text-lg text-sumi mt-2">¥5,500 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
 
-        <!-- Product 9 -->
         <article class="product-card reveal group" data-category="home">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -296,14 +283,15 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Home Fragrance</span>
-              <h3 class="text-lg font-normal">リードディフューザー 200ml</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">火を使わず安全に香りを楽しめるディフューザー。約2ヶ月持続します。</p>
-              <p class="text-lg text-sumi mt-2">¥6,600 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p9.name">リードディフューザー 200ml</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p9.desc">火を使わず安全に香りを楽しめるディフューザー。約2ヶ月持続します。
+              </p>
+              <p class="text-lg text-sumi mt-2">¥6,600 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
 
-        <!-- Product 10 -->
         <article class="product-card reveal group" data-category="gift">
           <a href="#" class="block">
             <div class="aspect-square overflow-hidden bg-sand mb-4">
@@ -312,9 +300,11 @@
             </div>
             <div class="space-y-2">
               <span class="text-xs tracking-widest text-gold uppercase">Gift</span>
-              <h3 class="text-lg font-normal">トラベルパフュームセット</h3>
-              <p class="text-sm text-sumi-l line-clamp-2">旅のお供に。5mlのミニボトル3本を専用レザーケースに収めました。</p>
-              <p class="text-lg text-sumi mt-2">¥9,900 <span class="text-xs text-sumi-l">(税込)</span></p>
+              <h3 class="text-lg font-normal" data-i18n="product.p10.name">トラベルセット</h3>
+              <p class="text-sm text-sumi-l line-clamp-2" data-i18n="product.p10.desc">ミニサイズの香水3本セット。旅のお供に、ギフトにも最適です。
+              </p>
+              <p class="text-lg text-sumi mt-2">¥7,700 <span class="text-xs text-sumi-l"
+                  data-i18n="product.tax">(税込)</span></p>
             </div>
           </a>
         </article>
@@ -323,156 +313,58 @@
     </div>
   </section>
 
-  <!-- ===== PRICE INFO ===== -->
-  <section class="py-16 lg:py-24 bg-sand/50">
-    <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-      <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4 reveal">Shipping & Payment</p>
-      <h2 class="text-2xl md:text-3xl font-normal tracking-wide mb-12 reveal">配送・お支払いについて</h2>
-
-      <div class="grid md:grid-cols-3 gap-8 text-left">
-        <div class="reveal bg-cream p-6 border border-sumi/10">
-          <div class="w-12 h-12 flex items-center justify-center border border-gold/30 mb-4">
+  <!-- SHIPPING INFO -->
+  <section class="py-16 bg-sand/30">
+    <div class="mx-auto max-w-5xl px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <p class="text-xs tracking-[0.3em] text-gold uppercase mb-4">Shipping & Payment</p>
+        <h2 class="text-2xl md:text-3xl font-normal tracking-wide" data-i18n="shipping.title">配送・お支払いについて</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="reveal text-center p-6">
+          <div class="w-14 h-14 mx-auto mb-4 border border-gold/30 flex items-center justify-center">
             <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
             </svg>
           </div>
-          <h3 class="text-lg font-normal mb-2">送料</h3>
-          <p class="text-sm text-sumi-l leading-relaxed">全国一律 ¥550（税込）<br />¥10,000以上のご購入で送料無料</p>
+          <h3 class="font-medium mb-2" data-i18n="shipping.delivery.title">全国送料無料</h3>
+          <p class="text-sm text-sumi-l" data-i18n="shipping.delivery.desc">¥5,000以上のご注文で送料無料。通常2-4営業日でお届けします。</p>
         </div>
-
-        <div class="reveal bg-cream p-6 border border-sumi/10">
-          <div class="w-12 h-12 flex items-center justify-center border border-gold/30 mb-4">
+        <div class="reveal text-center p-6">
+          <div class="w-14 h-14 mx-auto mb-4 border border-gold/30 flex items-center justify-center">
             <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
             </svg>
           </div>
-          <h3 class="text-lg font-normal mb-2">お支払い方法</h3>
-          <p class="text-sm text-sumi-l leading-relaxed">クレジットカード / PayPay<br />Amazon Pay / コンビニ決済</p>
+          <h3 class="font-medium mb-2" data-i18n="shipping.payment.title">各種決済対応</h3>
+          <p class="text-sm text-sumi-l" data-i18n="shipping.payment.desc">クレジットカード、PayPay、コンビニ払い、銀行振込に対応しています。</p>
         </div>
-
-        <div class="reveal bg-cream p-6 border border-sumi/10">
-          <div class="w-12 h-12 flex items-center justify-center border border-gold/30 mb-4">
+        <div class="reveal text-center p-6">
+          <div class="w-14 h-14 mx-auto mb-4 border border-gold/30 flex items-center justify-center">
             <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
             </svg>
           </div>
-          <h3 class="text-lg font-normal mb-2">配送日数</h3>
-          <p class="text-sm text-sumi-l leading-relaxed">ご注文から2〜4営業日<br />ギフトラッピング無料対応</p>
+          <h3 class="font-medium mb-2" data-i18n="shipping.gift.title">ギフト包装</h3>
+          <p class="text-sm text-sumi-l" data-i18n="shipping.gift.desc">和紙を使用した上品なギフト包装を無料でご用意いたします。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== REVIEWS ===== -->
-  <section class="py-16 lg:py-24 bg-cream">
-    <div class="mx-auto max-w-6xl px-6 lg:px-8">
-      <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4 text-center reveal">Customer Reviews</p>
-      <h2 class="text-2xl md:text-3xl font-normal tracking-wide text-center mb-12 reveal">お客様レビュー</h2>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="reveal bg-sand/30 p-8 border border-sumi/5">
-          <div class="flex gap-1 mb-4">
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-          </div>
-          <p class="text-sm text-sumi-l leading-relaxed mb-4">
-            「ワークショップで作った香りが忘れられず、同じ系統のオードパルファムを購入しました。期待以上の品質で、毎日愛用しています。」</p>
-          <p class="text-xs text-sumi/50">K.S様 / 露 オードパルファム 30ml</p>
-        </div>
-
-        <div class="reveal bg-sand/30 p-8 border border-sumi/5">
-          <div class="flex gap-1 mb-4">
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-          </div>
-          <p class="text-sm text-sumi-l leading-relaxed mb-4">「ギフトセットを母の日に贈りました。上品な香りと素敵なパッケージにとても喜んでもらえました。リピート決定です。」
-          </p>
-          <p class="text-xs text-sumi/50">M.T様 / 香りのギフトセット</p>
-        </div>
-
-        <div class="reveal bg-sand/30 p-8 border border-sumi/5">
-          <div class="flex gap-1 mb-4">
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-          </div>
-          <p class="text-sm text-sumi-l leading-relaxed mb-4">「リードディフューザーを購入。火を使わないので安心して使えます。玄関に置いていますが、帰宅するたびに癒されます。」
-          </p>
-          <p class="text-xs text-sumi/50">Y.N様 / リードディフューザー 200ml</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CTA ===== -->
+  <!-- CTA -->
   <section class="py-20 lg:py-28 bg-sumi text-cream">
-    <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-      <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4 reveal">Workshop Experience</p>
-      <h2 class="text-2xl md:text-3xl lg:text-4xl font-normal tracking-wide mb-6 reveal">世界にひとつの香りを<br
-          class="md:hidden" />創ってみませんか？</h2>
-      <p class="text-cream/70 leading-relaxed max-w-xl mx-auto mb-10 reveal">
-        オンラインショップの製品は、ワークショップで体験できる香りの世界観をベースに作られています。<br />
-        実際に調香を体験して、あなただけのオリジナルフレグランスを創りましょう。
-      </p>
-      <a href="pricing.html"
-        class="reveal inline-flex items-center justify-center px-10 py-4 bg-gold text-sumi text-sm tracking-widest uppercase hover:bg-gold-l transition-all duration-300">
-        ワークショップを予約する
+    <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center reveal">
+      <p class="text-xs tracking-[0.4em] text-gold uppercase mb-4">Workshop</p>
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-normal tracking-wide mb-6" data-i18n="cta.title">香りを自分で創る体験を</h2>
+      <p class="text-cream/70 leading-relaxed mb-10 max-w-2xl mx-auto" data-i18n="cta.subtitle">
+        オンラインショップの製品をお気に召していただけたら、ぜひワークショップで自分だけの香りを創ってみませんか？</p>
+      <a href="reservation.html"
+        class="inline-flex items-center px-10 py-4 bg-gold text-sumi text-sm tracking-widest uppercase hover:bg-gold-l transition-colors">
+        <span data-i18n="cta.button">ワークショップを予約する</span>
         <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
         </svg>
@@ -480,96 +372,188 @@
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="bg-sumi text-cream/80 pt-16 pb-8">
+  <!-- FOOTER -->
+  <footer class="bg-sumi text-cream/70 py-16">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="grid md:grid-cols-4 gap-10 mb-12">
         <div class="md:col-span-2">
-          <a href="index.html" class="text-xl tracking-[0.3em] text-cream">TSUYU</a>
-          <p class="mt-4 text-sm leading-relaxed text-cream/60">
-            浅草 露ーTSUYU ASAKUSA<br />
-            世界にひとつ、あなただけの香りを創る調香ワークショップ
-          </p>
+          <a href="index.html" class="text-xl tracking-[0.3em] text-cream mb-4 block">TSUYU</a>
+          <p class="text-sm leading-relaxed" data-i18n="footer.tagline">浅草 露ーTSUYU ASAKUSA<br />世界にひとつ、あなただけの香りを。</p>
         </div>
         <div>
-          <h4 class="text-sm tracking-widest uppercase mb-4 text-cream">Menu</h4>
-          <ul class="space-y-2 text-sm text-cream/60">
-            <li><a href="experience.html" class="hover:text-cream transition-colors">ワークショップ体験</a></li>
-            <li><a href="pricing.html" class="hover:text-cream transition-colors">プラン・料金</a></li>
-            <li><a href="shop.html" class="hover:text-cream transition-colors">オンラインショップ</a></li>
-            <li><a href="about.html" class="hover:text-cream transition-colors">私たちについて</a></li>
-            <li><a href="contact.html" class="hover:text-cream transition-colors">お問い合わせ</a></li>
+          <h4 class="text-cream text-sm tracking-widest uppercase mb-4" data-i18n="footer.menu">Menu</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="experience.html" class="hover:text-cream transition-colors">Experience</a></li>
+            <li><a href="pricing.html" class="hover:text-cream transition-colors">Plans</a></li>
+            <li><a href="shop.html" class="hover:text-cream transition-colors">Online Shop</a></li>
+            <li><a href="about.html" class="hover:text-cream transition-colors">About</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm tracking-widest uppercase mb-4 text-cream">Contact</h4>
-          <address class="not-italic text-sm text-cream/60 space-y-2">
-            <p>〒111-0032</p>
-            <p>東京都台東区浅草2-1-1</p>
-            <p>TEL: 03-1234-5678</p>
-            <p>営業時間: 10:00 - 18:00</p>
-          </address>
+          <h4 class="text-cream text-sm tracking-widest uppercase mb-4" data-i18n="footer.info">Information</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="contact.html" class="hover:text-cream transition-colors" data-i18n="footer.contact">お問い合わせ</a>
+            </li>
+            <li><a href="reservation.html" class="hover:text-cream transition-colors" data-i18n="footer.reserve">ご予約</a>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="border-t border-cream/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-xs text-cream/40">&copy; 2024 浅草 露ーTSUYU ASAKUSA. All rights reserved.</p>
-        <div class="flex gap-6 text-xs text-cream/40">
-          <a href="#" class="hover:text-cream transition-colors">プライバシーポリシー</a>
-          <a href="#" class="hover:text-cream transition-colors">特定商取引法に基づく表記</a>
-        </div>
+      <div class="border-t border-cream/10 pt-8 text-center text-xs text-cream/50">
+        <p>&copy; 2024 浅草 露ーTSUYU ASAKUSA. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-btn').addEventListener('click', function () {
-      var menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-      menu.classList.toggle('flex');
-    });
+    const translations = {
+      ja: {
+        'meta.title': 'オンラインショップ | 浅草 露ーTSUYU ASAKUSA',
+        'meta.description': '浅草 露のオンラインショップ。和モダンな香り製品をお届けします。',
+        'nav.reserve': 'ご予約',
+        'header.title': 'オンラインショップ',
+        'header.subtitle': 'ワークショップで体験した香りの世界を、ご自宅でもお楽しみいただけます。厳選された香料を使用した、和モダンなフレグランス製品をお届けします。',
+        'filter.all': 'すべて',
+        'filter.perfume': 'パフューム',
+        'filter.home': 'ホームフレグランス',
+        'filter.gift': 'ギフト',
+        'product.tax': '(税込)',
+        'product.p1.name': '露 オードパルファム 30ml',
+        'product.p1.desc': '浅草の朝露をイメージした、清々しくも奥深い香り。ヒノキとユズのハーモニー。',
+        'product.p2.name': '露 オードパルファム 50ml',
+        'product.p2.desc': '露シリーズのフラッグシップ。長く愛される上品な香立ちをお楽しみください。',
+        'product.p3.name': '調香アロマオイル 10ml',
+        'product.p3.desc': '天然由来の香料をブレンドしたアロマオイル。ディフューザーやバスタイムに。',
+        'product.p4.name': '香りのギフトセット',
+        'product.p4.desc': '人気の香り3種をセットにした特別なギフトボックス。和紙の化粧箱入り。',
+        'product.p5.name': 'ルームスプレー 100ml',
+        'product.p5.desc': 'お部屋に上品な香りを。白檀とジャスミンの調和が空間を包みます。',
+        'product.p6.name': '香り袋（匂い袋）3個セット',
+        'product.p6.desc': '伝統的な匂い袋を現代風にアレンジ。クローゼットや引き出しに。',
+        'product.p7.name': '和のお香 20本入り',
+        'product.p7.desc': '天然素材にこだわった上質なお香。沈香と伽羅の深い香りをお楽しみください。',
+        'product.p8.name': 'ソイアロマキャンドル',
+        'product.p8.desc': '大豆由来のソイワックスを使用。約40時間の燃焼時間で長くお楽しみいただけます。',
+        'product.p9.name': 'リードディフューザー 200ml',
+        'product.p9.desc': '火を使わず安全に香りを楽しめるディフューザー。約2ヶ月持続します。',
+        'product.p10.name': 'トラベルセット',
+        'product.p10.desc': 'ミニサイズの香水3本セット。旅のお供に、ギフトにも最適です。',
+        'shipping.title': '配送・お支払いについて',
+        'shipping.delivery.title': '全国送料無料',
+        'shipping.delivery.desc': '¥5,000以上のご注文で送料無料。通常2-4営業日でお届けします。',
+        'shipping.payment.title': '各種決済対応',
+        'shipping.payment.desc': 'クレジットカード、PayPay、コンビニ払い、銀行振込に対応しています。',
+        'shipping.gift.title': 'ギフト包装',
+        'shipping.gift.desc': '和紙を使用した上品なギフト包装を無料でご用意いたします。',
+        'cta.title': '香りを自分で創る体験を',
+        'cta.subtitle': 'オンラインショップの製品をお気に召していただけたら、ぜひワークショップで自分だけの香りを創ってみませんか？',
+        'cta.button': 'ワークショップを予約する',
+        'footer.tagline': '浅草 露ーTSUYU ASAKUSA<br />世界にひとつ、あなただけの香りを。',
+        'footer.menu': 'メニュー',
+        'footer.info': 'ご案内',
+        'footer.contact': 'お問い合わせ',
+        'footer.reserve': 'ご予約',
+      },
+      en: {
+        'meta.title': 'Online Shop | TSUYU ASAKUSA',
+        'meta.description': 'TSUYU ASAKUSA online shop. Japanese-modern fragrance products.',
+        'nav.reserve': 'Reserve',
+        'header.title': 'Online Shop',
+        'header.subtitle': 'Bring the workshop experience home. We deliver carefully crafted Japanese-modern fragrance products using premium ingredients.',
+        'filter.all': 'All',
+        'filter.perfume': 'Perfume',
+        'filter.home': 'Home Fragrance',
+        'filter.gift': 'Gift',
+        'product.tax': '(tax incl.)',
+        'product.p1.name': 'TSUYU Eau de Parfum 30ml',
+        'product.p1.desc': 'A refreshing yet deep fragrance inspired by Asakusa morning dew. Harmony of hinoki and yuzu.',
+        'product.p2.name': 'TSUYU Eau de Parfum 50ml',
+        'product.p2.desc': 'Our flagship TSUYU fragrance. Enjoy an elegant, long-lasting scent.',
+        'product.p3.name': 'Blending Aroma Oil 10ml',
+        'product.p3.desc': 'Natural aroma oil blend. Perfect for diffusers and bath time.',
+        'product.p4.name': 'Fragrance Gift Set',
+        'product.p4.desc': 'Special gift box with 3 popular scents. Comes in a washi paper box.',
+        'product.p5.name': 'Room Spray 100ml',
+        'product.p5.desc': 'Elegant room fragrance. Sandalwood and jasmine harmony fills your space.',
+        'product.p6.name': 'Sachet Set (3 pieces)',
+        'product.p6.desc': 'Traditional Japanese sachets with a modern twist. For closets and drawers.',
+        'product.p7.name': 'Japanese Incense (20 sticks)',
+        'product.p7.desc': 'Premium incense using natural ingredients. Enjoy deep agarwood and kyara scents.',
+        'product.p8.name': 'Soy Aroma Candle',
+        'product.p8.desc': 'Made with soy wax. Enjoy up to 40 hours of burn time.',
+        'product.p9.name': 'Reed Diffuser 200ml',
+        'product.p9.desc': 'Flameless fragrance diffuser. Lasts approximately 2 months.',
+        'product.p10.name': 'Travel Set',
+        'product.p10.desc': 'Set of 3 mini perfumes. Perfect for travel or as gifts.',
+        'shipping.title': 'Shipping & Payment',
+        'shipping.delivery.title': 'Free Shipping',
+        'shipping.delivery.desc': 'Free shipping on orders over ¥5,000. Delivery in 2-4 business days.',
+        'shipping.payment.title': 'Multiple Payment Options',
+        'shipping.payment.desc': 'We accept credit cards, PayPay, convenience store payment, and bank transfer.',
+        'shipping.gift.title': 'Gift Wrapping',
+        'shipping.gift.desc': 'Elegant washi paper gift wrapping available free of charge.',
+        'cta.title': 'Create Your Own Fragrance',
+        'cta.subtitle': 'If you love our products, why not create your own signature scent at our workshop?',
+        'cta.button': 'Book a Workshop',
+        'footer.tagline': 'TSUYU ASAKUSA<br />Create your one-of-a-kind fragrance.',
+        'footer.menu': 'Menu',
+        'footer.info': 'Information',
+        'footer.contact': 'Contact',
+        'footer.reserve': 'Reservation',
+      }
+    };
 
-    // Close mobile menu on link click
-    document.querySelectorAll('#mobile-menu a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        document.getElementById('mobile-menu').classList.add('hidden');
-        document.getElementById('mobile-menu').classList.remove('flex');
-      });
-    });
+    let currentLang = localStorage.getItem('tsuyu-lang') || 'ja';
 
-    // Scroll reveal animation
-    function revealOnScroll() {
-      var reveals = document.querySelectorAll('.reveal');
-      reveals.forEach(function (el) {
-        var windowHeight = window.innerHeight;
-        var revealTop = el.getBoundingClientRect().top;
-        var revealPoint = 100;
-        if (revealTop < windowHeight - revealPoint) {
-          el.classList.add('visible');
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('tsuyu-lang', lang);
+      document.documentElement.lang = lang;
+      applyTranslations();
+      updateLangButtons();
+    }
+
+    function applyTranslations() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang] && translations[currentLang][key]) {
+          el.innerHTML = translations[currentLang][key];
         }
       });
     }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
+
+    function updateLangButtons() {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('text-gold', 'font-medium');
+        btn.classList.add('text-sumi/50');
+        if (btn.dataset.lang === currentLang) {
+          btn.classList.remove('text-sumi/50');
+          btn.classList.add('text-gold', 'font-medium');
+        }
+      });
+    }
+
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+    });
 
     // Category filter
-    var categoryBtns = document.querySelectorAll('.category-btn');
-    var productCards = document.querySelectorAll('.product-card');
-
-    categoryBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var category = btn.dataset.category;
-
-        // Update button styles
-        categoryBtns.forEach(function (b) {
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const productCards = document.querySelectorAll('.product-card');
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+        categoryBtns.forEach(b => {
           b.classList.remove('bg-sumi', 'text-cream');
           b.classList.add('border', 'border-sumi/30', 'text-sumi/70');
         });
         btn.classList.add('bg-sumi', 'text-cream');
         btn.classList.remove('border', 'border-sumi/30', 'text-sumi/70');
-
-        // Filter products
-        productCards.forEach(function (card) {
+        productCards.forEach(card => {
           if (category === 'all' || card.dataset.category === category) {
             card.style.display = 'block';
           } else {
@@ -578,8 +562,22 @@
         });
       });
     });
-  </script>
 
+    // Scroll reveal
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, observerOptions);
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      applyTranslations();
+      updateLangButtons();
+    });
+  </script>
 </body>
 
 </html>
