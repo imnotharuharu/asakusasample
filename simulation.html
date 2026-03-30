@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,34 +26,82 @@
     }
   </script>
   <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: system-ui, sans-serif; }
-    
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+    }
+
     /* Fade transitions */
-    .fade-enter { opacity: 0; transform: translateY(20px); }
-    .fade-enter-active { opacity: 1; transform: translateY(0); transition: all 0.5s ease-out; }
-    .fade-exit { opacity: 1; transform: translateY(0); }
-    .fade-exit-active { opacity: 0; transform: translateY(-20px); transition: all 0.3s ease-in; }
-    
+    .fade-enter {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .fade-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.5s ease-out;
+    }
+
+    .fade-exit {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-exit-active {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s ease-in;
+    }
+
     /* Progress bar animation */
-    .progress-bar { transition: width 0.5s ease-out; }
-    
+    .progress-bar {
+      transition: width 0.5s ease-out;
+    }
+
     /* Choice hover effect */
-    .choice-btn { transition: all 0.3s ease; }
-    .choice-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15); }
-    
+    .choice-btn {
+      transition: all 0.3s ease;
+    }
+
+    .choice-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
+    }
+
     /* Gradient circle animation */
     @keyframes pulse-soft {
-      0%, 100% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.05); opacity: 1; }
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
     }
-    .gradient-circle { animation: pulse-soft 4s ease-in-out infinite; }
-    
+
+    .gradient-circle {
+      animation: pulse-soft 4s ease-in-out infinite;
+    }
+
     /* Screen transitions */
-    .screen { display: none; }
-    .screen.active { display: flex; }
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: flex;
+    }
   </style>
 </head>
+
 <body class="bg-ivory text-charcoal min-h-screen">
 
   <!-- Navigation -->
@@ -63,33 +112,42 @@
         <a href="index.html" class="text-lg tracking-widest font-light text-charcoal hover:text-gold transition-colors">
           TSUYU
         </a>
-        
+
         <!-- Desktop Nav -->
         <div class="hidden md:flex items-center gap-8">
-          <a href="index.html" class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Home</a>
-          <a href="shop.html" class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Shop</a>
-          <a href="reservation.html" class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Reservation</a>
-          <a href="contact.html" class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Contact</a>
+          <a href="index.html"
+            class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Home</a>
+          <a href="shop.html"
+            class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Shop</a>
+          <a href="reservation.html"
+            class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Reservation</a>
+          <a href="contact.html"
+            class="text-sm tracking-wide text-charcoal/70 hover:text-charcoal transition-colors">Contact</a>
         </div>
-        
+
         <!-- Language Switcher -->
         <div class="flex items-center gap-1 text-sm">
-          <button onclick="setLang('ja')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="ja">🇯🇵</button>
-          <button onclick="setLang('en')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="en">🇺🇸</button>
-          <button onclick="setLang('zh')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="zh">🇨🇳</button>
-          <button onclick="setLang('ko')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="ko">🇰🇷</button>
-          <button onclick="setLang('es')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors" data-lang="es">🇪🇸</button>
+          <button onclick="setLang('ja')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors"
+            data-lang="ja">🇯🇵</button>
+          <button onclick="setLang('en')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors"
+            data-lang="en">🇺🇸</button>
+          <button onclick="setLang('zh')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors"
+            data-lang="zh">🇨🇳</button>
+          <button onclick="setLang('ko')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors"
+            data-lang="ko">🇰🇷</button>
+          <button onclick="setLang('es')" class="lang-btn p-1.5 rounded hover:bg-charcoal/5 transition-colors"
+            data-lang="es">🇪🇸</button>
         </div>
-        
+
         <!-- Mobile Menu Button -->
         <button class="md:hidden p-2" onclick="toggleMobileMenu()" aria-label="メニュー">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
     </div>
-    
+
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden hidden bg-ivory border-t border-charcoal/10">
       <div class="px-4 py-4 space-y-3">
@@ -103,7 +161,7 @@
 
   <!-- Main Content -->
   <main class="pt-14 sm:pt-16 min-h-screen flex flex-col">
-    
+
     <!-- Progress Bar -->
     <div id="progress-container" class="hidden fixed top-14 sm:top-16 left-0 right-0 h-1 bg-charcoal/10 z-40">
       <div id="progress-bar" class="progress-bar h-full bg-gold" style="width: 0%"></div>
@@ -112,20 +170,19 @@
     <!-- Welcome Screen -->
     <div id="welcome-screen" class="screen active flex-1 flex-col items-center justify-center px-6 py-12">
       <div class="max-w-md text-center fade-enter-active">
-        <div class="w-20 h-20 mx-auto mb-8 rounded-full bg-gradient-to-br from-blush to-softgold flex items-center justify-center">
+        <div
+          class="w-20 h-20 mx-auto mb-8 rounded-full bg-gradient-to-br from-blush to-softgold flex items-center justify-center">
           <span class="text-3xl">🌸</span>
         </div>
         <h1 class="text-2xl sm:text-3xl font-light mb-4" data-i18n="welcome_title">あなただけの香りを見つけましょう</h1>
         <p class="text-charcoal/60 leading-relaxed mb-8" data-i18n="welcome_desc">
           5つの質問に答えるだけで、あなたにぴったりの香りのレシピをご提案します。心を落ち着けて、直感で選んでください。
         </p>
-        <button 
-          onclick="startQuiz()" 
-          class="inline-flex items-center gap-2 px-8 py-4 bg-gold text-white rounded-full text-sm tracking-wide hover:bg-gold/90 transition-colors"
-        >
+        <button onclick="startQuiz()"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-gold text-white rounded-full text-sm tracking-wide hover:bg-gold/90 transition-colors">
           <span data-i18n="start_btn">はじめる</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </button>
       </div>
@@ -146,32 +203,28 @@
     <div id="result-screen" class="screen flex-1 flex-col items-center justify-center px-6 py-12">
       <div class="max-w-md w-full text-center">
         <p class="text-sm text-gold tracking-wide mb-4" data-i18n="result_label">あなたの香りレシピ</p>
-        
+
         <!-- Gradient Circle -->
         <div id="result-circle" class="gradient-circle w-48 h-48 mx-auto mb-8 rounded-full shadow-lg"></div>
-        
+
         <h2 id="result-name" class="text-2xl sm:text-3xl font-light mb-4"></h2>
         <p id="result-description" class="text-charcoal/60 leading-relaxed mb-6"></p>
-        
+
         <!-- Recipe -->
         <div id="recipe-list" class="bg-white/50 rounded-2xl p-6 mb-8 text-left"></div>
-        
+
         <!-- CTA -->
-        <a 
-          href="/reservation.html" 
-          class="inline-flex items-center gap-2 px-8 py-4 bg-charcoal text-ivory rounded-full text-sm tracking-wide hover:bg-charcoal/90 transition-colors"
-        >
+        <a href="reservation.html"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-charcoal text-ivory rounded-full text-sm tracking-wide hover:bg-charcoal/90 transition-colors">
           <span data-i18n="cta_workshop">ワークショップで実際に作ってみませんか？</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
-        
-        <button 
-          onclick="resetQuiz()" 
+
+        <button onclick="resetQuiz()"
           class="block mx-auto mt-6 text-sm text-charcoal/50 hover:text-charcoal transition-colors"
-          data-i18n="retry_btn"
-        >
+          data-i18n="retry_btn">
           もう一度診断する
         </button>
       </div>
@@ -369,7 +422,7 @@
     const recipes = {
       'fresh-morning': {
         name: { ja: '朝露の目覚め', en: 'Morning Dew Awakening', zh: '晨露苏醒', ko: '아침 이슬의 각성', es: 'Despertar del Rocío' },
-        desc: { 
+        desc: {
           ja: '爽やかな柑橘と透明感のあるグリーンノートが織りなす、清々しい朝の香り。新しい一日の始まりにふさわしい、希望に満ちた香りです。',
           en: 'A refreshing blend of citrus and transparent green notes, perfect for starting a new day filled with hope.',
           zh: '清新柑橘与通透绿叶交织，宛如充满希望的清晨。',
@@ -543,13 +596,13 @@
     function renderQuestion() {
       const q = questions[currentQuestion];
       const lang = currentLang;
-      
+
       document.getElementById('current-q').textContent = currentQuestion + 1;
       document.getElementById('question-text').textContent = i18n[lang][q.key];
-      
+
       const choicesContainer = document.getElementById('choices');
       choicesContainer.innerHTML = '';
-      
+
       q.answers.forEach((ansKey, idx) => {
         const btn = document.createElement('button');
         btn.className = 'choice-btn bg-white p-6 rounded-2xl border border-charcoal/10 text-center hover:border-gold/50';
@@ -557,7 +610,7 @@
         btn.onclick = () => selectAnswer(q.values[idx]);
         choicesContainer.appendChild(btn);
       });
-      
+
       // Update progress bar
       const progress = ((currentQuestion) / questions.length) * 100;
       document.getElementById('progress-bar').style.width = progress + '%';
@@ -566,7 +619,7 @@
     // Select answer
     function selectAnswer(value) {
       answers.push(value);
-      
+
       if (currentQuestion < questions.length - 1) {
         currentQuestion++;
         renderQuestion();
@@ -582,7 +635,7 @@
     // Calculate result based on answers
     function calculateRecipe() {
       const [mood, season, place, time, intensity] = answers;
-      
+
       // Map combinations to recipes
       if (mood === 'fresh' && (time === 'morning' || time === 'afternoon')) return 'fresh-morning';
       if (mood === 'romantic' && place === 'flower') return 'romantic-flower';
@@ -592,7 +645,7 @@
       if (place === 'cafe' && (time === 'afternoon' || time === 'evening')) return 'autumn-cafe';
       if (season === 'winter' && time === 'evening') return 'winter-evening';
       if (season === 'spring' && intensity === 'light') return 'spring-light';
-      
+
       // Default fallbacks based on mood
       const moodMap = {
         'fresh': 'fresh-morning',
@@ -608,11 +661,11 @@
       const recipeKey = calculateRecipe();
       const recipe = recipes[recipeKey];
       const lang = currentLang;
-      
+
       document.getElementById('result-name').textContent = recipe.name[lang];
       document.getElementById('result-description').textContent = recipe.desc[lang];
       document.getElementById('result-circle').style.background = recipe.gradient;
-      
+
       // Render recipe list
       const recipeList = document.getElementById('recipe-list');
       recipeList.innerHTML = `
@@ -624,7 +677,7 @@
           </div>
         `).join('')}
       `;
-      
+
       document.getElementById('progress-container').classList.add('hidden');
       showScreen('result-screen');
     }
@@ -648,4 +701,5 @@
     });
   </script>
 </body>
+
 </html>
