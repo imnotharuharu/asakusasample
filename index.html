@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>浅草 露ーTSUYU ASAKUSA | 調香ワークショップ</title>
-  <meta name="description" content="浅草で世界にひとつだけの香りを創る。20種類以上の香料から、あなただけのオリジナルフレグランスを調香するワークショップ体験。" />
+  <title data-i18n="meta.title">浅草 露ーTSUYU ASAKUSA | 調香ワークショップ</title>
+  <meta name="description" data-i18n="meta.description"
+    content="浅草で世界にひとつだけの香りを創る。20種類以上の香料から、あなただけのオリジナルフレグランスを調香するワークショップ体験。" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -61,7 +62,6 @@
       font-family: 'Shippori Mincho', Georgia, serif;
     }
 
-    /* Delay utilities for fade-in */
     .delay-200 {
       animation-delay: 0.2s;
     }
@@ -90,12 +90,10 @@
       animation-delay: 1.5s;
     }
 
-    /* Initially hidden for animation */
     .anim-hidden {
       opacity: 0;
     }
 
-    /* Scroll-triggered reveal */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -126,103 +124,126 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
 
-        <a href="index.html" id="nav-logo"
+        <!-- Logo -->
+        <a href="/" id="nav-logo"
           class="text-lg tracking-[0.25em] font-normal text-white transition-colors duration-500">
           TSUYU
         </a>
 
+        <!-- Desktop Links -->
         <div class="hidden lg:flex items-center gap-10" id="nav-links">
-          <a href="experience.html"
-            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Experience
-            <a href="reservation.html"
-              class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Reservation</a>
-            <a href="pricing.html"
-              class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Plans</a>
-            <a href="shop.html"
-              class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Online
-              Shop</a>
-            <a href="about.html"
-              class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">About</a>
-            <a href="contact.html"
-              class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase">Contact</a>
+          <a href="/experience.html"
+            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase"
+            data-i18n="nav.experience">Experience</a>
+          <a href="/reservation.html"
+            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase"
+            data-i18n="nav.reservation">Reservation</a>
+          <a href="/pricing.html"
+            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase"
+            data-i18n="nav.plans">Plans</a>
+          <a href="/shop.html"
+            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase"
+            data-i18n="nav.shop">Online Shop</a>
+          <a href="/about.html"
+            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase"
+            data-i18n="nav.about">About</a>
+          <a href="/contact.html"
+            class="nav-link-item text-sm tracking-widest text-white/80 hover:text-white transition-colors duration-300 uppercase"
+            data-i18n="nav.contact">Contact</a>
         </div>
 
+        <!-- Language Switcher + CTA + Hamburger -->
         <div class="flex items-center gap-4">
-          <!-- Language Switcher + CTA + Hamburger -->
-          <div class="flex items-center gap-4">
-            <!-- Language Switcher -->
-            <div class="lang-switch hidden md:flex items-center gap-1 text-sm" id="lang-switch-desktop">
-              <button id="lang-ja" class="px-2 py-1 text-white/80 hover:text-white transition-colors">JP</button>
-              <span class="text-white/40">/</span>
-              <button id="lang-en" class="px-2 py-1 text-white/80 hover:text-white transition-colors">EN</button>
-            </div>
-            <a href="reservation.html" id="nav-cta"
-              class="hidden md:inline-flex items-center px-6 py-2.5 bg-white/10 border border-white/30 text-white text-sm tracking-widest uppercase hover:bg-white/20 transition-colors duration-300">
-              ご予約
-            </a>
-            <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
-              <span id="menu-line-1" class="block w-6 h-px bg-white transition-all duration-300"></span>
-              <span id="menu-line-2" class="block w-6 h-px bg-white transition-all duration-300"></span>
-              <span id="menu-line-3" class="block w-4 h-px bg-white transition-all duration-300 ml-auto"></span>
-            </button>
+          <!-- Language Switcher -->
+          <div class="lang-switch hidden md:flex items-center gap-1 text-sm" id="lang-switch-desktop">
+            <button id="lang-ja" class="px-2 py-1 text-white/80 hover:text-white transition-colors">JP</button>
+            <span class="text-white/40">/</span>
+            <button id="lang-en" class="px-2 py-1 text-white/80 hover:text-white transition-colors">EN</button>
           </div>
+          <a href="/reservation.html" id="nav-cta"
+            class="hidden md:inline-flex items-center px-6 py-2.5 bg-white/10 border border-white/30 text-white text-sm tracking-widest uppercase hover:bg-white/20 transition-colors duration-300"
+            data-i18n="nav.cta">
+            ご予約
+          </a>
+          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
+            <span id="menu-line-1" class="block w-6 h-px bg-white transition-all duration-300"></span>
+            <span id="menu-line-2" class="block w-6 h-px bg-white transition-all duration-300"></span>
+            <span id="menu-line-3" class="block w-4 h-px bg-white transition-all duration-300 ml-auto"></span>
+          </button>
         </div>
       </div>
+    </div>
 
-      <div id="mobile-menu"
-        class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
-        <a href="experience.html"
-          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
-        <a href="reservation.html"
-          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Reservation</a>
-        <a href="pricing.html"
-          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
-        <a href="shop.html"
-          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Online
-          Shop</a>
-        <a href="about.html"
-          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
-        <a href="contact.html"
-          class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
-        <a href="pricing.html"
-          class="mobile-nav-link mt-4 px-8 py-3 bg-sumi text-cream text-sm tracking-widest uppercase">ご予約はこちら</a>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+      class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
+      <!-- Mobile Language Switcher -->
+      <div class="lang-switch flex items-center gap-2 text-sm mb-4" id="lang-switch-mobile">
+        <button id="lang-ja-mobile" class="px-3 py-1 text-sumi/70 hover:text-sumi transition-colors">JP</button>
+        <span class="text-sumi/40">/</span>
+        <button id="lang-en-mobile" class="px-3 py-1 text-sumi/70 hover:text-sumi transition-colors">EN</button>
       </div>
+      <a href="/experience.html"
+        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase"
+        data-i18n="nav.experience">Experience</a>
+      <a href="/reservation.html"
+        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase"
+        data-i18n="nav.reservation">Reservation</a>
+      <a href="/pricing.html"
+        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase"
+        data-i18n="nav.plans">Plans</a>
+      <a href="/shop.html"
+        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase"
+        data-i18n="nav.shop">Online Shop</a>
+      <a href="/about.html"
+        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase"
+        data-i18n="nav.about">About</a>
+      <a href="/contact.html"
+        class="mobile-nav-link text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase"
+        data-i18n="nav.contact">Contact</a>
+      <a href="/reservation.html"
+        class="mobile-nav-link mt-4 px-8 py-3 bg-sumi text-cream text-sm tracking-widest uppercase"
+        data-i18n="nav.ctaFull">ご予約はこちら</a>
+    </div>
   </nav>
 
   <!-- ===== HERO ===== -->
   <section class="relative h-screen w-full overflow-hidden">
-    <img src="images/hero.jpg" alt="浅草 露の調香ワークショップ風景" class="absolute inset-0 w-full h-full object-cover"
+    <img src="/images/hero.jpg" alt="浅草 露の調香ワークショップ風景" class="absolute inset-0 w-full h-full object-cover"
       style="object-position: center 60%;" />
     <div class="absolute inset-0 bg-black/50"></div>
 
     <div class="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-      <p class="text-xs md:text-sm tracking-[0.4em] text-white/60 uppercase mb-6 anim-hidden animate-fade-in delay-300">
+      <p class="text-xs md:text-sm tracking-[0.4em] text-white/60 uppercase mb-6 anim-hidden animate-fade-in delay-300"
+        data-i18n="hero.tagline">
         Fragrance Workshop in Asakusa
       </p>
 
       <h1 class="anim-hidden animate-fade-in delay-600">
-        <span class="block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-normal tracking-wider text-white mb-2">浅草
-          露</span>
+        <span class="block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-normal tracking-wider text-white mb-2"
+          data-i18n="hero.title">浅草 露</span>
         <span class="block w-16 h-px bg-white/40 mx-auto my-4 md:my-6"></span>
         <span class="block text-lg md:text-xl lg:text-2xl tracking-[0.35em] text-white/80 font-normal">TSUYU
           ASAKUSA</span>
       </h1>
 
-      <p
-        class="mt-8 md:mt-10 text-sm md:text-base text-white/60 leading-relaxed max-w-md anim-hidden animate-fade-in delay-900">
+      <p class="mt-8 md:mt-10 text-sm md:text-base text-white/60 leading-relaxed max-w-md anim-hidden animate-fade-in delay-900"
+        data-i18n="hero.subtitle">
         世界にひとつ、あなただけの香りを創る
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 mt-10 md:mt-12 anim-hidden animate-fade-in delay-1100">
-        <a href="#reservation"
-          class="inline-flex items-center justify-center px-8 py-4 bg-white/10 border border-white/40 text-white text-sm tracking-widest uppercase hover:bg-white/20 transition-all duration-300 backdrop-blur-sm">
+        <a href="/reservation.html"
+          class="inline-flex items-center justify-center px-8 py-4 bg-white/10 border border-white/40 text-white text-sm tracking-widest uppercase hover:bg-white/20 transition-all duration-300 backdrop-blur-sm"
+          data-i18n="hero.cta">
           ワークショップを予約
           <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
           </svg>
         </a>
-        <a href="#experience"
-          class="inline-flex items-center justify-center px-8 py-4 border border-white/20 text-white/80 text-sm tracking-widest uppercase hover:border-white/40 hover:text-white transition-all duration-300">
+        <a href="/experience.html"
+          class="inline-flex items-center justify-center px-8 py-4 border border-white/20 text-white/80 text-sm tracking-widest uppercase hover:border-white/40 hover:text-white transition-all duration-300"
+          data-i18n="hero.details">
           詳細を見る
         </a>
       </div>
@@ -242,8 +263,9 @@
   <section class="py-24 lg:py-32 bg-sand" id="experience">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 reveal">
       <div class="text-center mb-16 lg:mb-20">
-        <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4">Features</p>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">露ーTSUYUが選ばれる理由</h2>
+        <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4" data-i18n="features.label">Features</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight" data-i18n="features.title">
+          露ーTSUYUが選ばれる理由</h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
@@ -257,8 +279,9 @@
                 d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611l-.772.13A18.142 18.142 0 0112 21.75a18.142 18.142 0 01-7.363-1.307l-.772-.13c-1.717-.293-2.3-2.379-1.067-3.611L5 14.5" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium tracking-wide mb-3">香りのワークショップ</h3>
-          <p class="text-sm text-sumi-l leading-relaxed">調香師の指導のもと、世界中から集めた香料を組み合わせて、あなただけのオリジナルフレグランスを創作。</p>
+          <h3 class="text-lg font-medium tracking-wide mb-3" data-i18n="features.f1.title">香りのワークショップ</h3>
+          <p class="text-sm text-sumi-l leading-relaxed" data-i18n="features.f1.desc">
+            調香師の指導のもと、世界中から集めた香料を組み合わせて、あなただけのオリジナルフレグランスを創作。</p>
         </div>
 
         <!-- Feature 2 -->
@@ -271,8 +294,9 @@
                 d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium tracking-wide mb-3">20種類以上の香料</h3>
-          <p class="text-sm text-sumi-l leading-relaxed">フローラル、ウッディ、シトラスなど、厳選された20種以上の天然・合成香料を自由にブレンド。</p>
+          <h3 class="text-lg font-medium tracking-wide mb-3" data-i18n="features.f2.title">20種類以上の香料</h3>
+          <p class="text-sm text-sumi-l leading-relaxed" data-i18n="features.f2.desc">
+            フローラル、ウッディ、シトラスなど、厳選された20種以上の天然・合成香料を自由にブレンド。</p>
         </div>
 
         <!-- Feature 3 -->
@@ -285,8 +309,9 @@
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
           </div>
-          <h3 class="text-lg font-medium tracking-wide mb-3">世界にひとつの香り体験</h3>
-          <p class="text-sm text-sumi-l leading-relaxed">完成した香水はその場でお持ち帰り。大切な方へのギフトや、旅の思い出としても最適です。</p>
+          <h3 class="text-lg font-medium tracking-wide mb-3" data-i18n="features.f3.title">世界にひとつの香り体験</h3>
+          <p class="text-sm text-sumi-l leading-relaxed" data-i18n="features.f3.desc">
+            完成した香水はその場でお持ち帰り。大切な方へのギフトや、旅の思い出としても最適です。</p>
         </div>
       </div>
     </div>
@@ -296,22 +321,26 @@
   <section class="py-24 lg:py-32 bg-cream" id="shop">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 reveal">
       <div class="text-center mb-16 lg:mb-20">
-        <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4">Services</p>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">わたしたちの提供するもの</h2>
+        <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4" data-i18n="services.label">Services</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight" data-i18n="services.title">わたしたちの提供するもの
+        </h2>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-8">
         <!-- Workshop Card -->
-        <a href="experience.html" class="group relative overflow-hidden aspect-[4/3] block">
-          <img src="images/workshop.jpg" alt="調香ワークショップの様子"
+        <a href="/experience.html" class="group relative overflow-hidden aspect-[4/3] block">
+          <img src="/images/workshop.jpg" alt="調香ワークショップの様子"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <div class="absolute inset-0 bg-gradient-to-t from-sumi/80 via-sumi/20 to-transparent"></div>
           <div class="absolute bottom-0 left-0 p-8 lg:p-10">
             <p class="text-xs tracking-[0.3em] text-cream/70 uppercase mb-2">Workshop</p>
-            <h3 class="text-2xl lg:text-3xl font-medium text-cream mb-3">調香ワークショップ</h3>
-            <p class="text-sm text-cream/80 leading-relaxed max-w-sm mb-4">プロの調香師と一緒に、あなたの感性を香りで表現する特別なひととき。</p>
+            <h3 class="text-2xl lg:text-3xl font-medium text-cream mb-3" data-i18n="services.workshop.title">調香ワークショップ
+            </h3>
+            <p class="text-sm text-cream/80 leading-relaxed max-w-sm mb-4" data-i18n="services.workshop.desc">
+              プロの調香師と一緒に、あなたの感性を香りで表現する特別なひととき。</p>
             <span
-              class="inline-flex items-center text-sm text-cream/90 tracking-widest uppercase group-hover:text-cream transition-colors">
+              class="inline-flex items-center text-sm text-cream/90 tracking-widest uppercase group-hover:text-cream transition-colors"
+              data-i18n="services.workshop.link">
               詳しく見る
               <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
@@ -321,17 +350,18 @@
         </a>
 
         <!-- Online Shop Card -->
-        <a href="#" class="group relative overflow-hidden aspect-[4/3] block">
-          <img src="images/experience.jpg" alt="オリジナルフレグランス"
+        <a href="/shop.html" class="group relative overflow-hidden aspect-[4/3] block">
+          <img src="/images/experience.jpg" alt="オリジナルフレグランス"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <div class="absolute inset-0 bg-gradient-to-t from-sumi/80 via-sumi/20 to-transparent"></div>
           <div class="absolute bottom-0 left-0 p-8 lg:p-10">
             <p class="text-xs tracking-[0.3em] text-cream/70 uppercase mb-2">Online Shop</p>
-            <h3 class="text-2xl lg:text-3xl font-medium text-cream mb-3">オンラインショップ</h3>
-            <p class="text-sm text-cream/80 leading-relaxed max-w-sm mb-4">露ーTSUYUオリジナルの香水やディフューザーをオンラインでお買い求めいただけます。
-            </p>
+            <h3 class="text-2xl lg:text-3xl font-medium text-cream mb-3" data-i18n="services.shop.title">オンラインショップ</h3>
+            <p class="text-sm text-cream/80 leading-relaxed max-w-sm mb-4" data-i18n="services.shop.desc">
+              露ーTSUYUオリジナルの香水やディフューザーをオンラインでお買い求めいただけます。</p>
             <span
-              class="inline-flex items-center text-sm text-cream/90 tracking-widest uppercase group-hover:text-cream transition-colors">
+              class="inline-flex items-center text-sm text-cream/90 tracking-widest uppercase group-hover:text-cream transition-colors"
+              data-i18n="services.shop.link">
               ショップへ
               <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
@@ -346,21 +376,24 @@
   <!-- ===== CTA ===== -->
   <section class="py-24 lg:py-32 bg-sumi text-cream" id="reservation">
     <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center reveal">
-      <p class="text-sm tracking-[0.3em] text-cream/50 uppercase mb-6">Reserve Your Experience</p>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight mb-6">あなたの香りの旅を始めましょう</h2>
-      <p class="text-base text-cream/60 leading-relaxed max-w-2xl mx-auto mb-10">
+      <p class="text-sm tracking-[0.3em] text-cream/50 uppercase mb-6" data-i18n="cta.label">Reserve Your Experience</p>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight mb-6" data-i18n="cta.title">あなたの香りの旅を始めましょう
+      </h2>
+      <p class="text-base text-cream/60 leading-relaxed max-w-2xl mx-auto mb-10" data-i18n="cta.desc">
         浅草の趣ある空間で、プロの調香師があなたの香りづくりをサポートします。お一人様からグループまで、大切な時間をお過ごしください。
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#reservation"
-          class="inline-flex items-center px-10 py-4 bg-cream text-sumi text-sm tracking-widest uppercase hover:bg-cream-d transition-all duration-300">
+        <a href="/reservation.html"
+          class="inline-flex items-center px-10 py-4 bg-cream text-sumi text-sm tracking-widest uppercase hover:bg-cream-d transition-all duration-300"
+          data-i18n="cta.reserve">
           ワークショップを予約
           <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
           </svg>
         </a>
-        <a href="#contact"
-          class="inline-flex items-center px-10 py-4 border border-cream/30 text-cream text-sm tracking-widest uppercase hover:border-cream/60 transition-all duration-300">
+        <a href="/contact.html"
+          class="inline-flex items-center px-10 py-4 border border-cream/30 text-cream text-sm tracking-widest uppercase hover:border-cream/60 transition-all duration-300"
+          data-i18n="cta.contact">
           お問い合わせ
         </a>
       </div>
@@ -371,8 +404,8 @@
   <section class="py-24 lg:py-32 bg-cream" id="about">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 reveal">
       <div class="text-center mb-16 lg:mb-20">
-        <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4">Reviews</p>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">お客様の声</h2>
+        <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4" data-i18n="reviews.label">Reviews</p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight" data-i18n="reviews.title">お客様の声</h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
@@ -400,11 +433,11 @@
                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
           </div>
-          <p class="text-sm leading-relaxed text-sumi-l mb-6">
+          <p class="text-sm leading-relaxed text-sumi-l mb-6" data-i18n="reviews.r1.text">
             "初めての調香体験でしたが、丁寧に教えていただき、想像以上に素敵な香りが完成しました。浅草観光の一番の思い出になりました。"</p>
           <div>
-            <p class="text-sm font-medium">田中 美咲</p>
-            <p class="text-xs text-sumi-l mt-1">東京都 / 2025年1月</p>
+            <p class="text-sm font-medium" data-i18n="reviews.r1.name">田中 美咲</p>
+            <p class="text-xs text-sumi-l mt-1" data-i18n="reviews.r1.loc">東京都 / 2025年1月</p>
           </div>
         </div>
 
@@ -432,11 +465,11 @@
                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
           </div>
-          <p class="text-sm leading-relaxed text-sumi-l mb-6">
+          <p class="text-sm leading-relaxed text-sumi-l mb-6" data-i18n="reviews.r2.text">
             "友人の誕生日プレゼントとして参加。二人で香りを比べ合いながら楽しい時間を過ごせました。空間の雰囲気も素晴らしかったです。"</p>
           <div>
-            <p class="text-sm font-medium">佐藤 健太</p>
-            <p class="text-xs text-sumi-l mt-1">神奈川県 / 2025年2月</p>
+            <p class="text-sm font-medium" data-i18n="reviews.r2.name">佐藤 健太</p>
+            <p class="text-xs text-sumi-l mt-1" data-i18n="reviews.r2.loc">神奈川県 / 2025年2月</p>
           </div>
         </div>
 
@@ -464,11 +497,11 @@
                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
           </div>
-          <p class="text-sm leading-relaxed text-sumi-l mb-6">
+          <p class="text-sm leading-relaxed text-sumi-l mb-6" data-i18n="reviews.r3.text">
             "リピーターです。季節ごとに香りの好みが変わるので、毎回新しい発見があります。スタッフの方々の知識も豊富で、毎回学びがあります。"</p>
           <div>
-            <p class="text-sm font-medium">山田 真理子</p>
-            <p class="text-xs text-sumi-l mt-1">大阪府 / 2025年3月</p>
+            <p class="text-sm font-medium" data-i18n="reviews.r3.name">山田 真理子</p>
+            <p class="text-xs text-sumi-l mt-1" data-i18n="reviews.r3.loc">大阪府 / 2025年3月</p>
           </div>
         </div>
       </div>
@@ -478,7 +511,8 @@
   <!-- ===== PRESS / LOGO LIST ===== -->
   <section class="py-16 lg:py-20 border-y border-sand">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 reveal">
-      <p class="text-center text-xs tracking-[0.3em] text-sumi-l uppercase mb-10">Featured In</p>
+      <p class="text-center text-xs tracking-[0.3em] text-sumi-l uppercase mb-10" data-i18n="press.label">Featured In
+      </p>
       <div class="flex flex-wrap items-center justify-center gap-10 lg:gap-16">
         <span
           class="text-sm lg:text-base tracking-widest text-sumi-l/50 hover:text-sumi-l transition-colors duration-300 cursor-default">VOGUE
@@ -500,22 +534,25 @@
   <!-- ===== NEWSLETTER ===== -->
   <section class="py-24 lg:py-32 bg-sand" id="contact">
     <div class="mx-auto max-w-2xl px-6 lg:px-8 text-center reveal">
-      <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4">Newsletter</p>
-      <h2 class="text-3xl md:text-4xl font-normal tracking-tight mb-4">香りの便りをお届けします</h2>
-      <p class="text-sm text-sumi-l leading-relaxed mb-8">新商品や季節のワークショップ情報、限定イベントのお知らせをお届けします。</p>
+      <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4" data-i18n="newsletter.label">Newsletter</p>
+      <h2 class="text-3xl md:text-4xl font-normal tracking-tight mb-4" data-i18n="newsletter.title">香りの便りをお届けします</h2>
+      <p class="text-sm text-sumi-l leading-relaxed mb-8" data-i18n="newsletter.desc">
+        新商品や季節のワークショップ情報、限定イベントのお知らせをお届けします。</p>
 
-      <!-- Newsletter Form -->
       <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-        <input type="email" id="newsletter-email" placeholder="メールアドレスを入力" required
+        <input type="email" id="newsletter-email" data-i18n-placeholder="newsletter.placeholder"
+          placeholder="メールアドレスを入力" required
           class="flex-1 px-5 py-3.5 bg-white border border-sand text-sm text-sumi placeholder:text-sumi-l/50 focus:outline-none focus:border-gold transition-colors"
           aria-label="メールアドレス" />
         <button type="submit"
-          class="px-8 py-3.5 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi/90 transition-colors whitespace-nowrap">
+          class="px-8 py-3.5 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi/90 transition-colors whitespace-nowrap"
+          data-i18n="newsletter.submit">
           登録する
         </button>
       </form>
-      <p id="newsletter-thanks" class="text-sm text-gold tracking-wide hidden">ご登録ありがとうございます。</p>
-      <p class="text-xs text-sumi-l/60 mt-4">いつでも配信を解除いただけます。</p>
+      <p id="newsletter-thanks" class="text-sm text-gold tracking-wide hidden" data-i18n="newsletter.thanks">
+        ご登録ありがとうございます。</p>
+      <p class="text-xs text-sumi-l/60 mt-4" data-i18n="newsletter.note">いつでも配信を解除いただけます。</p>
     </div>
   </section>
 
@@ -526,41 +563,50 @@
 
         <!-- Brand -->
         <div class="lg:col-span-1">
-          <a href="" class="text-xl tracking-[0.25em] font-normal text-cream block mb-4">TSUYU</a>
-          <p class="text-sm text-cream/60 leading-relaxed">浅草で出会う、<br />あなただけの香りの物語。</p>
+          <a href="/" class="text-xl tracking-[0.25em] font-normal text-cream block mb-4">TSUYU</a>
+          <p class="text-sm text-cream/60 leading-relaxed" data-i18n="footer.tagline">浅草で出会う、<br />あなただけの香りの物語。</p>
         </div>
 
         <!-- Navigation -->
         <div>
-          <p class="text-xs tracking-[0.2em] text-cream/40 uppercase mb-5">Navigation</p>
+          <p class="text-xs tracking-[0.2em] text-cream/40 uppercase mb-5" data-i18n="footer.navTitle">Navigation</p>
           <nav class="flex flex-col gap-3" aria-label="フッターナビゲーション">
-            <a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">ホーム</a>
-            <a href="experience.html" class="text-sm text-cream/70 hover:text-cream transition-colors">ワークショップ体験</a>
-            <a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">ご予約</a>
-            <a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">オンラインショップ</a>
-            <a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">プラン・料金</a>
+            <a href="/" class="text-sm text-cream/70 hover:text-cream transition-colors"
+              data-i18n="footer.nav.home">ホーム</a>
+            <a href="/experience.html" class="text-sm text-cream/70 hover:text-cream transition-colors"
+              data-i18n="footer.nav.workshop">ワークショップ体験</a>
+            <a href="/reservation.html" class="text-sm text-cream/70 hover:text-cream transition-colors"
+              data-i18n="footer.nav.reserve">ご予約</a>
+            <a href="/shop.html" class="text-sm text-cream/70 hover:text-cream transition-colors"
+              data-i18n="footer.nav.shop">オンラインショップ</a>
+            <a href="/pricing.html" class="text-sm text-cream/70 hover:text-cream transition-colors"
+              data-i18n="footer.nav.pricing">プラン・料金</a>
           </nav>
         </div>
 
         <!-- Information -->
         <div>
-          <p class="text-xs tracking-[0.2em] text-cream/40 uppercase mb-5">Information</p>
+          <p class="text-xs tracking-[0.2em] text-cream/40 uppercase mb-5" data-i18n="footer.infoTitle">Information</p>
           <nav class="flex flex-col gap-3">
-            <a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">私たちについて</a>
-            <a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">コンセプト</a>
-            <a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">アクセス</a>
-            <a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">お問い合わせ</a>
-            <a href="#" class="text-sm text-cream/70 hover:text-cream transition-colors">FAQ</a>
+            <a href="/about.html" class="text-sm text-cream/70 hover:text-cream transition-colors"
+              data-i18n="footer.info.about">私たちについて</a>
+            <a href="/about.html#concept" class="text-sm text-cream/70 hover:text-cream transition-colors"
+              data-i18n="footer.info.concept">コンセプト</a>
+            <a href="/contact.html" class="text-sm text-cream/70 hover:text-cream transition-colors"
+              data-i18n="footer.info.access">アクセス</a>
+            <a href="/contact.html" class="text-sm text-cream/70 hover:text-cream transition-colors"
+              data-i18n="footer.info.contact">お問い合わせ</a>
+            <a href="/contact.html#faq" class="text-sm text-cream/70 hover:text-cream transition-colors">FAQ</a>
           </nav>
         </div>
 
         <!-- Contact & Social -->
         <div>
-          <p class="text-xs tracking-[0.2em] text-cream/40 uppercase mb-5">Contact</p>
+          <p class="text-xs tracking-[0.2em] text-cream/40 uppercase mb-5" data-i18n="footer.contactTitle">Contact</p>
           <div class="flex flex-col gap-3 text-sm text-cream/70">
             <p>〒111-0032</p>
-            <p>東京都台東区浅草1-2-3</p>
-            <p>浅草ビル 3F</p>
+            <p data-i18n="footer.address1">東京都台東区浅草1-2-3</p>
+            <p data-i18n="footer.address2">浅草ビル 3F</p>
             <a href="tel:03-1234-5678" class="hover:text-cream transition-colors">03-1234-5678</a>
             <a href="mailto:info@tsuyu-asakusa.jp" class="hover:text-cream transition-colors">info@tsuyu-asakusa.jp</a>
           </div>
@@ -599,9 +645,12 @@
       <div class="pt-8 border-t border-cream/10 flex flex-col md:flex-row items-center justify-between gap-4">
         <p class="text-xs text-cream/40">&copy; 2025 浅草 露ーTSUYU ASAKUSA. All rights reserved.</p>
         <div class="flex gap-6">
-          <a href="#" class="text-xs text-cream/40 hover:text-cream/70 transition-colors">プライバシーポリシー</a>
-          <a href="#" class="text-xs text-cream/40 hover:text-cream/70 transition-colors">特定商取引法に基づく表記</a>
-          <a href="#" class="text-xs text-cream/40 hover:text-cream/70 transition-colors">利用規約</a>
+          <a href="#" class="text-xs text-cream/40 hover:text-cream/70 transition-colors"
+            data-i18n="footer.privacy">プライバシーポリシー</a>
+          <a href="#" class="text-xs text-cream/40 hover:text-cream/70 transition-colors"
+            data-i18n="footer.legal">特定商取引法に基づく表記</a>
+          <a href="#" class="text-xs text-cream/40 hover:text-cream/70 transition-colors"
+            data-i18n="footer.terms">利用規約</a>
         </div>
       </div>
     </div>
@@ -609,7 +658,213 @@
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
+    // ===== TRANSLATIONS =====
+    const translations = {
+      ja: {
+        meta: {
+          title: '浅草 露ーTSUYU ASAKUSA | 調香ワークショップ',
+          description: '浅草で世界にひとつだけの香りを創る。20種類以上の香料から、あなただけのオリジナルフレグランスを調香するワークショップ体験。'
+        },
+        nav: {
+          experience: 'Experience',
+          reservation: 'Reservation',
+          plans: 'Plans',
+          shop: 'Online Shop',
+          about: 'About',
+          contact: 'Contact',
+          cta: 'ご予約',
+          ctaFull: 'ご予約はこちら'
+        },
+        hero: {
+          tagline: 'Fragrance Workshop in Asakusa',
+          title: '浅草 露',
+          subtitle: '世界にひとつ、あなただけの香りを創る',
+          cta: 'ワークショップを予約',
+          details: '詳細を見る'
+        },
+        features: {
+          label: 'Features',
+          title: '露ーTSUYUが選ばれる理由',
+          f1: { title: '香りのワークショップ', desc: '調香師の指導のもと、世界中から集めた香料を組み合わせて、あなただけのオリジナルフレグランスを創作。' },
+          f2: { title: '20種類以上の香料', desc: 'フローラル、ウッディ、シトラスなど、厳選された20種以上の天然・合成香料を自由にブレンド。' },
+          f3: { title: '世界にひとつの香り体験', desc: '完成した香水はその場でお持ち帰り。大切な方へのギフトや、旅の思い出としても最適です。' }
+        },
+        services: {
+          label: 'Services',
+          title: 'わたしたちの提供するもの',
+          workshop: { title: '調香ワークショップ', desc: 'プロの調香師と一緒に、あなたの感性を香りで表現する特別なひととき。', link: '詳しく見る' },
+          shop: { title: 'オンラインショップ', desc: '露ーTSUYUオリジナルの香水やディフューザーをオンラインでお買い求めいただけます。', link: 'ショップへ' }
+        },
+        cta: {
+          label: 'Reserve Your Experience',
+          title: 'あなたの香りの旅を始めましょう',
+          desc: '浅草の趣ある空間で、プロの調香師があなたの香りづくりをサポートします。お一人様からグループまで、大切な時間をお過ごしください。',
+          reserve: 'ワークショップを予約',
+          contact: 'お問い合わせ'
+        },
+        reviews: {
+          label: 'Reviews',
+          title: 'お客様の声',
+          r1: { text: '"初めての調香体験でしたが、丁寧に教えていただき、想像以上に素敵な香りが完成しました。浅草観光の一番の思い出になりました。"', name: '田中 美咲', loc: '東京都 / 2025年1月' },
+          r2: { text: '"友人の誕生日プレゼントとして参加。二人で香りを比べ合いながら楽しい時間を過ごせました。空間の雰囲気も素晴らしかったです。"', name: '佐藤 健太', loc: '神奈川県 / 2025年2月' },
+          r3: { text: '"リピーターです。季節ごとに香りの好みが変わるので、毎回新しい発見があります。スタッフの方々の知識も豊富で、毎回学びがあります。"', name: '山田 真理子', loc: '大阪府 / 2025年3月' }
+        },
+        press: { label: 'Featured In' },
+        newsletter: {
+          label: 'Newsletter',
+          title: '香りの便りをお届けします',
+          desc: '新商品や季節のワークショップ情報、限定イベントのお知らせをお届けします。',
+          placeholder: 'メールアドレスを入力',
+          submit: '登録する',
+          thanks: 'ご登録ありがとうございます。',
+          note: 'いつでも配信を解除いただけます。'
+        },
+        footer: {
+          tagline: '浅草で出会う、<br />あなただけの香りの物語。',
+          navTitle: 'Navigation',
+          nav: { home: 'ホーム', workshop: 'ワークショップ体験', reserve: 'ご予約', shop: 'オンラインショップ', pricing: 'プラン・料金' },
+          infoTitle: 'Information',
+          info: { about: '私たちについて', concept: 'コンセプト', access: 'アクセス', contact: 'お問い合わせ' },
+          contactTitle: 'Contact',
+          address1: '東京都台東区浅草1-2-3',
+          address2: '浅草ビル 3F',
+          privacy: 'プライバシーポリシー',
+          legal: '特定商取引法に基づく表記',
+          terms: '利用規約'
+        }
+      },
+      en: {
+        meta: {
+          title: 'TSUYU ASAKUSA | Fragrance Workshop',
+          description: 'Create your one-of-a-kind fragrance in Asakusa. Experience a perfume-making workshop with over 20 premium ingredients.'
+        },
+        nav: {
+          experience: 'Experience',
+          reservation: 'Reservation',
+          plans: 'Plans',
+          shop: 'Online Shop',
+          about: 'About',
+          contact: 'Contact',
+          cta: 'Book Now',
+          ctaFull: 'Book Now'
+        },
+        hero: {
+          tagline: 'Fragrance Workshop in Asakusa',
+          title: 'TSUYU',
+          subtitle: 'Create your own unique fragrance',
+          cta: 'Book Workshop',
+          details: 'Learn More'
+        },
+        features: {
+          label: 'Features',
+          title: 'Why Choose TSUYU',
+          f1: { title: 'Fragrance Workshop', desc: 'Create your original fragrance by blending ingredients from around the world under the guidance of a professional perfumer.' },
+          f2: { title: '20+ Premium Ingredients', desc: 'Freely blend from over 20 carefully selected natural and synthetic ingredients including floral, woody, and citrus notes.' },
+          f3: { title: 'One-of-a-Kind Experience', desc: 'Take home your completed perfume on the spot. Perfect as a gift or a memorable souvenir from your trip.' }
+        },
+        services: {
+          label: 'Services',
+          title: 'What We Offer',
+          workshop: { title: 'Fragrance Workshop', desc: 'A special moment to express your sensibility through scent with a professional perfumer.', link: 'Learn More' },
+          shop: { title: 'Online Shop', desc: 'Purchase TSUYU original perfumes and diffusers online.', link: 'Visit Shop' }
+        },
+        cta: {
+          label: 'Reserve Your Experience',
+          title: 'Begin Your Fragrance Journey',
+          desc: 'Our professional perfumers will guide your fragrance creation in the charming atmosphere of Asakusa. Perfect for individuals or groups.',
+          reserve: 'Book Workshop',
+          contact: 'Contact Us'
+        },
+        reviews: {
+          label: 'Reviews',
+          title: 'Customer Reviews',
+          r1: { text: '"It was my first fragrance experience, and the staff taught me so carefully. The scent I created was beyond my expectations. Best memory of Asakusa!"', name: 'Misaki T.', loc: 'Tokyo / January 2025' },
+          r2: { text: '"We participated for my friend\'s birthday. We had a great time comparing each other\'s fragrances. The atmosphere was wonderful!"', name: 'Kenta S.', loc: 'Kanagawa / February 2025' },
+          r3: { text: '"I\'m a repeat customer. My scent preferences change with seasons, so each visit brings new discoveries. The staff is incredibly knowledgeable."', name: 'Mariko Y.', loc: 'Osaka / March 2025' }
+        },
+        press: { label: 'Featured In' },
+        newsletter: {
+          label: 'Newsletter',
+          title: 'Stay Updated on Fragrance News',
+          desc: 'Get updates on new products, seasonal workshops, and exclusive events.',
+          placeholder: 'Enter your email',
+          submit: 'Subscribe',
+          thanks: 'Thank you for subscribing.',
+          note: 'You can unsubscribe at any time.'
+        },
+        footer: {
+          tagline: 'Discover your unique<br />fragrance story in Asakusa.',
+          navTitle: 'Navigation',
+          nav: { home: 'Home', workshop: 'Workshop Experience', reserve: 'Reservations', shop: 'Online Shop', pricing: 'Plans & Pricing' },
+          infoTitle: 'Information',
+          info: { about: 'About Us', concept: 'Concept', access: 'Access', contact: 'Contact' },
+          contactTitle: 'Contact',
+          address1: '1-2-3 Asakusa, Taito-ku',
+          address2: 'Asakusa Bldg. 3F, Tokyo',
+          privacy: 'Privacy Policy',
+          legal: 'Legal Notice',
+          terms: 'Terms of Service'
+        }
+      }
+    };
+
+    // ===== i18n FUNCTIONS =====
+    function getNestedValue(obj, path) {
+      return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    }
+
+    function applyTranslations(lang) {
+      const t = translations[lang];
+      if (!t) return;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = getNestedValue(t, key);
+        if (value) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.value = value;
+          } else {
+            el.innerHTML = value;
+          }
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        const value = getNestedValue(t, key);
+        if (value) el.placeholder = value;
+      });
+
+      document.documentElement.lang = lang;
+    }
+
+    function setLanguage(lang) {
+      localStorage.setItem('tsuyu-lang', lang);
+      applyTranslations(lang);
+      updateLangSwitcher(lang);
+    }
+
+    function updateLangSwitcher(lang) {
+      document.querySelectorAll('.lang-switch button').forEach(btn => {
+        btn.classList.remove('active');
+        if ((btn.id === 'lang-ja' || btn.id === 'lang-ja-mobile') && lang === 'ja') btn.classList.add('active');
+        if ((btn.id === 'lang-en' || btn.id === 'lang-en-mobile') && lang === 'en') btn.classList.add('active');
+      });
+    }
+
+    // ===== MAIN SCRIPT =====
     document.addEventListener('DOMContentLoaded', function () {
+
+      // --- Language Init ---
+      const savedLang = localStorage.getItem('tsuyu-lang') || 'ja';
+      applyTranslations(savedLang);
+      updateLangSwitcher(savedLang);
+
+      // --- Language Switcher Events ---
+      document.getElementById('lang-ja')?.addEventListener('click', () => setLanguage('ja'));
+      document.getElementById('lang-en')?.addEventListener('click', () => setLanguage('en'));
+      document.getElementById('lang-ja-mobile')?.addEventListener('click', () => setLanguage('ja'));
+      document.getElementById('lang-en-mobile')?.addEventListener('click', () => setLanguage('en'));
 
       // --- Mobile Menu Toggle ---
       var btn = document.getElementById('mobile-menu-btn');
@@ -655,6 +910,7 @@
       var navLinks = document.querySelectorAll('.nav-link-item');
       var navCta = document.getElementById('nav-cta');
       var menuLines = [line1, line2, line3];
+      var langBtns = document.querySelectorAll('.lang-switch button');
 
       function updateNavbar() {
         var scrolled = window.scrollY > window.innerHeight * 0.6;
@@ -671,6 +927,7 @@
             navCta.style.borderColor = '#2C2418';
           }
           menuLines.forEach(function (l) { if (l) l.style.background = '#2C2418'; });
+          langBtns.forEach(function (b) { b.style.color = 'rgba(44,36,24,0.7)'; });
         } else {
           navbar.style.background = 'transparent';
           navbar.style.backdropFilter = 'none';
@@ -684,6 +941,7 @@
             navCta.style.borderColor = 'rgba(255,255,255,0.3)';
           }
           menuLines.forEach(function (l) { if (l) l.style.background = '#ffffff'; });
+          langBtns.forEach(function (b) { b.style.color = 'rgba(255,255,255,0.8)'; });
         }
       }
       window.addEventListener('scroll', updateNavbar);
