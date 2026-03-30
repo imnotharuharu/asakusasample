@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ご予約 | 浅草 露ーTSUYU ASAKUSA</title>
+  <meta name="description" content="浅草 露の調香ワークショップをご予約ください。プラン選択から日時指定まで、簡単なステップでご予約いただけます。" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Shippori Mincho -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            mincho: ['"Shippori Mincho"', 'Georgia', 'serif'],
+          },
+          colors: {
+            cream: '#F5F1EB',
+            'cream-d': '#EDE8DF',
+            sumi: '#2C2418',
+            'sumi-l': '#5C4E3C',
+            gold: '#B8963E',
+            'gold-l': '#D4B96A',
+            sand: '#E8E0D4',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Shippori Mincho', Georgia, serif; }
+    
+    .step-hidden { display: none; }
+    .step-active { display: block; animation: fadeIn 0.5s ease-out; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Calendar styles */
+    .calendar-day {
+      transition: all 0.2s ease;
+    }
+    .calendar-day:not(.disabled):hover {
+      background-color: #B8963E;
+      color: white;
+    }
+    .calendar-day.selected {
+      background-color: #2C2418;
+      color: #F5F1EB;
+    }
+    .calendar-day.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+    
+    /* Time slot styles */
+    .time-slot {
+      transition: all 0.2s ease;
+    }
+    .time-slot:not(.disabled):hover {
+      border-color: #B8963E;
+      background-color: rgba(184, 150, 62, 0.1);
+    }
+    .time-slot.selected {
+      border-color: #2C2418;
+      background-color: #2C2418;
+      color: #F5F1EB;
+    }
+    .time-slot.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    
+    /* Plan card styles */
+    .plan-card {
+      transition: all 0.3s ease;
+    }
+    .plan-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .plan-card.selected {
+      border-color: #B8963E;
+      box-shadow: 0 0 0 2px #B8963E;
+    }
+    
+    /* Progress bar */
+    .progress-step.active .step-number {
+      background-color: #2C2418;
+      color: #F5F1EB;
+    }
+    .progress-step.completed .step-number {
+      background-color: #B8963E;
+      color: white;
+    }
+    .progress-line.active {
+      background-color: #B8963E;
+    }
+  </style>
+</head>
+
+<body class="bg-cream text-sumi antialiased">
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-sand transition-all duration-500">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <a href="/index.html" id="nav-logo" class="text-lg tracking-[0.25em] font-normal text-sumi transition-colors duration-500">
+          TSUYU
+        </a>
+        <div class="hidden lg:flex items-center gap-10">
+          <a href="/experience.html" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Experience</a>
+          <a href="/reservation.html" class="text-sm tracking-widest text-gold hover:text-gold transition-colors duration-300 uppercase">Reservation</a>
+          <a href="/pricing.html" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Plans</a>
+          <a href="/shop.html" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Online Shop</a>
+          <a href="/about.html" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">About</a>
+          <a href="/contact.html" class="text-sm tracking-widest text-sumi/70 hover:text-sumi transition-colors duration-300 uppercase">Contact</a>
+        </div>
+        <div class="flex items-center gap-4">
+          <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニューを開く">
+            <span id="menu-line-1" class="block w-6 h-px bg-sumi transition-all duration-300"></span>
+            <span id="menu-line-2" class="block w-6 h-px bg-sumi transition-all duration-300"></span>
+            <span id="menu-line-3" class="block w-4 h-px bg-sumi transition-all duration-300 ml-auto"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 top-16 bg-cream z-40 hidden flex-col items-center justify-center gap-8">
+      <a href="/experience.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Experience</a>
+      <a href="/reservation.html" class="text-lg tracking-widest text-gold hover:text-gold transition-colors uppercase">Reservation</a>
+      <a href="/pricing.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Plans</a>
+      <a href="/shop.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Online Shop</a>
+      <a href="/about.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">About</a>
+      <a href="/contact.html" class="text-lg tracking-widest text-sumi/70 hover:text-sumi transition-colors uppercase">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO HEADER ===== -->
+  <section class="relative pt-32 pb-16 lg:pt-40 lg:pb-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4">Reservation</p>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight mb-6 text-balance">
+            ワークショップの<br />ご予約
+          </h1>
+          <p class="text-base lg:text-lg text-sumi-l leading-relaxed max-w-lg">
+            浅草 露のワークショップは完全予約制です。<br />
+            お好みのプランと日時をお選びいただき、<br />
+            世界にひとつだけの香りを創る体験をご予約ください。
+          </p>
+        </div>
+        <div class="relative aspect-[4/3] overflow-hidden">
+          <img src="/images/reservation-hero.jpg" alt="浅草 露 予約イメージ" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROGRESS BAR ===== -->
+  <section class="py-8 border-y border-sand bg-white">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        <!-- Step 1 -->
+        <div class="progress-step active flex flex-col items-center" data-step="1">
+          <div class="step-number w-10 h-10 flex items-center justify-center border-2 border-sumi rounded-full text-sm font-medium mb-2 transition-all">1</div>
+          <span class="text-xs tracking-wide text-sumi-l hidden sm:block">プラン選択</span>
+        </div>
+        <div class="progress-line flex-1 h-px bg-sand mx-2" data-line="1"></div>
+        <!-- Step 2 -->
+        <div class="progress-step flex flex-col items-center" data-step="2">
+          <div class="step-number w-10 h-10 flex items-center justify-center border-2 border-sand rounded-full text-sm font-medium text-sumi-l mb-2 transition-all">2</div>
+          <span class="text-xs tracking-wide text-sumi-l hidden sm:block">日時選択</span>
+        </div>
+        <div class="progress-line flex-1 h-px bg-sand mx-2" data-line="2"></div>
+        <!-- Step 3 -->
+        <div class="progress-step flex flex-col items-center" data-step="3">
+          <div class="step-number w-10 h-10 flex items-center justify-center border-2 border-sand rounded-full text-sm font-medium text-sumi-l mb-2 transition-all">3</div>
+          <span class="text-xs tracking-wide text-sumi-l hidden sm:block">お客様情報</span>
+        </div>
+        <div class="progress-line flex-1 h-px bg-sand mx-2" data-line="3"></div>
+        <!-- Step 4 -->
+        <div class="progress-step flex flex-col items-center" data-step="4">
+          <div class="step-number w-10 h-10 flex items-center justify-center border-2 border-sand rounded-full text-sm font-medium text-sumi-l mb-2 transition-all">4</div>
+          <span class="text-xs tracking-wide text-sumi-l hidden sm:block">確認</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RESERVATION STEPS ===== -->
+  <section class="py-16 lg:py-24" id="reservation-content">
+    <div class="mx-auto max-w-5xl px-6 lg:px-8">
+      
+      <!-- STEP 1: Plan Selection -->
+      <div id="step-1" class="step-active">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl md:text-3xl font-normal tracking-tight mb-4">プランをお選びください</h2>
+          <p class="text-sm text-sumi-l">ご希望のワークショッププランをお選びください</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <!-- Standard Plan -->
+          <div class="plan-card bg-white border border-sand p-6 lg:p-8 cursor-pointer" data-plan="standard" data-price="5500">
+            <div class="aspect-[4/3] overflow-hidden mb-6 -mx-6 lg:-mx-8 -mt-6 lg:-mt-8">
+              <img src="/images/plan-standard.jpg" alt="スタンダードプラン" class="w-full h-full object-cover" />
+            </div>
+            <p class="text-xs tracking-[0.2em] text-gold uppercase mb-2">Standard</p>
+            <h3 class="text-xl font-medium mb-3">スタンダードプラン</h3>
+            <p class="text-2xl font-normal text-sumi mb-4">¥5,500<span class="text-sm text-sumi-l ml-1">(税込)</span></p>
+            <ul class="text-sm text-sumi-l space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>所要時間：約60分</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>20種類の香料から選択</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>30mlボトル お持ち帰り</span>
+              </li>
+            </ul>
+            <div class="pt-4 border-t border-sand">
+              <span class="text-sm text-gold">選択する</span>
+            </div>
+          </div>
+
+          <!-- Premium Plan -->
+          <div class="plan-card bg-white border-2 border-gold p-6 lg:p-8 cursor-pointer relative" data-plan="premium" data-price="8800">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gold text-white text-xs tracking-widest uppercase">人気</div>
+            <div class="aspect-[4/3] overflow-hidden mb-6 -mx-6 lg:-mx-8 -mt-6 lg:-mt-8">
+              <img src="/images/plan-premium.jpg" alt="プレミアムプラン" class="w-full h-full object-cover" />
+            </div>
+            <p class="text-xs tracking-[0.2em] text-gold uppercase mb-2">Premium</p>
+            <h3 class="text-xl font-medium mb-3">プレミアムプラン</h3>
+            <p class="text-2xl font-normal text-sumi mb-4">¥8,800<span class="text-sm text-sumi-l ml-1">(税込)</span></p>
+            <ul class="text-sm text-sumi-l space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>所要時間：約90分</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>30種類以上の香料から選択</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>50mlボトル + ギフトボックス</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>季節の和菓子 & お茶付き</span>
+              </li>
+            </ul>
+            <div class="pt-4 border-t border-sand">
+              <span class="text-sm text-gold">選択する</span>
+            </div>
+          </div>
+
+          <!-- Private Plan -->
+          <div class="plan-card bg-white border border-sand p-6 lg:p-8 cursor-pointer" data-plan="private" data-price="15000">
+            <div class="aspect-[4/3] overflow-hidden mb-6 -mx-6 lg:-mx-8 -mt-6 lg:-mt-8">
+              <img src="/images/plan-private.jpg" alt="プライベートプラン" class="w-full h-full object-cover" />
+            </div>
+            <p class="text-xs tracking-[0.2em] text-gold uppercase mb-2">Private</p>
+            <h3 class="text-xl font-medium mb-3">プライベートプラン</h3>
+            <p class="text-2xl font-normal text-sumi mb-4">¥15,000<span class="text-sm text-sumi-l ml-1">(税込)</span></p>
+            <ul class="text-sm text-sumi-l space-y-2 mb-6">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>所要時間：約120分</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>貸切でゆったりと体験</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>50ml + 10mlミニボトル</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gold mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span>カップル・グループに最適</span>
+              </li>
+            </ul>
+            <div class="pt-4 border-t border-sand">
+              <span class="text-sm text-gold">選択する</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- People Selection -->
+        <div class="mt-12 p-6 lg:p-8 bg-white border border-sand">
+          <h3 class="text-lg font-medium mb-6">参加人数</h3>
+          <div class="flex items-center gap-4">
+            <button id="people-minus" class="w-12 h-12 flex items-center justify-center border border-sand hover:border-gold transition-colors text-xl">-</button>
+            <span id="people-count" class="text-2xl font-medium w-12 text-center">1</span>
+            <button id="people-plus" class="w-12 h-12 flex items-center justify-center border border-sand hover:border-gold transition-colors text-xl">+</button>
+            <span class="text-sm text-sumi-l ml-4">名様</span>
+          </div>
+          <p class="text-xs text-sumi-l mt-4">※ 1〜6名様まで同時にご予約いただけます</p>
+        </div>
+
+        <div class="mt-8 text-center">
+          <button id="step1-next" class="inline-flex items-center px-12 py-4 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+            次へ進む
+            <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Date & Time Selection -->
+      <div id="step-2" class="step-hidden">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl md:text-3xl font-normal tracking-tight mb-4">日時をお選びください</h2>
+          <p class="text-sm text-sumi-l">ご希望の日付と時間帯をお選びください</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+          <!-- Calendar -->
+          <div class="bg-white border border-sand p-6 lg:p-8">
+            <div class="flex items-center justify-between mb-6">
+              <button id="prev-month" class="p-2 hover:bg-sand transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+              </button>
+              <h3 id="current-month" class="text-lg font-medium"></h3>
+              <button id="next-month" class="p-2 hover:bg-sand transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+              </button>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center mb-2">
+              <span class="text-xs text-red-500 py-2">日</span>
+              <span class="text-xs text-sumi-l py-2">月</span>
+              <span class="text-xs text-sumi-l py-2">火</span>
+              <span class="text-xs text-sumi-l py-2">水</span>
+              <span class="text-xs text-sumi-l py-2">木</span>
+              <span class="text-xs text-sumi-l py-2">金</span>
+              <span class="text-xs text-blue-500 py-2">土</span>
+            </div>
+            <div id="calendar-grid" class="grid grid-cols-7 gap-1">
+              <!-- Calendar days will be generated by JS -->
+            </div>
+            <p class="text-xs text-sumi-l mt-4">※ 定休日：毎週火曜日</p>
+          </div>
+
+          <!-- Time Slots -->
+          <div class="bg-white border border-sand p-6 lg:p-8">
+            <h3 class="text-lg font-medium mb-6">時間帯</h3>
+            <p id="selected-date-display" class="text-sm text-sumi-l mb-6">日付を選択してください</p>
+            <div id="time-slots" class="grid grid-cols-2 gap-3">
+              <button class="time-slot disabled border border-sand py-4 px-6 text-center text-sm" data-time="10:00">10:00</button>
+              <button class="time-slot disabled border border-sand py-4 px-6 text-center text-sm" data-time="11:30">11:30</button>
+              <button class="time-slot disabled border border-sand py-4 px-6 text-center text-sm" data-time="13:00">13:00</button>
+              <button class="time-slot disabled border border-sand py-4 px-6 text-center text-sm" data-time="14:30">14:30</button>
+              <button class="time-slot disabled border border-sand py-4 px-6 text-center text-sm" data-time="16:00">16:00</button>
+              <button class="time-slot disabled border border-sand py-4 px-6 text-center text-sm" data-time="17:30">17:30</button>
+            </div>
+            <p class="text-xs text-sumi-l mt-6">※ 空き状況はリアルタイムで更新されます</p>
+          </div>
+        </div>
+
+        <div class="mt-8 flex justify-between items-center">
+          <button id="step2-back" class="inline-flex items-center px-8 py-4 border border-sand text-sumi text-sm tracking-widest uppercase hover:bg-sand transition-colors">
+            <svg class="mr-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" /></svg>
+            戻る
+          </button>
+          <button id="step2-next" class="inline-flex items-center px-12 py-4 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+            次へ進む
+            <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Customer Information -->
+      <div id="step-3" class="step-hidden">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl md:text-3xl font-normal tracking-tight mb-4">お客様情報</h2>
+          <p class="text-sm text-sumi-l">ご予約者様の情報をご入力ください</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto bg-white border border-sand p-8 lg:p-12">
+          <form id="customer-form" class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium mb-2">お名前（姓）<span class="text-red-500 ml-1">*</span></label>
+                <input type="text" id="last-name" required class="w-full px-4 py-3 border border-sand bg-cream/50 text-sm focus:outline-none focus:border-gold transition-colors" placeholder="山田" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">お名前（名）<span class="text-red-500 ml-1">*</span></label>
+                <input type="text" id="first-name" required class="w-full px-4 py-3 border border-sand bg-cream/50 text-sm focus:outline-none focus:border-gold transition-colors" placeholder="花子" />
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium mb-2">フリガナ（セイ）<span class="text-red-500 ml-1">*</span></label>
+                <input type="text" id="last-name-kana" required class="w-full px-4 py-3 border border-sand bg-cream/50 text-sm focus:outline-none focus:border-gold transition-colors" placeholder="ヤマダ" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">フリガナ（メイ）<span class="text-red-500 ml-1">*</span></label>
+                <input type="text" id="first-name-kana" required class="w-full px-4 py-3 border border-sand bg-cream/50 text-sm focus:outline-none focus:border-gold transition-colors" placeholder="ハナコ" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">メールアドレス<span class="text-red-500 ml-1">*</span></label>
+              <input type="email" id="email" required class="w-full px-4 py-3 border border-sand bg-cream/50 text-sm focus:outline-none focus:border-gold transition-colors" placeholder="example@email.com" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">電話番号<span class="text-red-500 ml-1">*</span></label>
+              <input type="tel" id="phone" required class="w-full px-4 py-3 border border-sand bg-cream/50 text-sm focus:outline-none focus:border-gold transition-colors" placeholder="090-1234-5678" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">ご要望・備考（任意）</label>
+              <textarea id="notes" rows="4" class="w-full px-4 py-3 border border-sand bg-cream/50 text-sm focus:outline-none focus:border-gold transition-colors resize-none" placeholder="アレルギーや特別なご要望があればご記入ください"></textarea>
+            </div>
+
+            <div class="pt-4">
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input type="checkbox" id="privacy-agree" required class="mt-1 w-4 h-4 accent-gold" />
+                <span class="text-sm text-sumi-l">
+                  <a href="#" class="text-gold underline">プライバシーポリシー</a>と<a href="#" class="text-gold underline">キャンセルポリシー</a>に同意します
+                </span>
+              </label>
+            </div>
+          </form>
+        </div>
+
+        <div class="mt-8 flex justify-between items-center">
+          <button id="step3-back" class="inline-flex items-center px-8 py-4 border border-sand text-sumi text-sm tracking-widest uppercase hover:bg-sand transition-colors">
+            <svg class="mr-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" /></svg>
+            戻る
+          </button>
+          <button id="step3-next" class="inline-flex items-center px-12 py-4 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+            確認画面へ
+            <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Confirmation -->
+      <div id="step-4" class="step-hidden">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl md:text-3xl font-normal tracking-tight mb-4">ご予約内容の確認</h2>
+          <p class="text-sm text-sumi-l">以下の内容でよろしければ「予約を確定」をクリックしてください</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto bg-white border border-sand">
+          <!-- Reservation Summary -->
+          <div class="p-8 lg:p-12 space-y-8">
+            <div>
+              <p class="text-xs tracking-[0.2em] text-gold uppercase mb-3">プラン</p>
+              <p id="confirm-plan" class="text-xl font-medium">-</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <p class="text-xs tracking-[0.2em] text-gold uppercase mb-3">日時</p>
+                <p id="confirm-datetime" class="text-lg">-</p>
+              </div>
+              <div>
+                <p class="text-xs tracking-[0.2em] text-gold uppercase mb-3">人数</p>
+                <p id="confirm-people" class="text-lg">-</p>
+              </div>
+            </div>
+
+            <div class="pt-8 border-t border-sand">
+              <p class="text-xs tracking-[0.2em] text-gold uppercase mb-3">お客様情報</p>
+              <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span class="text-sumi-l">お名前：</span>
+                  <span id="confirm-name">-</span>
+                </div>
+                <div>
+                  <span class="text-sumi-l">フリガナ：</span>
+                  <span id="confirm-kana">-</span>
+                </div>
+                <div>
+                  <span class="text-sumi-l">メール：</span>
+                  <span id="confirm-email">-</span>
+                </div>
+                <div>
+                  <span class="text-sumi-l">電話番号：</span>
+                  <span id="confirm-phone">-</span>
+                </div>
+              </div>
+              <div id="confirm-notes-wrap" class="mt-4 hidden">
+                <span class="text-sm text-sumi-l">備考：</span>
+                <p id="confirm-notes" class="text-sm mt-1">-</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Total -->
+          <div class="p-8 lg:px-12 bg-sand/50 border-t border-sand">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-sumi-l">合計金額（税込）</span>
+              <span id="confirm-total" class="text-3xl font-medium">¥-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex justify-between items-center">
+          <button id="step4-back" class="inline-flex items-center px-8 py-4 border border-sand text-sumi text-sm tracking-widest uppercase hover:bg-sand transition-colors">
+            <svg class="mr-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" /></svg>
+            戻る
+          </button>
+          <button id="confirm-submit" class="inline-flex items-center px-12 py-4 bg-gold text-white text-sm tracking-widest uppercase hover:bg-gold/90 transition-colors">
+            予約を確定する
+            <svg class="ml-3 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Completion -->
+      <div id="step-5" class="step-hidden">
+        <div class="max-w-2xl mx-auto text-center py-12">
+          <div class="w-20 h-20 mx-auto mb-8 flex items-center justify-center bg-gold/10 rounded-full">
+            <svg class="w-10 h-10 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-normal tracking-tight mb-6">ご予約が完了しました</h2>
+          <p class="text-sumi-l leading-relaxed mb-8">
+            ご予約いただきありがとうございます。<br />
+            確認メールをお送りしましたので、内容をご確認ください。<br />
+            ワークショップ当日のご来店を心よりお待ちしております。
+          </p>
+          
+          <div class="bg-white border border-sand p-8 mb-8 text-left">
+            <p class="text-xs tracking-[0.2em] text-gold uppercase mb-4">予約番号</p>
+            <p id="booking-number" class="text-2xl font-medium tracking-widest">TSY-2025-XXXXX</p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/index.html" class="inline-flex items-center justify-center px-8 py-4 border border-sand text-sumi text-sm tracking-widest uppercase hover:bg-sand transition-colors">
+              トップへ戻る
+            </a>
+            <a href="/experience.html" class="inline-flex items-center justify-center px-8 py-4 bg-sumi text-cream text-sm tracking-widest uppercase hover:bg-sumi/90 transition-colors">
+              ワークショップについて
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="py-16 lg:py-24 bg-sand/50">
+    <div class="mx-auto max-w-3xl px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-sm tracking-[0.3em] text-gold uppercase mb-4">FAQ</p>
+        <h2 class="text-2xl md:text-3xl font-normal tracking-tight">ご予約に関するご質問</h2>
+      </div>
+
+      <div class="space-y-4">
+        <details class="bg-white border border-sand group">
+          <summary class="flex items-center justify-between p-6 cursor-pointer">
+            <span class="text-sm font-medium">予約のキャンセルは可能ですか？</span>
+            <svg class="w-5 h-5 text-gold transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-sumi-l leading-relaxed">
+            ご予約日の3日前までは無料でキャンセル可能です。2日前〜前日は50%、当日は100%のキャンセル料が発生します。
+          </div>
+        </details>
+
+        <details class="bg-white border border-sand group">
+          <summary class="flex items-center justify-between p-6 cursor-pointer">
+            <span class="text-sm font-medium">予約の変更はできますか？</span>
+            <svg class="w-5 h-5 text-gold transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-sumi-l leading-relaxed">
+            日時の変更は3日前まで可能です。確認メールに記載のリンクから変更手続きを行っていただけます。
+          </div>
+        </details>
+
+        <details class="bg-white border border-sand group">
+          <summary class="flex items-center justify-between p-6 cursor-pointer">
+            <span class="text-sm font-medium">当日の持ち物はありますか？</span>
+            <svg class="w-5 h-5 text-gold transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-sumi-l leading-relaxed">
+            特にご持参いただくものはございません。エプロンなど必要なものはこちらでご用意いたします。
+          </div>
+        </details>
+
+        <details class="bg-white border border-sand group">
+          <summary class="flex items-center justify-between p-6 cursor-pointer">
+            <span class="text-sm font-medium">お支払い方法を教えてください</span>
+            <svg class="w-5 h-5 text-gold transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-sumi-l leading-relaxed">
+            当日店頭でのお支払いとなります。現金、クレジットカード（VISA/Master/JCB/AMEX）、電子マネー（PayPay/交通系IC）がご利用いただけます。
+          </div>
+        </details>
+
+        <details class="bg-white border border-sand group">
+          <summary class="flex items-center justify-between p-6 cursor-pointer">
+            <span class="text-sm font-medium">子供も参加できますか？</span>
+            <svg class="w-5 h-5 text-gold transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-sumi-l leading-relaxed">
+            10歳以上のお子様からご参加いただけます。保護者の方の同伴をお願いしております。
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="py-16 lg:py-20 bg-sumi text-cream">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-16">
+        <div class="lg:col-span-1">
+          <a href="/index.html" class="text-xl tracking-[0.25em] font-normal text-cream block mb-4">TSUYU</a>
+          <p class="text-sm text-cream/60 leading-relaxed">浅草で出会う、<br />あなただけの香りの物語。</p>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.2em] text-cream/40 uppercase mb-5">Navigation</p>
+          <nav class="flex flex-col gap-3">
+            <a href="/index.html" class="text-sm text-cream/70 hover:text-cream transition-colors">ホーム</a>
+            <a href="/experience.html" class="text-sm text-cream/70 hover:text-cream transition-colors">ワークショップ体験</a>
+            <a href="/reservation.html" class="text-sm text-cream/70 hover:text-cream transition-colors">ご予約</a>
+            <a href="/shop.html" class="text-sm text-cream/70 hover:text-cream transition-colors">オンラインショップ</a>
+            <a href="/pricing.html" class="text-sm text-cream/70 hover:text-cream transition-colors">プラン・料金</a>
+          </nav>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.2em] text-cream/40 uppercase mb-5">Information</p>
+          <nav class="flex flex-col gap-3">
+            <a href="/about.html" class="text-sm text-cream/70 hover:text-cream transition-colors">私たちについて</a>
+            <a href="/contact.html" class="text-sm text-cream/70 hover:text-cream transition-colors">アクセス</a>
+            <a href="/contact.html" class="text-sm text-cream/70 hover:text-cream transition-colors">お問い合わせ</a>
+          </nav>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.2em] text-cream/40 uppercase mb-5">Contact</p>
+          <div class="flex flex-col gap-3 text-sm text-cream/70">
+            <p>〒111-0032</p>
+            <p>東京都台東区浅草1-2-3</p>
+            <p>浅草ビル 3F</p>
+            <a href="tel:03-1234-5678" class="hover:text-cream transition-colors">03-1234-5678</a>
+            <a href="mailto:info@tsuyu-asakusa.jp" class="hover:text-cream transition-colors">info@tsuyu-asakusa.jp</a>
+          </div>
+        </div>
+      </div>
+      <div class="pt-10 border-t border-cream/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-xs text-cream/40">&copy; 2025 TSUYU ASAKUSA. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="text-xs text-cream/40 hover:text-cream/70 transition-colors">プライバシーポリシー</a>
+          <a href="#" class="text-xs text-cream/40 hover:text-cream/70 transition-colors">特定商取引法に基づく表記</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // Reservation State
+    const state = {
+      currentStep: 1,
+      plan: null,
+      planName: '',
+      planPrice: 0,
+      people: 1,
+      date: null,
+      time: null,
+      customer: {}
+    };
+
+    // DOM Elements
+    const steps = {
+      1: document.getElementById('step-1'),
+      2: document.getElementById('step-2'),
+      3: document.getElementById('step-3'),
+      4: document.getElementById('step-4'),
+      5: document.getElementById('step-5')
+    };
+
+    // Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuLine1 = document.getElementById('menu-line-1');
+    const menuLine2 = document.getElementById('menu-line-2');
+    const menuLine3 = document.getElementById('menu-line-3');
+    let menuOpen = false;
+
+    mobileMenuBtn.addEventListener('click', function() {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('flex');
+        menuLine1.style.transform = 'rotate(45deg) translateY(6px)';
+        menuLine2.style.opacity = '0';
+        menuLine3.style.transform = 'rotate(-45deg) translateY(-6px)';
+        menuLine3.style.width = '24px';
+      } else {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+        menuLine1.style.transform = '';
+        menuLine2.style.opacity = '1';
+        menuLine3.style.transform = '';
+        menuLine3.style.width = '16px';
+      }
+    });
+
+    // Step Navigation
+    function goToStep(step) {
+      // Hide current step
+      steps[state.currentStep].classList.remove('step-active');
+      steps[state.currentStep].classList.add('step-hidden');
+      
+      // Show new step
+      steps[step].classList.remove('step-hidden');
+      steps[step].classList.add('step-active');
+      
+      // Update progress bar
+      document.querySelectorAll('.progress-step').forEach((el, i) => {
+        const stepNum = i + 1;
+        el.classList.remove('active', 'completed');
+        if (stepNum === step) {
+          el.classList.add('active');
+        } else if (stepNum < step) {
+          el.classList.add('completed');
+        }
+      });
+      
+      document.querySelectorAll('.progress-line').forEach((el, i) => {
+        const lineNum = i + 1;
+        el.classList.remove('active');
+        if (lineNum < step) {
+          el.classList.add('active');
+        }
+      });
+      
+      state.currentStep = step;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // STEP 1: Plan Selection
+    const planCards = document.querySelectorAll('.plan-card');
+    const step1Next = document.getElementById('step1-next');
+    const peopleCount = document.getElementById('people-count');
+    const peopleMinus = document.getElementById('people-minus');
+    const peoplePlus = document.getElementById('people-plus');
+
+    planCards.forEach(card => {
+      card.addEventListener('click', function() {
+        planCards.forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        state.plan = this.dataset.plan;
+        state.planPrice = parseInt(this.dataset.price);
+        state.planName = this.querySelector('h3').textContent;
+        step1Next.disabled = false;
+      });
+    });
+
+    peopleMinus.addEventListener('click', function() {
+      if (state.people > 1) {
+        state.people--;
+        peopleCount.textContent = state.people;
+      }
+    });
+
+    peoplePlus.addEventListener('click', function() {
+      if (state.people < 6) {
+        state.people++;
+        peopleCount.textContent = state.people;
+      }
+    });
+
+    step1Next.addEventListener('click', function() {
+      if (state.plan) {
+        goToStep(2);
+        initCalendar();
+      }
+    });
+
+    // STEP 2: Date & Time Selection
+    let currentDate = new Date();
+    const calendarGrid = document.getElementById('calendar-grid');
+    const currentMonthEl = document.getElementById('current-month');
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    const selectedDateDisplay = document.getElementById('selected-date-display');
+    const timeSlots = document.querySelectorAll('.time-slot');
+    const step2Next = document.getElementById('step2-next');
+    const step2Back = document.getElementById('step2-back');
+
+    function initCalendar() {
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      
+      currentMonthEl.textContent = `${year}年 ${month + 1}月`;
+      
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const startDayOfWeek = firstDay.getDay();
+      const daysInMonth = lastDay.getDate();
+      
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      calendarGrid.innerHTML = '';
+      
+      // Empty cells before first day
+      for (let i = 0; i < startDayOfWeek; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'py-3';
+        calendarGrid.appendChild(emptyCell);
+      }
+      
+      // Days
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateObj = new Date(year, month, day);
+        const dayOfWeek = dateObj.getDay();
+        const isPast = dateObj < today;
+        const isTuesday = dayOfWeek === 2; // Closed on Tuesdays
+        const isDisabled = isPast || isTuesday;
+        
+        const dayCell = document.createElement('button');
+        dayCell.className = `calendar-day py-3 text-sm ${isDisabled ? 'disabled' : ''} ${dayOfWeek === 0 ? 'text-red-500' : ''} ${dayOfWeek === 6 ? 'text-blue-500' : ''}`;
+        dayCell.textContent = day;
+        dayCell.dataset.date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        
+        if (!isDisabled) {
+          dayCell.addEventListener('click', function() {
+            document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+            this.classList.add('selected');
+            state.date = this.dataset.date;
+            
+            const [y, m, d] = state.date.split('-');
+            selectedDateDisplay.textContent = `${y}年${parseInt(m)}月${parseInt(d)}日`;
+            
+            // Enable time slots (simulate availability)
+            timeSlots.forEach(slot => {
+              slot.classList.remove('disabled', 'selected');
+              // Randomly disable some slots for demo
+              if (Math.random() > 0.7) {
+                slot.classList.add('disabled');
+              }
+            });
+            
+            state.time = null;
+            step2Next.disabled = true;
+          });
+        }
+        
+        calendarGrid.appendChild(dayCell);
+      }
+    }
+
+    prevMonthBtn.addEventListener('click', function() {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    });
+
+    nextMonthBtn.addEventListener('click', function() {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    });
+
+    timeSlots.forEach(slot => {
+      slot.addEventListener('click', function() {
+        if (this.classList.contains('disabled')) return;
+        
+        timeSlots.forEach(s => s.classList.remove('selected'));
+        this.classList.add('selected');
+        state.time = this.dataset.time;
+        step2Next.disabled = false;
+      });
+    });
+
+    step2Back.addEventListener('click', () => goToStep(1));
+    step2Next.addEventListener('click', function() {
+      if (state.date && state.time) {
+        goToStep(3);
+      }
+    });
+
+    // STEP 3: Customer Information
+    const customerForm = document.getElementById('customer-form');
+    const step3Next = document.getElementById('step3-next');
+    const step3Back = document.getElementById('step3-back');
+    const privacyAgree = document.getElementById('privacy-agree');
+
+    const formInputs = customerForm.querySelectorAll('input[required]');
+    
+    function checkFormValidity() {
+      let allFilled = true;
+      formInputs.forEach(input => {
+        if (!input.value.trim()) allFilled = false;
+      });
+      step3Next.disabled = !(allFilled && privacyAgree.checked);
+    }
+
+    formInputs.forEach(input => {
+      input.addEventListener('input', checkFormValidity);
+    });
+    privacyAgree.addEventListener('change', checkFormValidity);
+
+    step3Back.addEventListener('click', () => goToStep(2));
+    step3Next.addEventListener('click', function() {
+      state.customer = {
+        lastName: document.getElementById('last-name').value,
+        firstName: document.getElementById('first-name').value,
+        lastNameKana: document.getElementById('last-name-kana').value,
+        firstNameKana: document.getElementById('first-name-kana').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        notes: document.getElementById('notes').value
+      };
+      
+      updateConfirmation();
+      goToStep(4);
+    });
+
+    // STEP 4: Confirmation
+    const step4Back = document.getElementById('step4-back');
+    const confirmSubmit = document.getElementById('confirm-submit');
+
+    function updateConfirmation() {
+      document.getElementById('confirm-plan').textContent = state.planName;
+      
+      const [y, m, d] = state.date.split('-');
+      document.getElementById('confirm-datetime').textContent = `${y}年${parseInt(m)}月${parseInt(d)}日 ${state.time}〜`;
+      document.getElementById('confirm-people').textContent = `${state.people}名様`;
+      document.getElementById('confirm-name').textContent = `${state.customer.lastName} ${state.customer.firstName}`;
+      document.getElementById('confirm-kana').textContent = `${state.customer.lastNameKana} ${state.customer.firstNameKana}`;
+      document.getElementById('confirm-email').textContent = state.customer.email;
+      document.getElementById('confirm-phone').textContent = state.customer.phone;
+      
+      if (state.customer.notes) {
+        document.getElementById('confirm-notes-wrap').classList.remove('hidden');
+        document.getElementById('confirm-notes').textContent = state.customer.notes;
+      }
+      
+      const total = state.planPrice * state.people;
+      document.getElementById('confirm-total').textContent = `¥${total.toLocaleString()}`;
+    }
+
+    step4Back.addEventListener('click', () => goToStep(3));
+    confirmSubmit.addEventListener('click', function() {
+      // Generate booking number
+      const bookingNum = 'TSY-2025-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+      document.getElementById('booking-number').textContent = bookingNum;
+      
+      // Hide progress bar
+      document.querySelector('.py-8.border-y').style.display = 'none';
+      
+      goToStep(5);
+    });
+  </script>
+
+</body>
+</html>
